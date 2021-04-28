@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sgsinclair/voyantjs.git"
+    "url": "https://github.com/voyanttools/voyantjs.git"
   },
   "keywords": [
     "voyant",
@@ -27,9 +27,9 @@
   ],
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/sgsinclair/voyantjs/issues"
+    "url": "https://github.com/voyanttools/voyantjs/issues"
   },
-  "homepage": "https://github.com/sgsinclair/voyantjs",
+  "homepage": "https://github.com/voyanttools/voyantjs",
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/eslint-parser": "^7.12.1",
@@ -68,7 +68,7 @@
     }
   },
   "jest": {
-    "collectCoverage": false,
+    "collectCoverage": true,
     "collectCoverageFrom": [
       "./src/**"
     ],
