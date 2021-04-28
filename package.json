@@ -4,11 +4,11 @@
   "description": "Simple library for interacting with Voyant Tools",
   "main": "index.js",
   "unpkg": "index.js",
+  "browser": "dist/voyantjs.js",
   "scripts": {
     "cm": "git-cz",
-    "build": "mkdirp dist && browserify index.js -o ./dist/voyantjs.js --debug -t babelify",
-    "watch": "mkdirp dist && watchify index.js -o ./dist/voyantjs.js --debug --verbose -t babelify",
-    "copy": "copy .\\dist\\voyantjs.js D:\\Git\\Voyant\\src\\main\\webapp\\resources\\spyral\\voyantjs.js",
+    "build": "mkdirp dist && browserify index.js -o ./dist/voyantjs.js --no-browser-field -t [ babelify --global ]",
+    "watch": "mkdirp dist && watchify index.js -o ./dist/voyantjs.js --no-browser-field --verbose -t  [ babelify --global ]",
     "test": "jest",
     "report-coverage": "codecov",
     "semantic-release": "semantic-release"
@@ -68,7 +68,7 @@
     }
   },
   "jest": {
-    "collectCoverage": true,
+    "collectCoverage": false,
     "collectCoverageFrom": [
       "./src/**"
     ],
