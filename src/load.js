@@ -1,5 +1,3 @@
-/* global Voyant */
-
 /**
  * Class embodying Load functionality.
  * @memberof Spyral
@@ -83,16 +81,8 @@ class Load {
 			}
 			else {
 				return response.text().then(text => {
-					if (Voyant && Voyant.util && Voyant.util.DetailedError) {
-						new Voyant.util.DetailedError({
-							msg: '',
-							error: text.split(/(\r\n|\r|\n)/).shift(),
-							details: text
-						}).showMsg();
-					} else {
-						alert(text.split(/(\r\n|\r|\n)/).shift());
-						if (window.console) { console.error(text); }
-					}
+					alert(text.split(/(\r\n|\r|\n)/).shift());
+					if (window.console) { console.error(text); }
 					throw Error(text);
 				});
 			}
@@ -114,15 +104,8 @@ class Load {
 			}
 			else {
 				return response.text().then(text => {
-					if (Voyant && Voyant.util && Voyant.util.DetailedError) {
-						new Voyant.util.DetailedError({
-							error: text.split(/(\r\n|\r|\n)/).shift(),
-							details: text
-						}).showMsg();
-					} else {
-						alert(text.split(/(\r\n|\r|\n)/).shift());
-						if (window.console) { console.error(text); }
-					}
+					alert(text.split(/(\r\n|\r|\n)/).shift());
+					if (window.console) { console.error(text); }
 					throw Error(text);
 				});
 			}

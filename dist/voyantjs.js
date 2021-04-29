@@ -12877,8 +12877,6 @@ function _objectSpread(target) {
 
   return target;
 }
-/* global Voyant */
-
 /**
  * Class embodying Load functionality.
  * @memberof Spyral
@@ -12986,18 +12984,10 @@ var Load = /*#__PURE__*/function () {
           return response.json();
         } else {
           return response.text().then(function (text) {
-            if (Voyant && Voyant.util && Voyant.util.DetailedError) {
-              new Voyant.util.DetailedError({
-                msg: '',
-                error: text.split(/(\r\n|\r|\n)/).shift(),
-                details: text
-              }).showMsg();
-            } else {
-              alert(text.split(/(\r\n|\r|\n)/).shift());
+            alert(text.split(/(\r\n|\r|\n)/).shift());
 
-              if (window.console) {
-                console.error(text);
-              }
+            if (window.console) {
+              console.error(text);
             }
 
             throw Error(text);
@@ -13022,17 +13012,10 @@ var Load = /*#__PURE__*/function () {
           return response;
         } else {
           return response.text().then(function (text) {
-            if (Voyant && Voyant.util && Voyant.util.DetailedError) {
-              new Voyant.util.DetailedError({
-                error: text.split(/(\r\n|\r|\n)/).shift(),
-                details: text
-              }).showMsg();
-            } else {
-              alert(text.split(/(\r\n|\r|\n)/).shift());
+            alert(text.split(/(\r\n|\r|\n)/).shift());
 
-              if (window.console) {
-                console.error(text);
-              }
+            if (window.console) {
+              console.error(text);
             }
 
             throw Error(text);
