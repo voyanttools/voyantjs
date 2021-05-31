@@ -2,6 +2,8 @@
 
 import Chart from './chart.js';
 
+import Util from './util.js';
+
 /**
  * The Spyral.Table class in Spyral provides convenience functions for working with tabular
  * data.
@@ -1047,7 +1049,7 @@ class Table {
 	 * @returns {Highcharts.Chart}
 	 */
 	chart(target = undefined, config = {}) {
-		if (typeof target === 'object') {
+		if (Util.isElement(target) === false && typeof target === 'object') {
 			config = target;
 			target = undefined;
 		}
