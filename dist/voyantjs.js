@@ -12654,11 +12654,10 @@ var Corpus = /*#__PURE__*/function () {
                   var all = Object.assign(t, config);
                   Object.keys(all).forEach(function (key) {
                     if (key !== 'input' && !(key in defaultAttributes)) {
-                      var value = all[key];
-
-                      if (typeof value !== 'string') {
-                        value = JSON.stringify(value);
-                      }
+                      var value = all[key]; // TODO need to sort this out, if key is "query" and value is an array then stringify will break the query format for voyant
+                      // if (typeof value !== 'string') {
+                      // 	value = JSON.stringify(value);
+                      // }
 
                       url.searchParams.append(key, value);
                     }
@@ -12702,7 +12701,11 @@ var Corpus = /*#__PURE__*/function () {
 
           Object.keys(config).forEach(function (key) {
             if (key !== 'input' && !(key in defaultAttributes)) {
-              url.searchParams.append(key, config[key]);
+              var value = config[key]; // if (typeof value !== 'string') {
+              // 	value = JSON.stringify(value);
+              // }
+
+              url.searchParams.append(key, value);
             }
           });
           resolve(out + ' src=\'' + url + '\'></iframe>');
@@ -13104,6 +13107,8 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
 var _chart = _interopRequireDefault(require("./chart.js"));
+
+var _util = _interopRequireDefault(require("./util.js"));
 /* global Spyral */
 
 /**
@@ -14425,7 +14430,7 @@ var Table = /*#__PURE__*/function () {
       var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
       var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-      if ((0, _typeof2["default"])(target) === 'object') {
+      if (_util["default"].isElement(target) === false && (0, _typeof2["default"])(target) === 'object') {
         config = target;
         target = undefined;
       }
@@ -14725,7 +14730,7 @@ function parseCsvLine(line) {
 var _default = Table;
 exports["default"] = _default;
 
-},{"./chart.js":243,"@babel/runtime/helpers/classCallCheck":32,"@babel/runtime/helpers/construct":33,"@babel/runtime/helpers/createClass":34,"@babel/runtime/helpers/interopRequireDefault":36,"@babel/runtime/helpers/typeof":39}],247:[function(require,module,exports){
+},{"./chart.js":243,"./util.js":247,"@babel/runtime/helpers/classCallCheck":32,"@babel/runtime/helpers/construct":33,"@babel/runtime/helpers/createClass":34,"@babel/runtime/helpers/interopRequireDefault":36,"@babel/runtime/helpers/typeof":39}],247:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14802,6 +14807,46 @@ var Util = /*#__PURE__*/function () {
     key: "more",
     value: function more(before, _more, after) {
       return before + '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>' + _more.substring(0, 500) + ' <a href="">+</a><div style="display: none">' + _more.substring(501) + '</div>' + after;
+    }
+  }, {
+    key: "isString",
+    value: function isString(val) {
+      return typeof val === 'string';
+    }
+  }, {
+    key: "isNumber",
+    value: function isNumber(val) {
+      return typeof val === 'number';
+    }
+  }, {
+    key: "isBoolean",
+    value: function isBoolean(val) {
+      return typeof val === 'boolean';
+    }
+  }, {
+    key: "isUndefined",
+    value: function isUndefined(val) {
+      return typeof val === 'undefined';
+    }
+  }, {
+    key: "isArray",
+    value: function isArray(val) {
+      return Object.prototype.toString.call(val) === '[object Array]';
+    }
+  }, {
+    key: "isObject",
+    value: function isObject(val) {
+      return Object.prototype.toString.call(val) === '[object Object]';
+    }
+  }, {
+    key: "isNull",
+    value: function isNull(val) {
+      return Object.prototype.toString.call(val) === '[object Null]';
+    }
+  }, {
+    key: "isElement",
+    value: function isElement(val) {
+      return val instanceof Element;
     }
   }]);
   return Util;
