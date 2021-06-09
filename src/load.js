@@ -81,7 +81,6 @@ class Load {
 			}
 			else {
 				return response.text().then(text => {
-					alert(text.split(/(\r\n|\r|\n)/).shift());
 					if (window.console) { console.error(text); }
 					throw Error(text);
 				});
@@ -104,7 +103,6 @@ class Load {
 			}
 			else {
 				return response.text().then(text => {
-					alert(text.split(/(\r\n|\r|\n)/).shift());
 					if (window.console) { console.error(text); }
 					throw Error(text);
 				});
