@@ -27,3 +27,35 @@ test('more', () => {
 	const string = Util.more('foo', Util.toString(Mocks.DocumentsMetadata), 'bar');
 	expect(string).toMatch('foo<svg');
 })
+
+test('isString', () => {
+	expect(Util.isString('foo')).toBe(true);
+})
+
+test('isNumber', () => {
+	expect(Util.isNumber(5)).toBe(true);
+})
+
+test('isBoolean', () => {
+	expect(Util.isBoolean(false)).toBe(true);
+})
+
+test('isUndefined', () => {
+	expect(Util.isUndefined(undefined)).toBe(true);
+})
+
+test('isArray', () => {
+	expect(Util.isArray(['foo'])).toBe(true);
+})
+
+test('isObject', () => {
+	expect(Util.isObject({'foo': 'bar'})).toBe(true);
+})
+
+test('isNull', () => {
+	expect(Util.isNull(undefined)).toBe(false);
+})
+
+test('isNode', () => {
+	expect(Util.isNode('foo')).toBe(false);
+})

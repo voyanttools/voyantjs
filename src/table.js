@@ -1049,7 +1049,7 @@ class Table {
 	 * @returns {Highcharts.Chart}
 	 */
 	chart(target = undefined, config = {}) {
-		if (Util.isElement(target) === false && typeof target === 'object') {
+		if (Util.isNode(target) === false && typeof target === 'object') {
 			config = target;
 			target = undefined;
 		}

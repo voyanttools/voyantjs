@@ -12544,7 +12544,7 @@ var Corpus = /*#__PURE__*/function () {
      *  	* **stopList**: a named stopword list or comma-separated list of words
      *  	* **visible**: the number of terms to display in the word cloud (default is 50)
      *  	* **whiteList**: a keyword list – terms will be limited to this list
-     *  * <a href="./#!/guide/collocatesgraph" target="_blank">CollocateGraphs</a> represents keywords and terms that occur in close proximity as a force directed network graph.
+     *  * <a href="./#!/guide/collocatesgraph" target="_blank">CollocatesGraph</a> represents keywords and terms that occur in close proximity as a force directed network graph.
     	 *  	* **centralize**: the term to use for centralize mode (where things are focused on a single word)
         *  	* **context**: the size of the context (the number of words on each size of the keyword)
      *  	* **limit**: the number of collocates to load for each keyword
@@ -12802,7 +12802,9 @@ var Corpus = /*#__PURE__*/function () {
         _load["default"].trombone(_objectSpread({}, config, {}, api), {
           tool: 'corpus.CorpusMetadata'
         }).then(function (data) {
-          return resolve(new Corpus(data.corpus.metadata.id));
+          resolve(new Corpus(data.corpus.metadata.id));
+        }, function (err) {
+          reject(err);
         });
       });
       ['id', 'metadata', 'summary', 'titles', 'text', 'texts', 'terms', 'tokens', 'words', 'contexts', 'collocates', 'phrases', 'correlations', 'lemmas', 'tool'].forEach(function (name) {
@@ -12987,8 +12989,6 @@ var Load = /*#__PURE__*/function () {
           return response.json();
         } else {
           return response.text().then(function (text) {
-            alert(text.split(/(\r\n|\r|\n)/).shift());
-
             if (window.console) {
               console.error(text);
             }
@@ -13015,8 +13015,6 @@ var Load = /*#__PURE__*/function () {
           return response;
         } else {
           return response.text().then(function (text) {
-            alert(text.split(/(\r\n|\r|\n)/).shift());
-
             if (window.console) {
               console.error(text);
             }
@@ -14430,7 +14428,7 @@ var Table = /*#__PURE__*/function () {
       var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
       var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-      if (_util["default"].isElement(target) === false && (0, _typeof2["default"])(target) === 'object') {
+      if (_util["default"].isNode(target) === false && (0, _typeof2["default"])(target) === 'object') {
         config = target;
         target = undefined;
       }
@@ -14844,9 +14842,9 @@ var Util = /*#__PURE__*/function () {
       return Object.prototype.toString.call(val) === '[object Null]';
     }
   }, {
-    key: "isElement",
-    value: function isElement(val) {
-      return val instanceof Element;
+    key: "isNode",
+    value: function isNode(val) {
+      return val instanceof Node;
     }
   }]);
   return Util;

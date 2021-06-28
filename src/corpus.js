@@ -1233,7 +1233,7 @@ class Corpus {
 	 *  	* **stopList**: a named stopword list or comma-separated list of words
 	 *  	* **visible**: the number of terms to display in the word cloud (default is 50)
 	 *  	* **whiteList**: a keyword list – terms will be limited to this list
-	 *  * <a href="./#!/guide/collocatesgraph" target="_blank">CollocateGraphs</a> represents keywords and terms that occur in close proximity as a force directed network graph.
+	 *  * <a href="./#!/guide/collocatesgraph" target="_blank">CollocatesGraph</a> represents keywords and terms that occur in close proximity as a force directed network graph.
  	 *  	* **centralize**: the term to use for centralize mode (where things are focused on a single word)
      *  	* **context**: the size of the context (the number of words on each size of the keyword)
 	 *  	* **limit**: the number of collocates to load for each keyword
@@ -1321,9 +1321,10 @@ class Corpus {
 						Object.keys(all).forEach(key => {
 							if (key !=='input' && !(key in defaultAttributes)) {
 								let value = all[key];
-								if (typeof value !== 'string') {
-									value = JSON.stringify(value);
-								}
+								// TODO need to sort this out, if key is "query" and value is an array then stringify will break the query format for voyant
+								// if (typeof value !== 'string') {
+								// 	value = JSON.stringify(value);
+								// }
 								url.searchParams.append(key, value);
 							}
 						});
@@ -1359,7 +1360,11 @@ class Corpus {
 				// add API values from config (some may be ignored)
 				Object.keys(config).forEach(key => {
 					if (key !=='input' && !(key in defaultAttributes)) {
-						url.searchParams.append(key, config[key]);
+						let value = config[key];
+						// if (typeof value !== 'string') {
+						// 	value = JSON.stringify(value);
+						// }
+						url.searchParams.append(key, value);
 					}
 				});
 				resolve(out+' src=\''+url+'\'></iframe>');
@@ -1438,7 +1443,11 @@ class Corpus {
 			}
 			
 			Load.trombone({...config,...api}, {tool: 'corpus.CorpusMetadata'})
-				.then(data => resolve(new Corpus(data.corpus.metadata.id)));
+				.then((data) => {
+					resolve(new Corpus(data.corpus.metadata.id));
+				}, (err) => {
+					reject(err);
+				});
 			
 		});
 

@@ -75,8 +75,8 @@ class Util {
 		return Object.prototype.toString.call(val) === '[object Null]';
 	}
 
-	static isElement(val) {
-		return val instanceof Element;
+	static isNode(val) {
+		return val instanceof Node;
 	}
 }
 
