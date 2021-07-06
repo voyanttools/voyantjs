@@ -28,6 +28,18 @@ test('more', () => {
 	expect(string).toMatch('foo<svg');
 })
 
+test('dataUrlToBlob', () => {
+	const blob = Util.dataUrlToBlob('data:text/plain;base64,Zm9v');
+	expect(blob instanceof Blob).toBe(true);
+})
+
+test('blobToDataUrl', () => {
+	const blob = Util.dataUrlToBlob('data:text/plain;base64,Zm9v');
+	return Util.blobToDataUrl(blob).then((dataUrl) => {
+		expect(dataUrl).toMatch(/foo/);
+	});
+});
+
 test('isString', () => {
 	expect(Util.isString('foo')).toBe(true);
 })

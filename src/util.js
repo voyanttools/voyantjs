@@ -44,7 +44,36 @@ class Util {
 	 */
 	static more(before, more, after) {
 		return before + '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'+more.substring(0,500)+' <a href="">+</a><div style="display: none">'+more.substring(501)+'</div>' + after;
+	}
 
+
+	static dataUrlToBlob(dataUrl) {
+		const parts = dataUrl.split(',');
+		const byteString = atob(parts[1]);
+		const mimeString = parts[0].split(':')[1].split(';')[0];
+		
+		const ab = new ArrayBuffer(byteString.length);
+		const ia = new Uint8Array(ab);
+		for (let i = 0; i < byteString.length; i++) {
+			ia[i] = byteString.charCodeAt(i);
+		}
+		
+		return new Blob([ab], {type: mimeString});
+	}
+
+	static blobToDataUrl(blob) {
+		return new Promise((resolve, reject) => {
+			const fr = new FileReader();
+			fr.onload = function(e) {
+				resolve(e.target.result);
+			};
+	
+			try {
+				fr.readAsDataURL(blob);
+			} catch(e) {
+				reject(e);
+			}
+		});
 	}
 
 	static isString(val) {
