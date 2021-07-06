@@ -1,4 +1,5 @@
 import Load from './load';
+import Util from './util.js';
 import LDA from 'lda-topic-model';
 
 
@@ -1415,11 +1416,11 @@ class Corpus {
 				} else {
 					config = {input: config};
 				}
-			} else if (config instanceof Array && config.length > 0 && typeof config[0] === 'string') {
+			} else if (Util.isArray(config) && config.length > 0 && typeof config[0] === 'string') {
 				config = {input: config};
-			} else if (config instanceof File || (config instanceof Array && config[0] instanceof File)) {
+			} else if (config instanceof Blob || Util.isNode(config) || (Util.isArray(config) && (config[0] instanceof Blob || Util.isNode(config[0])))) {
 				const formData = new FormData();
-				if (config instanceof File) {
+				if (config instanceof Blob) {
 					formData.append('input', config);
 				} else {
 					config.forEach(file => {

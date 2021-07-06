@@ -1938,7 +1938,7 @@ module.exports = function (it) {
 };
 
 },{"../internals/an-object":75,"../internals/get-iterator-method":108}],110:[function(require,module,exports){
-(function (global){
+(function (global){(function (){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -1957,7 +1957,7 @@ function () {
   return this;
 }() || Function('return this')();
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"@babel/runtime/helpers/interopRequireDefault":36,"@babel/runtime/helpers/typeof":39}],111:[function(require,module,exports){
 "use strict";
 
@@ -11108,6 +11108,8 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _load = _interopRequireDefault(require("./load"));
 
+var _util = _interopRequireDefault(require("./util.js"));
+
 var _ldaTopicModel = _interopRequireDefault(require("lda-topic-model"));
 
 function ownKeys(object, enumerableOnly) {
@@ -12770,14 +12772,14 @@ var Corpus = /*#__PURE__*/function () {
               input: config
             };
           }
-        } else if (config instanceof Array && config.length > 0 && typeof config[0] === 'string') {
+        } else if (_util["default"].isArray(config) && config.length > 0 && typeof config[0] === 'string') {
           config = {
             input: config
           };
-        } else if (config instanceof File || config instanceof Array && config[0] instanceof File) {
+        } else if (config instanceof Blob || _util["default"].isNode(config) || _util["default"].isArray(config) && (config[0] instanceof Blob || _util["default"].isNode(config[0]))) {
           var formData = new FormData();
 
-          if (config instanceof File) {
+          if (config instanceof Blob) {
             formData.append('input', config);
           } else {
             config.forEach(function (file) {
@@ -12833,7 +12835,7 @@ var Corpus = /*#__PURE__*/function () {
 var _default = Corpus;
 exports["default"] = _default;
 
-},{"./load":245,"@babel/runtime/helpers/asyncToGenerator":31,"@babel/runtime/helpers/classCallCheck":32,"@babel/runtime/helpers/createClass":34,"@babel/runtime/helpers/defineProperty":35,"@babel/runtime/helpers/interopRequireDefault":36,"@babel/runtime/helpers/typeof":39,"@babel/runtime/regenerator":40,"lda-topic-model":226}],245:[function(require,module,exports){
+},{"./load":245,"./util.js":247,"@babel/runtime/helpers/asyncToGenerator":31,"@babel/runtime/helpers/classCallCheck":32,"@babel/runtime/helpers/createClass":34,"@babel/runtime/helpers/defineProperty":35,"@babel/runtime/helpers/interopRequireDefault":36,"@babel/runtime/helpers/typeof":39,"@babel/runtime/regenerator":40,"lda-topic-model":226}],245:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -14805,6 +14807,40 @@ var Util = /*#__PURE__*/function () {
     key: "more",
     value: function more(before, _more, after) {
       return before + '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>' + _more.substring(0, 500) + ' <a href="">+</a><div style="display: none">' + _more.substring(501) + '</div>' + after;
+    }
+  }, {
+    key: "dataUrlToBlob",
+    value: function dataUrlToBlob(dataUrl) {
+      var parts = dataUrl.split(',');
+      var byteString = atob(parts[1]);
+      var mimeString = parts[0].split(':')[1].split(';')[0];
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+
+      return new Blob([ab], {
+        type: mimeString
+      });
+    }
+  }, {
+    key: "blobToDataUrl",
+    value: function blobToDataUrl(blob) {
+      return new Promise(function (resolve, reject) {
+        var fr = new FileReader();
+
+        fr.onload = function (e) {
+          resolve(e.target.result);
+        };
+
+        try {
+          fr.readAsDataURL(blob);
+        } catch (e) {
+          reject(e);
+        }
+      });
     }
   }, {
     key: "isString",
