@@ -1420,12 +1420,20 @@ class Corpus {
 				config = {input: config};
 			} else if (config instanceof Blob || Util.isNode(config) || (Util.isArray(config) && (config[0] instanceof Blob || Util.isNode(config[0])))) {
 				const formData = new FormData();
-				if (config instanceof Blob) {
-					formData.append('input', config);
-				} else {
+				if (Util.isArray(config)) {
 					config.forEach(file => {
+						if (Util.isNode(file)) {
+							const nodeString = new XMLSerializer().serializeToString(file);
+							file = new Blob([nodeString], {type: 'text/xml'});
+						}
 						formData.append('input', file);
 					});
+				} else {
+					if (Util.isNode(config)) {
+						const nodeString = new XMLSerializer().serializeToString(config);
+						config = new Blob([nodeString], {type: 'text/xml'});
+					}
+					formData.append('input', config);
 				}
 				
 				// append any other form options that may have been included

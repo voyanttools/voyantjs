@@ -12779,12 +12779,26 @@ var Corpus = /*#__PURE__*/function () {
         } else if (config instanceof Blob || _util["default"].isNode(config) || _util["default"].isArray(config) && (config[0] instanceof Blob || _util["default"].isNode(config[0]))) {
           var formData = new FormData();
 
-          if (config instanceof Blob) {
-            formData.append('input', config);
-          } else {
+          if (_util["default"].isArray(config)) {
             config.forEach(function (file) {
+              if (_util["default"].isNode(file)) {
+                var nodeString = new XMLSerializer().serializeToString(file);
+                file = new Blob([nodeString], {
+                  type: 'text/xml'
+                });
+              }
+
               formData.append('input', file);
             });
+          } else {
+            if (_util["default"].isNode(config)) {
+              var nodeString = new XMLSerializer().serializeToString(config);
+              config = new Blob([nodeString], {
+                type: 'text/xml'
+              });
+            }
+
+            formData.append('input', config);
           } // append any other form options that may have been included
 
 
