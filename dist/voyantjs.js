@@ -1938,7 +1938,7 @@ module.exports = function (it) {
 };
 
 },{"../internals/an-object":75,"../internals/get-iterator-method":108}],110:[function(require,module,exports){
-(function (global){(function (){
+(function (global){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -1957,7 +1957,7 @@ function () {
   return this;
 }() || Function('return this')();
 
-}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"@babel/runtime/helpers/interopRequireDefault":36,"@babel/runtime/helpers/typeof":39}],111:[function(require,module,exports){
 "use strict";
 
@@ -12789,6 +12789,7 @@ var Corpus = /*#__PURE__*/function () {
               }
 
               formData.append('input', file);
+              formData.append('inputFormat', _util["default"].getFileExtensionFromMimeType(file.type));
             });
           } else {
             if (_util["default"].isNode(config)) {
@@ -12799,6 +12800,7 @@ var Corpus = /*#__PURE__*/function () {
             }
 
             formData.append('input', config);
+            formData.append('inputFormat', _util["default"].getFileExtensionFromMimeType(config.type));
           } // append any other form options that may have been included
 
 
@@ -14822,6 +14824,12 @@ var Util = /*#__PURE__*/function () {
     value: function more(before, _more, after) {
       return before + '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>' + _more.substring(0, 500) + ' <a href="">+</a><div style="display: none">' + _more.substring(501) + '</div>' + after;
     }
+    /**
+     * Take a data URL and convert it to a Blob.
+     * @param {String} dataUrl 
+     * @returns {Blob}
+     */
+
   }, {
     key: "dataUrlToBlob",
     value: function dataUrlToBlob(dataUrl) {
@@ -14839,6 +14847,12 @@ var Util = /*#__PURE__*/function () {
         type: mimeString
       });
     }
+    /**
+     * Take a Blob and convert it to a data URL.
+     * @param {Blob} blob 
+     * @returns {String}
+     */
+
   }, {
     key: "blobToDataUrl",
     value: function blobToDataUrl(blob) {
@@ -14856,45 +14870,152 @@ var Util = /*#__PURE__*/function () {
         }
       });
     }
+    /**
+     * Returns true if the value is a String.
+     * @param {*} val 
+     * @returns {Boolean} 
+     */
+
   }, {
     key: "isString",
     value: function isString(val) {
       return typeof val === 'string';
     }
+    /**
+     * Returns true if the value is a Number.
+     * @param {*} val 
+     * @returns {Boolean}
+     */
+
   }, {
     key: "isNumber",
     value: function isNumber(val) {
       return typeof val === 'number';
     }
+    /**
+     * Returns true if the value is a Boolean.
+     * @param {*} val 
+     * @returns {Boolean}
+     */
+
   }, {
     key: "isBoolean",
     value: function isBoolean(val) {
       return typeof val === 'boolean';
     }
+    /**
+     * Returns true if the value is Undefined.
+     * @param {*} val 
+     * @returns {Boolean}
+     */
+
   }, {
     key: "isUndefined",
     value: function isUndefined(val) {
       return typeof val === 'undefined';
     }
+    /**
+     * Returns true if the value is an Array.
+     * @param {*} val 
+     * @returns {Boolean}
+     */
+
   }, {
     key: "isArray",
     value: function isArray(val) {
       return Object.prototype.toString.call(val) === '[object Array]';
     }
+    /**
+     * Returns true if the value is an Object.
+     * @param {*} val 
+     * @returns {Boolean}
+     */
+
   }, {
     key: "isObject",
     value: function isObject(val) {
       return Object.prototype.toString.call(val) === '[object Object]';
     }
+    /**
+     * Returns true if the value is Null.
+     * @param {*} val 
+     * @returns {Boolean}
+     */
+
   }, {
     key: "isNull",
     value: function isNull(val) {
       return Object.prototype.toString.call(val) === '[object Null]';
     }
+    /**
+     * Returns true if the value is a Node.
+     * @param {*} val 
+     * @returns {Boolean}
+     */
+
   }, {
     key: "isNode",
     value: function isNode(val) {
       return val instanceof Node;
+    }
+    /**
+     * Takes a MIME type and returns the related file extension.
+     * Only handles file types supported by Voyant.
+     * @param {String} mimeType 
+     * @returns {String}
+     */
+
+  }, {
+    key: "getFileExtensionFromMimeType",
+    value: function getFileExtensionFromMimeType(mimeType) {
+      mimeType = mimeType.trim().toLowerCase();
+
+      switch (mimeType) {
+        case 'application/atom+xml':
+          return 'xml';
+
+        case 'application/rss+xml':
+          return 'xml';
+
+        case 'application/xml':
+          return 'xml';
+
+        case 'application/xhtml+xml':
+          return 'xhtml';
+
+        case 'text/html':
+          return 'html';
+
+        case 'application/pdf':
+          return 'pdf';
+
+        case 'application/vnd.apple.pages':
+          return 'pages';
+
+        case 'application/rtf':
+          return 'rtf';
+
+        case 'application/vnd.oasis.opendocument.text':
+          return 'odt';
+
+        case 'application/epub+zip':
+          return 'epub';
+
+        case 'application/msword':
+          return 'doc';
+
+        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+          return 'docx';
+
+        case 'application/vnd.ms-excel':
+          return 'xls';
+
+        case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+          return 'xlsx';
+
+        default:
+          return undefined;
+      }
     }
   }]);
   return Util;

@@ -1427,6 +1427,7 @@ class Corpus {
 							file = new Blob([nodeString], {type: 'text/xml'});
 						}
 						formData.append('input', file);
+						formData.append('inputFormat', Util.getFileExtensionFromMimeType(file.type));
 					});
 				} else {
 					if (Util.isNode(config)) {
@@ -1434,6 +1435,7 @@ class Corpus {
 						config = new Blob([nodeString], {type: 'text/xml'});
 					}
 					formData.append('input', config);
+					formData.append('inputFormat', Util.getFileExtensionFromMimeType(config.type));
 				}
 				
 				// append any other form options that may have been included

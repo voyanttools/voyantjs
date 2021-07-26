@@ -71,3 +71,8 @@ test('isNull', () => {
 test('isNode', () => {
 	expect(Util.isNode('foo')).toBe(false);
 })
+
+test('getFileExtensionFromMimeType' () => {
+	expect(Util.getFileExtensionFromMimeType('application/vnd.oasis.opendocument.text')).toBe('odt');
+	expect(Util.getFileExtensionFromMimeType('application/x-apple-diskimage')).toBe(undefined);
+})
