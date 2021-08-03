@@ -159,6 +159,15 @@ class Util {
 	}
 
 	/**
+	 * Returns true if the value is a Function.
+	 * @param {*} val 
+	 * @returns {Boolean}
+	 */
+	static isFunction(val) {
+		return Object.prototype.toString.call(val) === '[object Function]';
+	}
+
+	/**
 	 * Takes a MIME type and returns the related file extension.
 	 * Only handles file types supported by Voyant.
 	 * @param {String} mimeType 
