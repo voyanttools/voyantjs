@@ -168,6 +168,19 @@ class Util {
 	}
 
 	/**
+	 * Returns true if the value is a Promise.
+	 * @param {*} val 
+	 * @returns {Boolean}
+	 */
+	static isPromise(val) {
+		// ES6 promise detection
+		// return Object.prototype.toString.call(val) === '[object Promise]';
+		
+		// general promise detection
+		return !!val && (typeof val === 'object' || typeof val === 'function') && typeof val.then === 'function';
+	}
+
+	/**
 	 * Takes a MIME type and returns the related file extension.
 	 * Only handles file types supported by Voyant.
 	 * @param {String} mimeType 

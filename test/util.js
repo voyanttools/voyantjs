@@ -76,6 +76,10 @@ test('isFunction', () => {
 	expect(Util.isFunction(()=>{})).toBe(true);
 })
 
+test('isPromise', () => {
+	expect(Util.isPromise(new Promise(() => {}))).toBe(true);
+})
+
 test('getFileExtensionFromMimeType', () => {
 	expect(Util.getFileExtensionFromMimeType('application/vnd.oasis.opendocument.text')).toBe('odt');
 	expect(Util.getFileExtensionFromMimeType('application/x-apple-diskimage')).toBe(undefined);
