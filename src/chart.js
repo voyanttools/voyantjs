@@ -1,3 +1,5 @@
+import NetworkGraph from './networkgraph';
+
 /* global Highcharts */
 
 /**
@@ -189,30 +191,19 @@ class Chart {
 	/**
 	 * Create a network graph
 	 * @param {Object} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {NetworkGraph}
 	 */
 	networkgraph(config={}) {
-		config.plotOptions = {
-			networkgraph: {
-				layoutAlgorithm: {
-					enableSimulation: true
-				},
-				keys: ['from', 'to']
-			}
-		};
-		Chart.setSeriesData(config, this.data);
-
 		return Chart.networkgraph(this.target, config);
 	}
 	/**
 	 * Create a network graph
 	 * @param {HTMLElement} target 
 	 * @param {Object} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {NetworkGraph}
 	 */
 	static networkgraph(target, config) {
-		Chart.setDefaultChartType(config, 'networkgraph');
-		return Highcharts.chart(target, config);
+		return new NetworkGraph(target, config);
 	}
 }
 
