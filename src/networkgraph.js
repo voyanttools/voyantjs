@@ -12,12 +12,13 @@ class NetworkGraph {
 	 * @typedef {Object} NetworkGraphConfig
 	 * @property {Array} nodes
 	 * @property {Array} links
-	 * @property {String} [nodeIdField]
-	 * @property {String} [nodeLabelField]
-	 * @property {String} [nodeValueField]
-	 * @property {String} [linkSourceField]
-	 * @property {String} [linkTargetField]
-	 * @property {String} [linkValueField]
+	 * @property {String|Function} [nodeIdField]
+	 * @property {String|Function} [nodeLabelField]
+	 * @property {String|Function} [nodeValueField]
+	 * @property {String|Function} [nodeCategoryField]
+	 * @property {String|Function} [linkSourceField]
+	 * @property {String|Function} [linkTargetField]
+	 * @property {String|Function} [linkValueField]
 	 */
 
 	physics = {
@@ -42,25 +43,27 @@ class NetworkGraph {
 		if (config.nodes === undefined) throw new Error('Missing nodes!');
 		if (config.links === undefined) throw new Error('Missing links!');
 		
-		const nodeIdField = config.nodeIdField || 'id';
-		const nodeLabelField = config.nodeLabelField || 'id';
-		const nodeValueField = config.nodeValueField || 'value';
+		const nodeIdField = config.nodeIdField === undefined ? 'id' : config.nodeIdField;
+		const nodeLabelField = config.nodeLabelField === undefined ? 'id' : config.nodeLabelField;
+		const nodeValueField = config.nodeValueField === undefined ? 'value' : config.nodeValueField;
+		const nodeCategoryField = config.nodeCategoryField === undefined ? 'category' : config.nodeCategoryField;
 
 		this.nodeData = config.nodes.map(node => {
 			return {
-				id: this._idGet(node[nodeIdField]),
-				label: node[nodeLabelField],
-				value: node[nodeValueField]
+				id: this._idGet(typeof nodeIdField === 'string' ? node[nodeIdField] : nodeIdField(node)),
+				label: typeof nodeLabelField === 'string' ? node[nodeLabelField] : nodeLabelField(node),
+				value: typeof nodeValueField === 'string' ? node[nodeValueField] : nodeValueField(node),
+				category: typeof nodeCategoryField === 'string' ? node[nodeCategoryField] : nodeCategoryField(node)
 			};
 		});
 
-		const linkSourceField = config.linkSourceField || 'source';
-		const linkTargetField = config.linkTargetField || 'target';
-		const linkValueField = config.linkValueField || 'value';
+		const linkSourceField = config.linkSourceField === undefined ? 'source' : config.linkSourceField;
+		const linkTargetField = config.linkTargetField === undefined ? 'target' : config.linkTargetField;
+		const linkValueField = config.linkValueField === undefined ? 'value' : config.linkValueField;
 
 		this.linkData = config.links.map(link => {
-			const sourceId = this._idGet(link[linkSourceField]);
-			const targetId = this._idGet(link[linkTargetField]);
+			const sourceId = this._idGet(typeof linkSourceField === 'string' ? link[linkSourceField] : linkSourceField(link));
+			const targetId = this._idGet(typeof linkTargetField === 'string' ? link[linkTargetField] : linkTargetField(link));
 			const linkId = sourceId+'-'+targetId;
 			return {
 				id: linkId,
@@ -120,6 +123,7 @@ class NetworkGraph {
 		const nodeEnter = node.enter().append('g')
 			.attr('class', 'spyral-ng-node')
 			.attr('id', d => d.id)
+			.attr('category', d => d.category)
 			.on('mouseover', this._nodeMouseOver.bind(this))
 			.on('mouseout', this._nodeMouseOut.bind(this))
 			.on('click', function(data) {
@@ -160,7 +164,7 @@ class NetworkGraph {
 			.text(d => d.label)
 			.attr('font-size', d => d.value ? Math.max(10, Math.sqrt(d.value)*8) : 10)
 			.each(function(d) { d.bbox = this.getBBox(); }) // set bounding box for later use
-			.attr('dominant-baseline', 'middle');
+			.attr('dominant-baseline', 'central');
 
 		this.nodes = nodeEnter.merge(node);
 
