@@ -28,23 +28,39 @@ class Load {
 		for (let key in all) {
 			if (all[key] === undefined) { delete all[key]; }
 		}
-		let searchParams = Object.keys(all).map((key) => {
-			if (all[key] instanceof Array) {
-				return all[key].map((val) => {
-					return encodeURIComponent(key) + '=' + encodeURIComponent(val);
-				}).join('&');
-			} else {
-				return encodeURIComponent(key) + '=' + encodeURIComponent(all[key]);
-			}
-		}).join('&');
 		
-		if ('method' in all === false) {
-			all.method = 'GET';
+		let method = all.method;
+		if (method === undefined) {
+			method = 'GET';
+		} else {
+			delete all.method;
 		}
 
 		let opt = {};
-		if (all.method === 'GET') {
-			if (searchParams.length < 800) {
+		if (method === 'GET' || method === 'POST') {
+			if (method === 'POST' || JSON.stringify(all).length > 1000) {
+				opt = {
+					method: 'POST'
+				};
+				if ('body' in all) {
+					// opt.headers = { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' };
+					opt.body = all['body'];
+				} else {
+					// don't set header as it messes up boundaries, see: https://stackoverflow.com/q/39280438
+					// opt.headers = { 'Content-Type': 'multipart/form-data' };
+					const formData = new FormData();
+					for (let key in all) {
+						if (all[key] instanceof Array) {
+							all[key].forEach((val) => {
+								formData.append(key, val);	
+							});
+						} else {
+							formData.set(key, all[key]);
+						}
+					}
+					opt.body = formData;
+				}
+			} else {
 				for (let key in all) {
 					if (all[key] instanceof Array) {
 						all[key].forEach((val) => {
@@ -54,25 +70,9 @@ class Load {
 						url.searchParams.set(key, all[key]);
 					}
 				}
-			} else {
-				opt = {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-					body: searchParams
-				};
-			}
-		} else if (all.method === 'POST') {
-			opt = {
-				method: 'POST'
-			};
-			if ('body' in all) {
-				opt.body = all['body'];
-			} else {
-				opt.headers = { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' };
-				opt.body = searchParams;
 			}
 		} else {
-			console.warn('Load.trombone: unsupported method:', all.method);
+			throw Error('Load.trombone: unsupported method:', method);
 		}
 		
 		return fetch(url.toString(), opt).then(response => {
