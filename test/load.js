@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Load from '../src/load';
 
 // needed to test Load.files().loadCorpusFromFiles

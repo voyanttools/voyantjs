@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Corpus from '../src/corpus';
 
 import * as Mocks from './mocks/corpus';

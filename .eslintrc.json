@@ -9,6 +9,7 @@
 		"ecmaVersion": 11,
 		"sourceType": "module"
 	},
+	"ignorePatterns": "**/test/*.js",
 	// "plugins": [
 	// 	"jsdoc"
 	// ],

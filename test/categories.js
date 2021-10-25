@@ -1,11 +1,8 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Categories from '../src/categories';
-
-
-beforeAll(() => {
-})
-
-beforeEach(() => {
-})
 
 test('categories', () => {
 	const categories = new Categories();

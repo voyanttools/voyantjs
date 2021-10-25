@@ -1,7 +1,8 @@
-require('jest-fetch-mock').enableMocks()
+/* eslint-disable no-undef */
+require('jest-fetch-mock').enableMocks();
 
-const Highcharts = require('highcharts')
-require('highcharts/modules/networkgraph')(Highcharts)
-require('highcharts/modules/data')(Highcharts)
+const Highcharts = require('highcharts');
+require('highcharts/modules/networkgraph')(Highcharts);
+require('highcharts/modules/data')(Highcharts);
 
-global.Highcharts = Highcharts
+global.Highcharts = Highcharts;

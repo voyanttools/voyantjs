@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Util from '../src/util';
 
 import * as Mocks from './mocks/corpus';
@@ -36,7 +40,7 @@ test('dataUrlToBlob', () => {
 test('blobToDataUrl', () => {
 	const blob = Util.dataUrlToBlob('data:text/plain;base64,Zm9v');
 	return Util.blobToDataUrl(blob).then((dataUrl) => {
-		expect(dataUrl).toMatch(/foo/);
+		expect(dataUrl).toMatch(/data:text\/plain;base64,Zm9v/);
 	});
 });
 

@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import Chart from '../src/chart';
 import NetworkGraph from '../src/networkgraph';
 
