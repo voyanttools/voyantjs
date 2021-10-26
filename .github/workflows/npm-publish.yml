@@ -1,7 +1,4 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
-
-name: Build & Publish
+name: Release
 
 on:
   push:
@@ -24,15 +21,21 @@ jobs:
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
-      - name: Install and test
+      - name: Install, test, and build
         run: |
           npm ci
           npm test
+          npm build
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
           name: code-coverage-report
           path: coverage
+      - name: Archive dist file
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist/voyantjs.js
           
   coverage:
     needs: build
@@ -59,12 +62,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
       - name: Setup node
         uses: actions/setup-node@v2
         with:
           node-version: 14
+      - name: Download dist file
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist/voyantjs.js
       - name: Semantic release
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-        run: npx semantic-release
+        run: |
+          npx semantic-release
+          npm publish
