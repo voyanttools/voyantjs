@@ -13,11 +13,11 @@ class Categories {
 	/**
 	 * Construct a new Categories class
 	 */
-	constructor() {
-		this._categories = {};
-		this._categoriesRanking = [];
-		this._features = {};
-		this._featureDefaults = {};
+	constructor({categories, categoriesRanking, features, featureDefaults} = {categories: {}, categoriesRanking: [], features: {}, featureDefaults: {}}) {
+		this.categories = categories;
+		this.categoriesRanking = categoriesRanking;
+		this.features = features;
+		this.featureDefaults = featureDefaults;
 	}
 
 	/**
@@ -25,7 +25,7 @@ class Categories {
 	 * @returns {Object}
 	 */
 	getCategories() {
-		return this._categories;
+		return this.categories;
 	}
 	
 	/**
@@ -43,7 +43,7 @@ class Categories {
 	 * @returns {Array}
 	 */
 	getCategoryTerms(name) {
-		return this._categories[name];
+		return this.categories[name];
 	}
 	
 	/**
@@ -51,9 +51,9 @@ class Categories {
 	 * @param {string} name 
 	 */
 	addCategory(name) {
-		if (this._categories[name] === undefined) {
-			this._categories[name] = [];
-			this._categoriesRanking.push(name);
+		if (this.categories[name] === undefined) {
+			this.categories[name] = [];
+			this.categoriesRanking.push(name);
 		}
 	}
 
@@ -67,8 +67,8 @@ class Categories {
 			var terms = this.getCategoryTerms(oldName);
 			var ranking = this.getCategoryRanking(oldName);
 			this.addTerms(newName, terms);
-			for (var feature in this._features) {
-				var value = this._features[feature][oldName];
+			for (var feature in this.features) {
+				var value = this.features[feature][oldName];
 				this.setCategoryFeature(newName, feature, value);
 			}
 			this.removeCategory(oldName);
@@ -81,13 +81,13 @@ class Categories {
 	 * @param {string} name 
 	 */
 	removeCategory(name) {
-		delete this._categories[name];
-		var index = this._categoriesRanking.indexOf(name);
+		delete this.categories[name];
+		var index = this.categoriesRanking.indexOf(name);
 		if (index !== -1) {
-			this._categoriesRanking.splice(index, 1);
+			this.categoriesRanking.splice(index, 1);
 		}
-		for (var feature in this._features) {
-			delete this._features[feature][name];
+		for (var feature in this.features) {
+			delete this.features[feature][name];
 		}
 	}
 
@@ -97,7 +97,7 @@ class Categories {
 	 * @returns {number}
 	 */
 	getCategoryRanking(name) {
-		var ranking = this._categoriesRanking.indexOf(name);
+		var ranking = this.categoriesRanking.indexOf(name);
 		if (ranking === -1) {
 			return undefined;
 		} else {
@@ -111,13 +111,13 @@ class Categories {
 	 * @param {number} ranking 
 	 */
 	setCategoryRanking(name, ranking) {
-		if (this._categories[name] !== undefined) {
-			ranking = Math.min(this._categoriesRanking.length-1, Math.max(0, ranking));
-			var index = this._categoriesRanking.indexOf(name);
+		if (this.categories[name] !== undefined) {
+			ranking = Math.min(this.categoriesRanking.length-1, Math.max(0, ranking));
+			var index = this.categoriesRanking.indexOf(name);
 			if (index !== -1) {
-				this._categoriesRanking.splice(index, 1);
+				this.categoriesRanking.splice(index, 1);
 			}
-			this._categoriesRanking.splice(ranking, 0, name);
+			this.categoriesRanking.splice(ranking, 0, name);
 		}
 	}
 
@@ -139,13 +139,13 @@ class Categories {
 		if (!Array.isArray(terms)) {
 			terms = [terms];
 		}
-		if (this._categories[category] === undefined) {
+		if (this.categories[category] === undefined) {
 			this.addCategory(category);
 		}
 		for (var i = 0; i < terms.length; i++) {
 			var term = terms[i];
-			if (this._categories[category].indexOf(term) === -1) {
-				this._categories[category].push(term);
+			if (this.categories[category].indexOf(term) === -1) {
+				this.categories[category].push(term);
 			}
 		}
 	}
@@ -168,12 +168,12 @@ class Categories {
 		if (!Array.isArray(terms)) {
 			terms = [terms];
 		}
-		if (this._categories[category] !== undefined) {
+		if (this.categories[category] !== undefined) {
 			for (var i = 0; i < terms.length; i++) {
 				var term = terms[i];
-				var index = this._categories[category].indexOf(term);
+				var index = this.categories[category].indexOf(term);
 				if (index !== -1) {
-					this._categories[category].splice(index, 1);
+					this.categories[category].splice(index, 1);
 				}
 			}
 		}
@@ -187,8 +187,8 @@ class Categories {
 	getCategoryForTerm(term) {
 		var ranking = Number.MAX_VALUE;
 		var cat = undefined;
-		for (var category in this._categories) {
-			if (this._categories[category].indexOf(term) !== -1 && this.getCategoryRanking(category) < ranking) {
+		for (var category in this.categories) {
+			if (this.categories[category].indexOf(term) !== -1 && this.getCategoryRanking(category) < ranking) {
 				ranking = this.getCategoryRanking(category);
 				cat = category;
 			}
@@ -203,8 +203,8 @@ class Categories {
 	 */
 	getCategoriesForTerm(term) {
 		var cats = [];
-		for (var category in this._categories) {
-			if (this._categories[category].indexOf(term) !== -1) {
+		for (var category in this.categories) {
+			if (this.categories[category].indexOf(term) !== -1) {
 				cats.push(category);
 			}
 		}
@@ -226,7 +226,7 @@ class Categories {
 	 * @returns {Object}
 	 */
 	getFeatures() {
-		return this._features;
+		return this.features;
 	}
 
 	/**
@@ -235,11 +235,11 @@ class Categories {
 	 * @param {*} defaultValue 
 	 */
 	addFeature(name, defaultValue) {
-		if (this._features[name] === undefined) {
-			this._features[name] = {};
+		if (this.features[name] === undefined) {
+			this.features[name] = {};
 		}
 		if (defaultValue !== undefined) {
-			this._featureDefaults[name] = defaultValue;
+			this.featureDefaults[name] = defaultValue;
 		}
 	}
 
@@ -248,8 +248,8 @@ class Categories {
 	 * @param {string} name 
 	 */
 	removeFeature(name) {
-		delete this._features[name];
-		delete this._featureDefaults[name];
+		delete this.features[name];
+		delete this.featureDefaults[name];
 	}
 
 	/**
@@ -259,10 +259,10 @@ class Categories {
 	 * @param {*} featureValue 
 	 */
 	setCategoryFeature(categoryName, featureName, featureValue) {
-		if (this._features[featureName] === undefined) {
+		if (this.features[featureName] === undefined) {
 			this.addFeature(featureName);
 		}
-		this._features[featureName][categoryName] = featureValue;
+		this.features[featureName][categoryName] = featureValue;
 	}
 
 	/**
@@ -273,10 +273,10 @@ class Categories {
 	 */
 	getCategoryFeature(categoryName, featureName) {
 		var value = undefined;
-		if (this._features[featureName] !== undefined) {
-			value = this._features[featureName][categoryName];
+		if (this.features[featureName] !== undefined) {
+			value = this.features[featureName][categoryName];
 			if (value === undefined) {
-				value = this._featureDefaults[featureName];
+				value = this.featureDefaults[featureName];
 				if (typeof value === 'function') {
 					value = value();
 				}
@@ -291,9 +291,9 @@ class Categories {
 	 */
 	getCategoryExportData() {
 		return {
-			categories: Object.assign({}, this._categories),
-			categoriesRanking: this._categoriesRanking.map(x => x),
-			features: Object.assign({}, this._features)
+			categories: Object.assign({}, this.categories),
+			categoriesRanking: this.categoriesRanking.map(x => x),
+			features: Object.assign({}, this.features)
 		};
 	}
 	
@@ -335,17 +335,28 @@ class Categories {
 			tool: 'resource.StoredCategories'
 		})).then(data => {
 			const cats = JSON.parse(data.storedCategories.resource);
-			me._features = cats.features;
-			me._categories = cats.categories;
-			me._categoriesRanking = cats.categoriesRanking || [];
-			if (me._categoriesRanking.length === 0) {
-				for (var category in me._categories) {
-					me._categoriesRanking.push(category);
+			me.features = cats.features;
+			me.categories = cats.categories;
+			me.categoriesRanking = cats.categoriesRanking || [];
+			if (me.categoriesRanking.length === 0) {
+				for (var category in me.categories) {
+					me.categoriesRanking.push(category);
 				}
 			}
 			return me;
 		});
-		
+	}
+
+	/**
+	 * Load categories and return a promise that resolves to a new Spyral.Categories instance.
+	 * 
+	 * @param {Object|String} config an object specifying the parameters (see above)
+	 * @param {Object} api an object specifying any parameters for the trombone call
+	 * @returns {Promise} this first returns a promise and when the promise is resolved it returns this categories object (with the loaded data included)
+	 */
+	static load(config={}, api={}) {
+		const categories = new Categories();
+		return categories.load(config, api);
 	}
 }
 
