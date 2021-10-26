@@ -9,7 +9,6 @@
     "build": "mkdirp dist && browserify index.js -o ./dist/voyantjs.js --standalone Spyral --no-browser-field -t [ babelify --global ]",
     "watch": "mkdirp dist && watchify index.js -o ./dist/voyantjs.js --standalone Spyral --no-browser-field --verbose -t  [ babelify --global ]",
     "test": "jest",
-    "report-coverage": "codecov",
     "semantic-release": "semantic-release"
   },
   "repository": {
@@ -38,7 +37,7 @@
     "@semantic-release/git": "^10.0.0",
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
-    "codecov": "^3.6.5",
+    "codecov": "^3.8.3",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.1.0",
     "eslint": "^7.19.0",
