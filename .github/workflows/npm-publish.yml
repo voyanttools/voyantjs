@@ -25,8 +25,9 @@ jobs:
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
       - name: Install and test
-        run: npm ci
-        run: npm test
+        run: |
+          npm ci
+          npm test
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
