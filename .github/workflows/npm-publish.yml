@@ -12,18 +12,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
         with:
           node-version: 14
-# see: https://github.com/actions/setup-node/issues/214#issuecomment-810829250
-      - run: >
+      - name: Replace ssh with https # see: https://github.com/actions/setup-node/issues/214#issuecomment-810829250
+        run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
-      - run: npm ci
-      - run: npm test
+      - name: Install and test
+        run: npm ci
+        run: npm test
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: coverage
 
 #   release:
 #       runs-on: ubuntu-latest
@@ -42,11 +50,16 @@ jobs:
       needs: build
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v2
-        - uses: codecov/codecov-action@v2
+        - name: Download code coverage results
+          uses: actions/download-artifact@v2
+          with:
+            name: code-coverage-report
+            path: coverage
+        - name: Upload coverage report
+          uses: codecov/codecov-action@v2
           with:
             token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-            directory: ./coverage
+            directory: coverage
             #flags: unittests # optional
             name: codecov-umbrella # optional
             #fail_ci_if_error: true # optional (default = false)
