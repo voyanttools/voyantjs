@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Publish
+name: Build & Publish
 
 on:
   push:
@@ -33,52 +33,38 @@ jobs:
         with:
           name: code-coverage-report
           path: coverage
-
-#   release:
-#       runs-on: ubuntu-latest
-#       steps:
-#         - uses: actions/checkout@v2
-#         - uses: actions/setup-node@v2
-#           with:
-#             node-version: 14
-#         - run: npm ci
-#         - env:
-#             GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-#             NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-#           run: npx semantic-release
           
   coverage:
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v2
-        - name: Download code coverage results
-          uses: actions/download-artifact@v2
-          with:
-            name: code-coverage-report
-            path: coverage
-        - name: Upload coverage report
-          uses: codecov/codecov-action@v2
-          with:
-            token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-            directory: coverage
-            #flags: unittests # optional
-            name: codecov-umbrella # optional
-            #fail_ci_if_error: true # optional (default = false)
-            verbose: true # optional (default = false)
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Download code coverage results
+        uses: actions/download-artifact@v2
+        with:
+          name: code-coverage-report
+          path: coverage
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v2
+        with:
+          directory: coverage
+          name: codecov-umbrella
+          #fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
 
-
-  # publish-npm:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: 14
-  #         registry-url: https://registry.npmjs.org/
-  #     - run: npm ci
-  #     - run: npm publish
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Semantic release
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: npx semantic-release
