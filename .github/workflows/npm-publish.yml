@@ -39,13 +39,14 @@ jobs:
 #           run: npx semantic-release
           
   coverage:
+      needs: build
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
         - uses: codecov/codecov-action@v2
           with:
             token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-            #files: ./coverage1.xml,./coverage2.xml # optional
+            directory: ./coverage
             #flags: unittests # optional
             name: codecov-umbrella # optional
             #fail_ci_if_error: true # optional (default = false)
