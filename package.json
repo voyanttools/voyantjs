@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "highcharts": "^9.3.0",
-    "lda-topic-model": "github:voyanttools/lda-topic-model"
+    "lda-topic-model": "git+https://github.com/voyanttools/lda-topic-model.git"
   },
   "directories": {
     "test": "test"
