@@ -25,16 +25,16 @@ jobs:
         run: |
           npm ci
           npm test
-          npm build
+          npx build
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
           name: code-coverage-report
           path: coverage
-      - name: Archive dist file
+      - name: Archive distribution file
         uses: actions/upload-artifact@v2
         with:
-          name: dist
+          name: distribution
           path: dist/voyantjs.js
           
   coverage:
@@ -68,10 +68,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-      - name: Download dist file
+      - name: Download distribution file
         uses: actions/download-artifact@v2
         with:
-          name: dist
+          name: distribution
           path: dist/voyantjs.js
       - name: Semantic release
         env:
