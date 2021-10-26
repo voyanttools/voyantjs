@@ -16,19 +16,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-      - name: Add SSH key
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          mkdir -p /home/runner/.ssh
-          ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
-          echo "${{secrets.SSH_KEY}}" > /home/runner/.ssh/github_actions
-          chmod 600 /home/runner/.ssh/github_actions
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add /home/runner/.ssh/github_actions
-      - env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: npm ci
+      - run: npm ci
       - run: npm test
 
 #   release:
