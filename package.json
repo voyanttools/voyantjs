@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "highcharts": "^9.3.0",
-    "lda-topic-model": "git+https://github.com/ajmacdonald/lda-topic-model.git"
+    "lda-topic-model": "github:voyanttools/lda-topic-model"
   },
   "directories": {
     "test": "test"
