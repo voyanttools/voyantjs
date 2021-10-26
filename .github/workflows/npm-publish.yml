@@ -51,6 +51,8 @@ jobs:
       needs: build
       runs-on: ubuntu-latest
       steps:
+        - name: Checkout repository
+          uses: actions/checkout@v2
         - name: Download code coverage results
           uses: actions/download-artifact@v2
           with:
