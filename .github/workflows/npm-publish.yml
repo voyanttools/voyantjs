@@ -25,7 +25,7 @@ jobs:
         run: |
           npm ci
           npm test
-          npx build
+          npm run-script build
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
