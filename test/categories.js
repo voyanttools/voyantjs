@@ -3,6 +3,19 @@
  */
 
 import Categories from '../src/categories';
+import Load from '../src/load';
+
+import * as Mocks from './mocks/categories';
+
+const baseUrl = 'http://localhost:8080/voyant';
+
+beforeAll(() => {
+	Load.setBaseUrl(baseUrl);
+})
+
+beforeEach(() => {
+	fetch.resetMocks()
+})
 
 test('categories', () => {
 	const categories = new Categories();
@@ -42,4 +55,11 @@ test('features', () => {
 	
 	const data = categories.getCategoryExportData();
 	expect(Object.keys(data.features).length).toBe(0);
+})
+
+test('load', () => {
+	fetch.once(JSON.stringify(Mocks.Categories));
+	return Categories.load('categories.en.txt').then(categories => {
+		expect(categories.getCategoryNames()).toEqual(expect.arrayContaining(['positive','negative']));
+	})
 })
