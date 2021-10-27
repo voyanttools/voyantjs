@@ -1,6 +1,6 @@
 {
   "name": "voyant",
-  "version": "2.1.2",
+  "version": "2.1.4",
   "description": "Simple library for interacting with Voyant Tools",
   "main": "dist/voyantjs.js",
   "unpkg": "dist/voyantjs.js",
