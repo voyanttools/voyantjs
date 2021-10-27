@@ -1,3 +1,10 @@
+## [2.1.6](https://github.com/voyanttools/voyantjs/compare/v2.1.5...v2.1.6) (2021-10-27)
+
+
+### Bug Fixes
+
+* **semantic-release:** specify assets for github ([68f547b](https://github.com/voyanttools/voyantjs/commit/68f547b550220a9c3a9a0299647e325cfeb30324))
+
 ## [2.1.5](https://github.com/voyanttools/voyantjs/compare/v2.1.4...v2.1.5) (2021-10-27)
 
 

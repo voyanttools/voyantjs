@@ -1,6 +1,6 @@
 {
   "name": "voyant",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Simple library for interacting with Voyant Tools",
   "main": "dist/voyantjs.js",
   "unpkg": "dist/voyantjs.js",
@@ -117,16 +117,25 @@
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
       "@semantic-release/npm",
-      ["@semantic-release/git", {
-        "assets": [
-          "dist/voyantjs.js"
-        ]
-      }],
-      ["@semantic-release/github", {
-        "assets": [
-          {"path": "dist/voyantjs.js", "label": "JS distribution"}
-        ]
-      }]
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "dist/voyantjs.js"
+          ]
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "dist/voyantjs.js",
+              "label": "JS distribution"
+            }
+          ]
+        }
+      ]
     ]
   }
 }
