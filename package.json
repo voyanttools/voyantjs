@@ -1,6 +1,6 @@
 {
   "name": "voyant",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Simple library for interacting with Voyant Tools",
   "main": "dist/voyantjs.js",
   "unpkg": "dist/voyantjs.js",
@@ -125,7 +125,7 @@
           ]
         }
       ],
-	  "@semantic-release/github"
+      "@semantic-release/github"
     ]
   }
 }

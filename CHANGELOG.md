@@ -1,3 +1,10 @@
+## [2.1.5](https://github.com/voyanttools/voyantjs/compare/v2.1.4...v2.1.5) (2021-10-27)
+
+
+### Bug Fixes
+
+* **semantic-release:** re-add github plugin ([faa669c](https://github.com/voyanttools/voyantjs/commit/faa669c46393178254e5d1257578edba4f923348))
+
 ## [2.1.4](https://github.com/voyanttools/voyantjs/compare/v2.1.3...v2.1.4) (2021-10-27)
 
 
