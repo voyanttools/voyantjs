@@ -9,7 +9,7 @@
     "build": "mkdirp dist && browserify index.js -o ./dist/voyantjs.js --standalone Spyral --no-browser-field -t [ babelify --global ]",
     "watch": "mkdirp dist && watchify index.js -o ./dist/voyantjs.js --standalone Spyral --no-browser-field --verbose -t  [ babelify --global ]",
     "test": "jest",
-    "semantic-release": "semantic-release -p @semantic-release/commit-analyzer -p @semantic-release/release-notes-generator -p @semantic-release/changelog -p @semantic-release/npm -p @semantic-release/git-p --debug"
+    "semantic-release": "semantic-release -p @semantic-release/commit-analyzer -p @semantic-release/release-notes-generator -p @semantic-release/changelog -p @semantic-release/npm -p @semantic-release/git --debug"
   },
   "repository": {
     "type": "git",
