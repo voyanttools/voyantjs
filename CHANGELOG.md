@@ -1,3 +1,10 @@
+## [2.1.7](https://github.com/voyanttools/voyantjs/compare/v2.1.6...v2.1.7) (2021-10-27)
+
+
+### Bug Fixes
+
+* **semantic-release:** re-add debug flag ([8dcc0f5](https://github.com/voyanttools/voyantjs/commit/8dcc0f5f437ebc002b3a88b91893c5a6039ccd45))
+
 ## [2.1.6](https://github.com/voyanttools/voyantjs/compare/v2.1.5...v2.1.6) (2021-10-27)
 
 
