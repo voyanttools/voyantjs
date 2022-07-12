@@ -1049,22 +1049,7 @@ class Table {
 	 * @returns {Highcharts.Chart}
 	 */
 	chart(target = undefined, config = {}) {
-		if (Util.isNode(target) === false && typeof target === 'object') {
-			config = target;
-			target = undefined;
-		}
-		
-		if (target === undefined) {
-			if (typeof Spyral !== 'undefined' && Spyral.Notebook) {
-				target = Spyral.Notebook.getTarget();
-				if (target.clientHeight <= 40) {
-					target.style.height = '400px'; // 400 is the default Highcharts height
-				}
-			} else {
-				target = document.createElement('div');
-				document.body.appendChild(target);
-			}
-		}
+		[target, config] = Chart._handleTargetAndConfig(target, config);
 
 		config.chart = config.chart || {};
 		
@@ -1074,7 +1059,7 @@ class Table {
 		let isHeadersCategories = headers.every(h => isNaN(h));
 
 		if (isHeadersCategories) {
-			Chart.setDefaultChartType(config, 'column');
+			Chart._setDefaultChartType(config, 'column');
 		}
 
 		// set categories if not set
@@ -1084,11 +1069,13 @@ class Table {
 		// start filling in series
 		config.series = config.series || [];
 
-		// one row, so let's take series from rows
-		if (rowsCount === 1) {
-			config.dataFrom = config.dataFrom || 'rows';
-		} else if (columnsCount === 1 || (!('dataFrom' in config))) {
-			config.dataFrom = config.dataFrom || 'columns';
+		if (!('seriesFrom' in config)) {
+			// one row, so let's take series from rows
+			if (rowsCount === 1) {
+				config.dataFrom = config.dataFrom || 'rows';
+			} else if (columnsCount === 1 || (!('dataFrom' in config))) {
+				config.dataFrom = config.dataFrom || 'columns';
+			}
 		}
 
 		if ('dataFrom' in config) {
