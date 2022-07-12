@@ -522,6 +522,34 @@ class Corpus {
 		return this.metadata(config).then(data => data.map(doc => doc.title));
 	}
 
+	/**
+	 * Returns an array of documents metadata for the corpus.
+	 * 
+	 * The following are valid in the config parameter:
+	 * 
+	 *  * **start**: the zero-based start of the list
+	 *  * **limit**: a limit to the number of items to return at a time
+	 *  * **docIndex**: a zero-based list of documents (first document is zero, etc.); multiple documents can be separated by a comma
+	 *  * **docId**: a set of document IDs; multiple documents can be separated by a comma
+	 *  * **query**: one or more term queries for the title, author or full-text
+	 *  * **sort**: one of the following sort orders: `INDEX`, `TITLE`, `AUTHOR`, `TOKENSCOUNTLEXICAL`, `TYPESCOUNTLEXICAL`, `TYPETOKENRATIOLEXICAL`, `PUBDATE`
+	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+	 * 
+	 * @param {Object} config an Object specifying parameters (see list above) 
+	 * @param {number} config.start the zero-based start of the list
+	 * @param {number} config.limit a limit to the number of items to return at a time
+	 * @param {number} config.docIndex a zero-based list of documents (first document is zero, etc.); multiple documents can be separated by a comma
+	 * @param {string} config.docId a set of document IDs; multiple documents can be separated by a comma
+	 * @param {string} config.query one or more term queries for the title, author or full-text
+	 * @param {string} config.sort one of the following sort orders: `INDEX`, `TITLE`, `AUTHOR`, `TOKENSCOUNTLEXICAL`, `TYPESCOUNTLEXICAL`, `TYPETOKENRATIOLEXICAL`, `PUBDATE`
+	 * @param {string} config.dir sort direction, **`ASC`**ending or **`DESC`**ending
+	 * @returns {Promise<Array>} a Promise for an Array of documents metadata
+	 */
+	documents(config={}) {
+		config.mode = 'documents';
+		return this.metadata(config);
+	}
+
 	/*
 	 * Create a Corpus and return the titles
 	 * @param {*} config 
@@ -1278,7 +1306,61 @@ class Corpus {
 	}
 	
 	/**
-	 * Get a promise for the HTML snippet that will produce the specified Voyant tools to appear.
+	 * Returns an array of entities.
+	 * 
+	 * The config object as parameter can contain the following:
+	 * 
+	 *  * **docIndex**: document index to restrict to (can be comma-separated list)
+	 *  * **annotator**: the annotator to use: 'stanford' or 'nssi'
+	 * 
+	 * @param {Object} config
+	 * @param {(number|string)} config.docIndex document index to restrict to (can be comma-separated list)
+	 * @param {string} config.annotator the annotator to use: 'stanford' or 'nssi'
+	 * @returns {Promise<Array>}
+	 */
+	entities(config = {annotator: 'stanford'}) {
+		const timeoutDelay = 5000;
+		const corpusId = this.corpusid;
+		return new Promise((resolve, reject) => {
+			function doLoad(config) {
+				Load.trombone(config, {
+					tool: 'corpus.DocumentEntities',
+					includeEntities: true,
+					noCache: true, // never cache, we don't want stale entity status
+					corpus: corpusId
+				}).then(data => {
+					const total = data.documentEntities.status.length;
+					let numDone = 0;
+					let hasFailures = false;
+					data.documentEntities.status.forEach(function(item) {
+						if (item[1] === 'done') numDone++;
+						else if (item[1].indexOf('failed') === 0) {
+							numDone++;
+							hasFailures = true;
+						}
+					});
+					const isDone = numDone === total;
+
+					if (isDone) {
+						if (hasFailures && numDone === 1) {
+							reject('Failed to get entities');
+						} else {
+							resolve(data.documentEntities.entities);
+						}
+					} else {
+						delete config.retryFailures;
+						setTimeout(doLoad.bind(this, config), timeoutDelay);
+					}
+
+				}, (error) => reject(error));
+			}
+			
+			doLoad(config);
+		});
+	}
+
+	/**
+	 * Returns an HTML snippet that will produce the specified Voyant tools to appear.
 	 * 
 	 * In its simplest form we can simply call the named tool:
 	 * 
@@ -1581,12 +1663,13 @@ class Corpus {
 			
 		});
 
-		['id','metadata','summary','titles','text','texts','terms','tokens','words','contexts','collocates','phrases','correlations','lemmas','tool'].forEach(name => {
+		['collocates','contexts','correlations','documents','entities','id','lda','ldaDocuments','ldaTopics','lemmas','metadata','phrases','summary','terms','text','texts','titles','toString','tokens','tool','words'].forEach(name => {
 			promise[name] = function() {
 				var args = arguments;
 				return promise.then(corpus => {return corpus[name].apply(corpus, args);});
 			};
 		});
+		
 		promise.assign = function(name) {
 			return this.then(corpus => {window[name] = corpus; return corpus;});
 		};
