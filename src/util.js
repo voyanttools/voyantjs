@@ -87,6 +87,75 @@ class Util {
 	}
 
 	/**
+	 * Takes an XML document and XSL stylesheet and returns the resulting transformation.
+	 * @param {(Document|String)} xmlDoc The XML document to transform
+	 * @param {(Document|String)} xslStylesheet The XSL to use for the transformation
+	 * @param {Boolean} [returnDoc=false] True to return a Document, false to return a DocumentFragment
+	 * @returns {Document}
+	 */
+	static transformXml(xmlDoc, xslStylesheet, returnDoc=false) {
+		if (this.isString(xmlDoc)) {
+			const parser = new DOMParser();
+			xmlDoc = parser.parseFromString(xmlDoc, 'application/xml');
+			const error = this._getParserError(xmlDoc);
+			if (error) {
+				throw error;
+			}
+		}
+		if (this.isString(xslStylesheet)) {
+			const parser = new DOMParser();
+			xslStylesheet = parser.parseFromString(xslStylesheet, 'application/xml');
+			const error = this._getParserError(xslStylesheet);
+			if (error) {
+				throw error;
+			}
+		}
+		const xslRoot = xslStylesheet.firstElementChild;
+		if (xslRoot.hasAttribute('version') === false) {
+			// Transform fails in Firefox if version is missing, so return a more helpful error message instead of the default.
+			throw new Error('XSL stylesheet is missing version attribute.');
+		}
+
+		const xsltProcessor = new XSLTProcessor();
+		try {
+			xsltProcessor.importStylesheet(xslStylesheet);
+		} catch (e) {
+			console.warn(e);
+		}
+		let result;
+		if (returnDoc) {
+			result = xsltProcessor.transformToDocument(xmlDoc);
+		} else {
+			result = xsltProcessor.transformToFragment(xmlDoc, document);
+		}
+		return result;
+	}
+
+	/**
+	 * Checks the Document for a parser error and returns an Error if found, or null.
+	 * @param {Document} doc 
+	 * @param {Boolean} [includePosition=false] True to include the error position information
+	 * @returns {Error|null}
+	 */
+	static _getParserError(doc, includePosition=false) {
+		// fairly naive check for parsererror, consider something like https://stackoverflow.com/a/55756548
+		const parsererror = doc.querySelector('parsererror');
+		if (parsererror !== null) {
+			const errorMsg = parsererror.textContent;
+			const error = new Error(errorMsg);
+			if (includePosition) {
+				const lineNumber = parseInt(errorMsg.match(/line[\s\w]+?(\d+)/i)[1]);
+				const columnNumber = parseInt(errorMsg.match(/column[\s\w]+?(\d+)/i)[1]);
+				error.lineNumber = lineNumber;
+				error.columnNumber = columnNumber;
+			}
+			return error;
+		} else {
+			return null;
+		}
+	}
+
+	/**
 	 * Returns true if the value is a String.
 	 * @param {*} val 
 	 * @returns {Boolean} 

@@ -44,6 +44,14 @@ test('blobToDataUrl', () => {
 	});
 });
 
+// test('transformXml', () => {
+// 	const xmlDoc = '<foo><bar>baz</bar></foo>';
+// 	const xslDoc = `<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+// 	<xsl:template match="/foo/bar"><xsl:value-of select="child::text()" /></xsl:template></xsl:stylesheet>`;
+// 	const result = Util.transformXml(xmlDoc, xslDoc, false);
+// 	expect(result.firstChild.textContent).toMatch('baz');
+// })
+
 test('isString', () => {
 	expect(Util.isString('foo')).toBe(true);
 })
