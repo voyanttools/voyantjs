@@ -11,7 +11,14 @@ import Load from './load';
 class Categories {
 
 	/**
-	 * Construct a new Categories class
+	 * Construct a new Categories class.
+	 * @constructor
+	 * @param {Object} config
+	 * @param {Object} config.categories
+	 * @param {Array} config.categoriesRanking
+	 * @param {Object} config.features
+	 * @param {Object} config.featureDefaults
+	 * @returns {Spyral.Categories}
 	 */
 	constructor({categories, categoriesRanking, features, featureDefaults} = {categories: {}, categoriesRanking: [], features: {}, featureDefaults: {}}) {
 		this.categories = categories;
@@ -21,7 +28,7 @@ class Categories {
 	}
 
 	/**
-	 * Get the categories
+	 * Get the categories.
 	 * @returns {Object}
 	 */
 	getCategories() {
@@ -30,16 +37,15 @@ class Categories {
 	
 	/**
 	 * Get category names as an array.
-	 * 
-	 * @returns {Array} of category names
+	 * @returns {Array}
 	 */
 	getCategoryNames() {
 		return Object.keys(this.getCategories());
 	}
 
 	/**
-	 * Get the terms for a category
-	 * @param {string} name 
+	 * Get the terms for a category.
+	 * @param {string} name The category name
 	 * @returns {Array}
 	 */
 	getCategoryTerms(name) {
@@ -47,8 +53,8 @@ class Categories {
 	}
 	
 	/**
-	 * Add a new category
-	 * @param {string} name 
+	 * Add a new category.
+	 * @param {string} name The category name
 	 */
 	addCategory(name) {
 		if (this.categories[name] === undefined) {
@@ -58,9 +64,9 @@ class Categories {
 	}
 
 	/**
-	 * Rename a category
-	 * @param {string} oldName 
-	 * @param {string} newName 
+	 * Rename a category.
+	 * @param {string} oldName The old category name
+	 * @param {string} newName The new category name
 	 */
 	renameCategory(oldName, newName) {
 		if (oldName !== newName) {
@@ -77,8 +83,8 @@ class Categories {
 	}
 
 	/**
-	 * Remove a category
-	 * @param {string} name 
+	 * Remove a category.
+	 * @param {string} name The category name
 	 */
 	removeCategory(name) {
 		delete this.categories[name];
@@ -92,8 +98,8 @@ class Categories {
 	}
 
 	/**
-	 * Gets the ranking for a category
-	 * @param {string} name 
+	 * Gets the ranking for a category.
+	 * @param {string} name The category name
 	 * @returns {number}
 	 */
 	getCategoryRanking(name) {
@@ -106,9 +112,9 @@ class Categories {
 	}
 
 	/**
-	 * Sets the ranking for a category
-	 * @param {string} name 
-	 * @param {number} ranking 
+	 * Sets the ranking for a category.
+	 * @param {string} name The category name
+	 * @param {number} ranking The category ranking
 	 */
 	setCategoryRanking(name, ranking) {
 		if (this.categories[name] !== undefined) {
@@ -122,18 +128,18 @@ class Categories {
 	}
 
 	/**
-	 * Add a term to a category
-	 * @param {string} category 
-	 * @param {string} term 
+	 * Add a term to a category.
+	 * @param {string} category The category name
+	 * @param {string} term The term
 	 */
 	addTerm(category, term) {
 		this.addTerms(category, [term]);
 	}
 
 	/**
-	 * Add multiple terms to a category
-	 * @param {string} category 
-	 * @param {Array} terms 
+	 * Add multiple terms to a category.
+	 * @param {string} category The category name
+	 * @param {Array} terms An array of terms
 	 */
 	addTerms(category, terms) {
 		if (!Array.isArray(terms)) {
@@ -151,18 +157,18 @@ class Categories {
 	}
 
 	/**
-	 * Remove a term from a category
-	 * @param {string} category 
-	 * @param {string} term 
+	 * Remove a term from a category.
+	 * @param {string} category The category name
+	 * @param {string} term The term
 	 */
 	removeTerm(category, term) {
 		this.removeTerms(category, [term]);
 	}
 
 	/**
-	 * Remove multiple terms from a category
-	 * @param {string} category 
-	 * @param {Array} terms 
+	 * Remove multiple terms from a category.
+	 * @param {string} category The category name
+	 * @param {Array} terms An array of terms
 	 */
 	removeTerms(category, terms) {
 		if (!Array.isArray(terms)) {
@@ -180,8 +186,8 @@ class Categories {
 	}
 	
 	/**
-	 * Get the category that a term belongs to, taking ranking into account
-	 * @param {string} term 
+	 * Get the category that a term belongs to, taking ranking into account.
+	 * @param {string} term The term
 	 * @returns {string}
 	 */
 	getCategoryForTerm(term) {
@@ -197,8 +203,8 @@ class Categories {
 	}
 
 	/**
-	 * Get all the categories a term belongs to
-	 * @param {string} term 
+	 * Get all the categories a term belongs to.
+	 * @param {string} term The term
 	 * @returns {Array}
 	 */
 	getCategoriesForTerm(term) {
@@ -212,9 +218,9 @@ class Categories {
 	}
 
 	/**
-	 * Get the feature for a term
-	 * @param {string} feature 
-	 * @param {string} term 
+	 * Get the feature for a term.
+	 * @param {string} feature The feature
+	 * @param {string} term The term
 	 * @returns {*}
 	 */
 	getFeatureForTerm(feature, term) {
@@ -222,7 +228,7 @@ class Categories {
 	}
 	
 	/**
-	 * Get the features
+	 * Get the features.
 	 * @returns {Object}
 	 */
 	getFeatures() {
@@ -230,9 +236,9 @@ class Categories {
 	}
 
 	/**
-	 * Add a feature
-	 * @param {string} name 
-	 * @param {*} defaultValue 
+	 * Add a feature.
+	 * @param {string} name The feature name
+	 * @param {*} defaultValue The default value
 	 */
 	addFeature(name, defaultValue) {
 		if (this.features[name] === undefined) {
@@ -244,8 +250,8 @@ class Categories {
 	}
 
 	/**
-	 * Remove a feature
-	 * @param {string} name 
+	 * Remove a feature.
+	 * @param {string} name The feature name
 	 */
 	removeFeature(name) {
 		delete this.features[name];
@@ -253,10 +259,10 @@ class Categories {
 	}
 
 	/**
-	 * Set the feature for a category
-	 * @param {string} categoryName 
-	 * @param {string} featureName 
-	 * @param {*} featureValue 
+	 * Set the feature for a category.
+	 * @param {string} categoryName The category name
+	 * @param {string} featureName The feature name
+	 * @param {*} featureValue The feature value
 	 */
 	setCategoryFeature(categoryName, featureName, featureValue) {
 		if (this.features[featureName] === undefined) {
@@ -266,9 +272,9 @@ class Categories {
 	}
 
 	/**
-	 * Get the feature for a category
-	 * @param {string} categoryName 
-	 * @param {string} featureName 
+	 * Get the feature for a category.
+	 * @param {string} categoryName The category name
+	 * @param {string} featureName The feature name
 	 * @returns {*}
 	 */
 	getCategoryFeature(categoryName, featureName) {
@@ -286,7 +292,7 @@ class Categories {
 	}
 	
 	/**
-	 * Get a copy of the category and feature data
+	 * Get a copy of the category and feature data.
 	 * @returns {Object}
 	 */
 	getCategoryExportData() {
@@ -300,7 +306,7 @@ class Categories {
 	/**
 	 * Save the categories (if we're in a recognized environment).
 	 * @param {Object} config for the network call (specifying if needed the location of Trombone, etc., see {@link Spyral.Load#trombone}
-	 * @returns {Promise} this returns a promise which eventually resolves to a string that is the ID reference for the stored categories
+	 * @returns {Promise<string>} this returns a promise which eventually resolves to a string that is the ID reference for the stored categories
 	 */
 	save(config={},api={}) {
 		const categoriesData = JSON.stringify(this.getCategoryExportData());
@@ -319,9 +325,9 @@ class Categories {
 	 * Which is equivalent to:
 	 * 	new Spyral.Categories().load({retrieveResourceId: "categories.en.txt"});
 	 * 
-	 * @param {Object|String} config an object specifying the parameters (see above)
+	 * @param {(Object|String)} config an object specifying the parameters (see above)
 	 * @param {Object} api an object specifying any parameters for the trombone call
-	 * @returns {Promise} this first returns a promise and when the promise is resolved it returns this categories object (with the loaded data included)
+	 * @returns {Promise<Object>} this first returns a promise and when the promise is resolved it returns this categories object (with the loaded data included)
 	 */
 	load(config={}, api={}) {
 		let me = this;
@@ -350,9 +356,9 @@ class Categories {
 	/**
 	 * Load categories and return a promise that resolves to a new Spyral.Categories instance.
 	 * 
-	 * @param {Object|String} config an object specifying the parameters (see above)
+	 * @param {(Object|String)} config an object specifying the parameters (see above)
 	 * @param {Object} api an object specifying any parameters for the trombone call
-	 * @returns {Promise} this first returns a promise and when the promise is resolved it returns this categories object (with the loaded data included)
+	 * @returns {Promise<Object>} this first returns a promise and when the promise is resolved it returns this categories object (with the loaded data included)
 	 */
 	static load(config={}, api={}) {
 		const categories = new Categories();

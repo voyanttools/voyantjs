@@ -7,20 +7,6 @@
  */
 class NetworkGraph {
 
-	/**
-	 * The network graph config object
-	 * @typedef {Object} NetworkGraphConfig
-	 * @property {Array} nodes
-	 * @property {Array} links
-	 * @property {String|Function} [nodeIdField]
-	 * @property {String|Function} [nodeLabelField]
-	 * @property {String|Function} [nodeValueField]
-	 * @property {String|Function} [nodeCategoryField]
-	 * @property {String|Function} [linkSourceField]
-	 * @property {String|Function} [linkTargetField]
-	 * @property {String|Function} [linkValueField]
-	 */
-
 	physics = {
 		damping: 0.4, // 0 = no damping, 1 = full damping
 		centralGravity: 0.1, // 0 = no grav, 1 = high grav
@@ -34,7 +20,16 @@ class NetworkGraph {
 	 * Construct a new NetworkGraph class
 	 * @constructor
 	 * @param {HTMLElement} target 
-	 * @param {NetworkGraphConfig} config 
+	 * @param {Object} config 
+	 * @param {Array} config.nodes An array of nodes
+	 * @param {Array} config.links An array of links
+	 * @param {String|Function} [config.nodeIdField]
+	 * @param {String|Function} [config.nodeLabelField]
+	 * @param {String|Function} [config.nodeValueField]
+	 * @param {String|Function} [config.nodeCategoryField]
+	 * @param {String|Function} [config.linkSourceField]
+	 * @param {String|Function} [config.linkTargetField]
+	 * @param {String|Function} [config.linkValueField]
 	 * @return {NetworkGraph}
 	 */
 	constructor(target, config) {

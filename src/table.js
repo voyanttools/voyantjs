@@ -62,8 +62,6 @@ import Util from './util.js';
  * 
  * @memberof Spyral
  * @class
- * @param {Array|String} data an array of data or a string with CSV or TSV.
- * @param {Object} config an Object for configuring the table initialization, see above
  */
 class Table {
 	/**
@@ -79,8 +77,9 @@ class Table {
 	/**
 	 * Create a new Table
 	 * @constructor
-	 * @param {(Object|Array|String|Number)} data
-	 * @param {TableConfig} config
+	 * @param {(Object|Array|String|Number)} data An array of data or a string with CSV or TSV.
+	 * @param {TableConfig} config an Object for configuring the table initialization
+	 * @returns {Spyral.Table}
 	 */
 	constructor(data, config, ...other) {
 		this._rows = [];
@@ -190,7 +189,7 @@ class Table {
 	/**
 	 * Set the headers for the Table
 	 * @param {(Object|Array)} data
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	setHeaders(data) {
 		if (data && Array.isArray(data)) {
@@ -210,7 +209,7 @@ class Table {
 	/**
 	 * Add rows to the Table
 	 * @param {Array} data
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	addRows(data) {
 		data.forEach(row => this.addRow(row), this);
@@ -220,7 +219,7 @@ class Table {
 	/**
 	 * Add a row to the Table
 	 * @param {(Array|Object)} data
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	addRow(data, ...other) {
 		
@@ -238,7 +237,7 @@ class Table {
 	 * @param {(number|string)} ind The row index
 	 * @param {(Object|Array)} data
 	 * @param {boolean} create
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	setRow(ind, data, create) {
 
@@ -289,7 +288,7 @@ class Table {
 	 * @param {(number|string)} ind The column index
 	 * @param {(Object|Array)} data
 	 * @param {boolean} create
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	setColumn(ind, data, create) {
 
@@ -348,7 +347,7 @@ class Table {
 	 * @param {(number|string)} row The row index
 	 * @param {(number|string)} column The column index
 	 * @param {number} value The value to set
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	setCell(row, column, value) {
 		this.updateCell(row,column,value,true);
@@ -417,6 +416,7 @@ class Table {
 	 * Add a column (at the specified index)
 	 * @param {(Object|String)} config
 	 * @param {(number|string)} ind
+	 * @returns {Spyral.Table}
 	 */
 	addColumn(config, ind) {
 		// determine col
@@ -846,7 +846,7 @@ class Table {
 	/**
 	 * TODO
 	 * Sort the specified rows
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	rowSort(inds, config) {
 		// no inds, use all columns
@@ -903,7 +903,7 @@ class Table {
 	/**
 	 * TODO
 	 * Sort the specified columns
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	columnSort(inds, config) {
 		// no inds, use all columns
@@ -987,7 +987,7 @@ class Table {
 	 * Set the target's contents to an HTML representation of the Table
 	 * @param {(Function|String|Object)} target
 	 * @param {Object} [config]
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	html(target, config) {
 		let html = this.toString(config);
@@ -1132,7 +1132,7 @@ class Table {
 	 * Create a new Table
 	 * @param {(Object|Array|String|Number)} data
 	 * @param {TableConfig} config
-	 * @returns {Table}
+	 * @returns {Spyral.Table}
 	 */
 	static create(data, config, ...other) {
 		return new Table(data, config, ...other);
