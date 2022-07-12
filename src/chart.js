@@ -1,9 +1,35 @@
+/* global Spyral, Highcharts */
+
 import NetworkGraph from './networkgraph';
 
-/* global Highcharts */
+import Util from './util.js';
 
 /**
- * Class representing a Chart.
+ * The Chart class in Spyral.
+ * This class provides methods for creating a variety of charts.
+ * Charts are created using the [Highcharts Library](https://api.highcharts.com/highcharts/).
+ * Highcharts have many configuration options and Spyral.Chart helps to streamline the process.
+ * A simple example:
+ * 
+ * 	Spyral.Chart.line({ series: [{ data: [0,2,1,3] }] })
+ * 
+ * A more complex example:
+ * 
+ * 	Spyral.Chart.column({
+ * 		title: 'Wildflowers',
+ * 		series: [{
+ * 			name: 'Ontario',
+ * 			data: [13, 39, 139, 38]
+ * 		},{
+ * 			name: 'Quebec',
+ * 			data: [14, 33, 94, 30]
+ * 		}],
+ * 		xAxis: {
+ * 			title: 'Number of Petals',
+ * 			categories: [3, 4, 5, 6]
+ * 		}
+ * 	})
+ * 
  * @memberof Spyral
  * @class
  */
@@ -17,17 +43,32 @@ class Chart {
 	 * @property {Object} xAxis
 	 * @property {Object} yAxis
 	 * @property {Object} chart
-	 * @property {Array} series
+	 * @property {Array<HighchartsSeriesConfig>} series
 	 * @property {Object} plotOptions
+	 */
+
+	/**
+	 * The series config object
+	 * @typedef {Object} HighchartsSeriesConfig
+	 * @property {Array} data
+	 * @property {string} [name]
 	 */
 
 	/**
 	 * Construct a new Chart class
 	 * @constructor
-	 * @param {HTMLElement} target 
-	 * @param {Array} data 
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Array} data An array of data to visualize.
 	 */
 	constructor(target, data) {
+		if (Util.isNode(target)) {
+			if (target.isConnected === false) {
+				throw new Error('The target node does not exist within the document.');
+			}
+		} else if (Util.isString(target) === false) {
+			data = target;
+			target = undefined;
+		}
 		this.target = target;
 		this.data = data;
 	}
@@ -35,22 +76,49 @@ class Chart {
 	/**
 	 * Create a new chart.
 	 * See [Highcharts API](https://api.highcharts.com/highcharts/) for full set of config options.
-	 * @param {(String|HTMLElement)} target 
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
 	 */
 	create(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
 		return Highcharts.chart(target, config);
 	}
 	
 	/**
 	 * Create a new chart.
 	 * See [Highcharts API](https://api.highcharts.com/highcharts/) for full set of config options.
-	 * @param {(String|HTMLElement)} target 
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
 	 */
 	static create(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		return Highcharts.chart(target, config);
+	}
+
+	static _handleTargetAndConfig(target, config) {
+		if (Util.isNode(target) === false && typeof target === 'object') {
+			config = target;
+			target = undefined;
+		}
+		
+		if (target === undefined) {
+			if (typeof Spyral !== 'undefined' && Spyral.Notebook) {
+				target = Spyral.Notebook.getTarget();
+				if (target.clientHeight <= 40) {
+					target.style.height = '400px'; // 400 is the default Highcharts height
+				}
+			} else {
+				target = document.createElement('div');
+				document.body.appendChild(target);
+			}
+		} else {
+			if (Util.isNode(target) && target.isConnected === false) {
+				throw new Error('The target node does not exist within the document.');
+			}
+		}
+
 		// convert title and suppress if not provided
 		if ('title' in config) {
 			if (typeof config.title === 'string') {
@@ -77,24 +145,23 @@ class Chart {
 		// suppress xAxis title unless provided
 		if (!('xAxis' in config)) {config.xAxis = {};}
 		if (!('title' in config.xAxis)) {
-			//config.xAxis.title = false;
+			config.xAxis.title = false;
+		} else if (typeof config.xAxis.title === 'string') {
+			config.xAxis.title = {text: config.xAxis.title};
 		}
 	
 		// suppress xAxis title unless provided
 		if (!('yAxis' in config)) {config.yAxis = {};}
 		if (!('title' in config.yAxis)) {
 			config.yAxis.title = false;
+		} else if (typeof config.yAxis.title === 'string')  {
+			config.yAxis.title = {text: config.yAxis.title};
 		}
-		
-		return Highcharts.chart(target, config);
+
+		return [target, config];
 	}
 
-	/**
-	 * Sets the default chart type
-	 * @param {Object} config The chart config object
-	 * @param {string} type The type of chart
-	 */
-	static setDefaultChartType(config, type) {
+	static _setDefaultChartType(config, type) {
 		if ('type' in config) {
 			config.chart.type = config.type;
 			delete config.type;
@@ -139,12 +206,34 @@ class Chart {
 	}
 	/**
 	 * Create a bar chart
-	 * @param {HTMLElement} target 
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
 	 * @returns {Highcharts.Chart}
 	 */
 	static bar(target, config) {
-		Chart.setDefaultChartType(config, 'bar');
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'bar');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a column chart
+	 * @param {Object} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	column(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.column(this.target, config);
+	}
+	/**
+	 * Create a column chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Object} config 
+	 * @returns {Highcharts.Chart}
+	 */
+	static column(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'column');
 		return Highcharts.chart(target, config);
 	}
 
@@ -159,12 +248,13 @@ class Chart {
 	}
 	/**
 	 * Create a line chart
-	 * @param {HTMLElement} target 
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
 	 * @returns {Highcharts.Chart}
 	 */
 	static line(target, config) {
-		Chart.setDefaultChartType(config, 'line');
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'line');
 		return Highcharts.chart(target, config);
 	}
 
@@ -179,30 +269,32 @@ class Chart {
 	}
 	/**
 	 * Create a scatter plot
-	 * @param {HTMLElement} target 
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
 	 * @returns {Highcharts.Chart}
 	 */
 	static scatter(target, config) {
-		Chart.setDefaultChartType(config, 'scatter');
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'scatter');
 		return Highcharts.chart(target, config);
 	}
 
 	/**
 	 * Create a network graph
 	 * @param {Object} [config]
-	 * @returns {NetworkGraph}
+	 * @returns {Spyral.NetworkGraph}
 	 */
 	networkgraph(config={}) {
 		return Chart.networkgraph(this.target, config);
 	}
 	/**
 	 * Create a network graph
-	 * @param {HTMLElement} target 
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
-	 * @returns {NetworkGraph}
+	 * @returns {Spyral.NetworkGraph}
 	 */
 	static networkgraph(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
 		return new NetworkGraph(target, config);
 	}
 }

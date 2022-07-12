@@ -44,11 +44,11 @@ test('create chart', () => {
 	expect(chart.data.length).toBe(10);
 })
 
-test('setDefaultChartType', () => {
+test('_setDefaultChartType', () => {
 	const config = {
 		chart: {}
 	};
-	Chart.setDefaultChartType(config, 'line');
+	Chart._setDefaultChartType(config, 'line');
 	expect(config.chart.type).toBe('line')
 })
 
@@ -57,6 +57,13 @@ test('bar', () => {
 	const bar = chart.bar();
 
 	expect(bar.series[0].type).toBe('bar');
+})
+
+test('column', () => {
+	const chart = new Chart(document.getElementById('target'), seriesData);
+	const column = chart.column();
+
+	expect(column.series[0].type).toBe('column');
 })
 
 test('line', () => {
