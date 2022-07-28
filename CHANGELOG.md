@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/voyanttools/voyantjs/compare/v2.2.0...v2.3.0) (2022-07-28)
+
+
+### Features
+
+* **lda:** add wordsPerTopic parameter ([24cb17d](https://github.com/voyanttools/voyantjs/commit/24cb17d55e35aab21ccb655bfe61ba2ea190e21d))
+
 # [2.2.0](https://github.com/voyanttools/voyantjs/compare/v2.1.7...v2.2.0) (2022-07-12)
 
 
