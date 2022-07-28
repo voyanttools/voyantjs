@@ -1276,13 +1276,14 @@ class Corpus {
 	 * 
 	 * @param {Object} config (see above)
 	 * @param {number} config.numberTopics the number of topics to get (default is 10)
+	 * @param {number} config.wordsPerTopic the number of words per topic (default is 10)
 	 * @param {number} config.sweeps the number of sweeps to do, more sweeps = more accurate (default is 100)
 	 * @param {string} config.language stopwords language to use, default is corpus language
 	 * @returns {Promise<Array>} a promise for an array of topics
 	 */
-	async ldaTopics(config = {numberTopics: 10, sweeps: 100}) {
+	async ldaTopics(config = {numberTopics: 10, wordsPerTopic: 10, sweeps: 100}) {
 		const lda = await this.lda(config);
-		return lda.getTopicWords();
+		return lda.getTopicWords(config.wordsPerTopic);
 	}
 	
 	/**
