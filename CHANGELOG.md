@@ -1,3 +1,17 @@
+# [2.2.0](https://github.com/voyanttools/voyantjs/compare/v2.1.7...v2.2.0) (2022-07-12)
+
+
+### Bug Fixes
+
+* **table:** use updated Chart methods ([8572bf4](https://github.com/voyanttools/voyantjs/commit/8572bf4dae7768724d979fa9b083278961a93cc5))
+
+
+### Features
+
+* **chart:** add column method, also some refactoring and documentation ([fd1ed89](https://github.com/voyanttools/voyantjs/commit/fd1ed89c562b43634f544a7b6a62edffb8938742))
+* **corpus:** add documents and entities methods ([6e58e01](https://github.com/voyanttools/voyantjs/commit/6e58e017b42fe3a56849557187d6c9ea69253331))
+* **util:** add transformXml method ([bc7bba6](https://github.com/voyanttools/voyantjs/commit/bc7bba6678e429f8edbdcebcda6315dcf9793819))
+
 ## [2.1.7](https://github.com/voyanttools/voyantjs/compare/v2.1.6...v2.1.7) (2021-10-27)
 
 
