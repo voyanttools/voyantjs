@@ -342,10 +342,8 @@ class Corpus {
   * For more information see the DToC documentation on [Curating Tags](http://cwrc.ca/Documentation/public/index.html#DITA_Files-Various_Applications/DToC/CuratingTags.html)
  */
 	
-	// don't document this because it should really only be used internally, use loadCorpus or Corpus.load instead
 	/**
 	 * Create a new Corpus using the specified Corpus ID
-	 * @ignore
 	 * @constructor
 	 * @param {string} id The Corpus ID
 	 */

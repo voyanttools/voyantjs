@@ -133,6 +133,7 @@ class Util {
 
 	/**
 	 * Checks the Document for a parser error and returns an Error if found, or null.
+	 * @ignore
 	 * @param {Document} doc 
 	 * @param {Boolean} [includePosition=false] True to include the error position information
 	 * @returns {Error|null}
