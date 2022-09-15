@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/voyanttools/voyantjs/compare/v2.3.0...v2.3.1) (2022-09-15)
+
+
+### Bug Fixes
+
+* change visibility of Corpus constructor and _getParserError ([806d06f](https://github.com/voyanttools/voyantjs/commit/806d06f48169210df78f5b223077f6e3aacbc188))
+
 # [2.3.0](https://github.com/voyanttools/voyantjs/compare/v2.2.0...v2.3.0) (2022-07-28)
 
 
