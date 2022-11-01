@@ -6,3 +6,7 @@ require('highcharts/modules/networkgraph')(Highcharts);
 require('highcharts/modules/data')(Highcharts);
 
 global.Highcharts = Highcharts;
+
+const { TextDecoder } = require('util');
+
+global.TextDecoder = TextDecoder;
