@@ -69,7 +69,7 @@ class Util {
 	/**
 	 * Take a Blob and convert it to a data URL.
 	 * @param {Blob} blob 
-	 * @returns {String}
+	 * @returns {Promise<String>} a Promise for a data URL
 	 */
 	static blobToDataUrl(blob) {
 		return new Promise((resolve, reject) => {
@@ -82,6 +82,32 @@ class Util {
 				fr.readAsDataURL(blob);
 			} catch(e) {
 				reject(e);
+			}
+		});
+	}
+
+	/**
+	 * Take a Blob and convert it to a String.
+	 * @param {Blob} blob 
+	 * @returns {Promise<String>} a Promise for a String
+	 */
+	static blobToString(blob) {
+		return new Promise((resolve, reject) => {
+			if (blob.type.search(/application\/(?!json|javascript)/) === 0) {
+				// probably a non-browser file type
+				reject();
+			} else {
+				const reader = new FileReader();
+				reader.addEventListener('loadend', function(ev) {
+					try {
+						const td = new TextDecoder();
+						const data = td.decode(ev.target.result);
+						resolve(data);
+					} catch (err) {
+						reject(err);
+					}
+				});
+				reader.readAsArrayBuffer(blob);
 			}
 		});
 	}

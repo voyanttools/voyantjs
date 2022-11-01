@@ -44,6 +44,13 @@ test('blobToDataUrl', () => {
 	});
 });
 
+test('blobToString', () => {
+	const blob = Util.dataUrlToBlob('data:text/plain;base64,Zm9v');
+	return Util.blobToString(blob).then((str) => {
+		expect(str).toMatch(/foo/);
+	});
+});
+
 // test('transformXml', () => {
 // 	const xmlDoc = '<foo><bar>baz</bar></foo>';
 // 	const xslDoc = `<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
