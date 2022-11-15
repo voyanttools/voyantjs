@@ -43,11 +43,11 @@ class Load {
 					method: 'POST'
 				};
 				if ('body' in all) {
+					// TODO assume FormData or set this header to ensure UTF-8?
 					// opt.headers = { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' };
 					opt.body = all['body'];
 				} else {
-					// don't set header as it messes up boundaries, see: https://stackoverflow.com/q/39280438
-					// opt.headers = { 'Content-Type': 'multipart/form-data' };
+					// don't set header as it messes up boundaries
 					const formData = new FormData();
 					for (let key in all) {
 						if (all[key] instanceof Array) {

@@ -85,6 +85,8 @@ class Table {
 		this._rows = [];
 		this._headers = {};
 		this._rowKeyColumnIndex = 0;
+
+		// TODO throw error if data is Promise
 		
 		// we have a configuration object followed by values: create({headers: []}, 1,2,3) …
 		if (data && typeof data === 'object' && (typeof config === 'string' || typeof config === 'number' || Array.isArray(config))) {

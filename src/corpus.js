@@ -248,10 +248,16 @@ class Corpus {
  */
 
 /**
+ * @cfg {String} xmlDocumentsXpath The XPath expression that defines the location of each document; only used for XML-based documents.
+ * 
+ * See also [Creating a Corpus with XML](#!/guide/corpuscreator-section-xml).
+ */
+
+/**
  * @cfg {String} xmlGroupByXpath The XPath expression that defines the location of each document's collection name; only used for XML-based documents.
  * 
  * 		loadCorpus("<doc><sp s='Juliet'>Hello!</sp><sp s='Romeo'>Hi!</sp><sp s='Juliet'>Bye!</sp></doc>", {
- * 			 xmlDocumentsXPath: '//sp',
+ * 			 xmlDocumentsXpath: '//sp',
  *           xmlGroupByXpath: "//@s"
  * 		}); // two docs: "Hello! Bye!" (Juliet) and "Hi!" (Romeo)
  * 
@@ -1669,6 +1675,7 @@ class Corpus {
 			};
 		});
 		
+		// TODO document assign
 		promise.assign = function(name) {
 			return this.then(corpus => {window[name] = corpus; return corpus;});
 		};

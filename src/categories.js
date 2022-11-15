@@ -12,6 +12,25 @@ class Categories {
 
 	/**
 	 * Construct a new Categories class.
+	 * 
+	 * The following are valid in the config parameter:
+	 * 
+	 *  * **categories**: an object that maps arrays of terms to category names
+	 *  * **categoriesRanking**: an array of category names that determines their ranking, from high to low
+	 *  * **features**: an object that maps categories to feature names
+	 *  * **featureDefaults**: an object that maps default feature value to feature names
+	 * 
+	 * An example:
+	 * 
+	 *  new Spyral.Categories({
+	 *    categories: {
+	 *      positive: ['good', 'happy'],
+	 *      negative: ['bad', 'sad']
+	 *    },
+	 *    categoriesRanking: ['positive','negative'],
+	 *    features: {color: {}},
+	 *    featureDefaults: {color: '#333333'}
+	 *  })
 	 * @constructor
 	 * @param {Object} config
 	 * @param {Object} config.categories
@@ -314,6 +333,8 @@ class Categories {
 			tool: 'resource.StoredCategories',
 			storeResource: categoriesData
 		})).then(data => data.storedCategories.id);
+		// TODO save id as property
+		// TODO somehow cache id so that it's not resaved everytime notebook is run
 	}
 	
 	/**
