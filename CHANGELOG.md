@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/voyanttools/voyantjs/compare/v2.3.1...v2.4.0) (2022-11-01)
+
+
+### Features
+
+* **util:** add blobToString method ([c95009e](https://github.com/voyanttools/voyantjs/commit/c95009e17cffbe1f573eca934d9bbabb3550b75a))
+
 ## [2.3.1](https://github.com/voyanttools/voyantjs/compare/v2.3.0...v2.3.1) (2022-09-15)
 
 
