@@ -1397,9 +1397,9 @@ export const CorpusTextsLimit500 = {
 		"Persuasion\nby\nJane Austen\n(1818)\nChapter 1\nSir Walter Elliot, of Kellynch Hall, in Somersetshire, was a man who,\nfor his own amusement, never took up any book but the Baronetage; there\nhe found occupation for an idle hour, and consolation in a distressed\none; there his faculties were roused into admiration and respect, by\ncontemplating the limited remnant of the earliest patents; there any\nunwelcome sensations, arising from domestic affairs changed naturally\ninto pity and contempt as he turned o"
 	  ]
 	}
-  }
+}
 
-  export const Stopwords = {
+export const Stopwords = {
 	"version": "5.7",
 	"voyantVersion": "2.4",
 	"voyantBuild": "M47",
@@ -1409,4 +1409,258 @@ export const CorpusTextsLimit500 = {
 		"0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020",";",".",":","%","&","-","\\?","!","\\*","@","\\+","\\(","\\)","\\]","\\[","\\{","\\}","<",">","$","\\^","|","a","about","above","across","after","afterwards","again","against","all","almost","alone","along","already","also","although","always","am","among","amongst","amoungst","amount","an","and","another","any","anyhow","anyone","anything","anyway","anywhere","are","around","as","at","b","back","be","because","been","before","beforehand","being","beside","besides","between","both","bottom","but","by","c","call","can","cannot","cant","co","con","could","couldnt","d","de","did","didn't","do","don't","does","doesn't","done","down","due","during","e","each","eg","eight","either","eleven","else","elsewhere","enough","etc","even","ever","every","everyone","everything","everywhere","except","f","few","fifteen","fify","fill","find","fire","first","five","for","former","formerly","forty","found","four","from","front","full","further","g","get","give","go","h","had","has","hasnt","have","he","hence","her","here","hereafter","hereby","herein","hereupon","hers","herself","him","himself","his","how","however","hundred","i","ie","if","in","inc","indeed","into","is","it","its","itself","j","k","keep","l","last","latter","latterly","least","less","ltd","m","made","many","may","me","meanwhile","might","mill","mine","more","moreover","most","mostly","move","much","must","my","myself","n","name","namely","neither","never","nevertheless","next","nine","no","nobody","none","noone","nor","not","nothing","now","nowhere","o","of","off","often","on","once","one","only","onto","or","other","others","otherwise","our","ours","ourselves","out","over","own","p","part","per","perhaps","please","put","q","r","rather","re","s","same","see","seem","seemed","seeming","seems","serious","several","she","should","since","six","sixty","so","some","somehow","someone","something","sometime","sometimes","somewhere","still","such","system","t","take","ten","than","that","the","their","them","themselves","then","thence","there","thereafter","thereby","therefore","therein","thereupon","these","they","thing","third","this","those","though","three","through","throughout","thru","thus","to","together","too","toward","towards","twelve","twenty","two","u","un","under","until","up","upon","us","v","very","via","w","was","we","well","were","what","whatever","when","whence","whenever","where","whereafter","whereas","whereby","wherein","whereupon","wherever","whether","which","while","whither","who","whoever","whole","whom","whose","why","will","with","within","without","would","x","y","yet","you","your","yours","yourself","yourselves","z","thou","thee","thy"
 	  ]
 	}
-  }
+}
+
+export const TopicModeling = {
+	"version": "5.7",
+	"voyantVersion": "2.6.0",
+	"voyantBuild": "",
+	"duration": 1821,
+	"topicModeling": {
+	  "topicWords": [
+		[
+		  "miss",
+		  "shall",
+		  "vernon",
+		  "emma",
+		  "taylor",
+		  "long",
+		  "sure",
+		  "london",
+		  "obliged",
+		  "knightley"
+		],
+		[
+		  "said",
+		  "soon",
+		  "bingley",
+		  "young",
+		  "daughters",
+		  "come",
+		  "general",
+		  "certainly",
+		  "visit",
+		  "woman"
+		],
+		[
+		  "mrs",
+		  "lady",
+		  "child",
+		  "children",
+		  "sister",
+		  "thomas",
+		  "norris",
+		  "just",
+		  "sure",
+		  "feelings"
+		],
+		[
+		  "think",
+		  "love",
+		  "world",
+		  "character",
+		  "heart",
+		  "person",
+		  "replied",
+		  "manner",
+		  "mind",
+		  "equal"
+		],
+		[
+		  "sisters",
+		  "thousand",
+		  "man",
+		  "fortune",
+		  "way",
+		  "old",
+		  "place",
+		  "house",
+		  "husband",
+		  "far"
+		],
+		[
+		  "mother",
+		  "dashwood",
+		  "pounds",
+		  "half",
+		  "brother",
+		  "present",
+		  "kind",
+		  "amiable",
+		  "receive",
+		  "estate"
+		],
+		[
+		  "mr",
+		  "little",
+		  "dear",
+		  "know",
+		  "wife",
+		  "make",
+		  "friend",
+		  "having",
+		  "bennet",
+		  "time"
+		],
+		[
+		  "sir",
+		  "years",
+		  "family",
+		  "good",
+		  "elliot",
+		  "walter",
+		  "life",
+		  "age",
+		  "marry",
+		  "woman"
+		],
+		[
+		  "father",
+		  "laura",
+		  "elizabeth",
+		  "edward",
+		  "lady",
+		  "door",
+		  "augusta",
+		  "born",
+		  "daughter",
+		  "youth"
+		],
+		[
+		  "great",
+		  "poor",
+		  "father",
+		  "mrs",
+		  "catherine",
+		  "quite",
+		  "married",
+		  "handsome",
+		  "say",
+		  "years"
+		]
+	  ],
+	  "topicDocuments": [
+		{
+		  "docId": "5e79de9013b456ba2819dd52c0193549",
+		  "weights": [
+			0.03,
+			0.048181817,
+			0.04090909,
+			0.047272727,
+			0.13545455,
+			0.056363635,
+			0.07636364,
+			0.32909092,
+			0.14727272,
+			0.089090906
+		  ]
+		},
+		{
+		  "docId": "c5c0b0a29cd930a738d98fc9ef4e9a3d",
+		  "weights": [
+			0.07181818,
+			0.045454547,
+			0.31181818,
+			0.07,
+			0.11818182,
+			0.036363635,
+			0.12818182,
+			0.09818182,
+			0.01,
+			0.11
+		  ]
+		},
+		{
+		  "docId": "13c971bc20f1b6fb7201fefcd4f86833",
+		  "weights": [
+			0.07272727,
+			0.121818185,
+			0.009090909,
+			0.22545454,
+			0.02,
+			0.07454546,
+			0.082727276,
+			0.048181817,
+			0.33636364,
+			0.009090909
+		  ]
+		},
+		{
+		  "docId": "1ec804fc94421e33206b52b90c8606c2",
+		  "weights": [
+			0.05181818,
+			0.33818182,
+			0.04090909,
+			0.04,
+			0.083636366,
+			0.023636363,
+			0.26090908,
+			0.02,
+			0.044545453,
+			0.096363634
+		  ]
+		},
+		{
+		  "docId": "823f28f7a74928761d04d3f103cf9138",
+		  "weights": [
+			0.18909091,
+			0.096363634,
+			0.12090909,
+			0.043636363,
+			0.10181818,
+			0.12545455,
+			0.16,
+			0.07454546,
+			0.036363635,
+			0.05181818
+		  ]
+		},
+		{
+		  "docId": "452ef698ce3869d966fa86ef16486b9f",
+		  "weights": [
+			0.013636364,
+			0.06454545,
+			0.13272727,
+			0.05090909,
+			0.23454545,
+			0.24818182,
+			0.10727273,
+			0.06454545,
+			0.009090909,
+			0.07454546
+		  ]
+		},
+		{
+		  "docId": "f3e15e44eddf1839f14df32df5c428b6",
+		  "weights": [
+			0.29,
+			0.04909091,
+			0.03727273,
+			0.05727273,
+			0.10818182,
+			0.05181818,
+			0.18545455,
+			0.06454545,
+			0.016363636,
+			0.14
+		  ]
+		},
+		{
+		  "docId": "0584fa5f25f6c4721931f79c07c44add",
+		  "weights": [
+			0.01,
+			0.06454545,
+			0.06636363,
+			0.14636363,
+			0.06272727,
+			0.13818182,
+			0.089090906,
+			0.17454545,
+			0.034545455,
+			0.21363637
+		  ]
+		}
+	  ]
+	}
+}
+  

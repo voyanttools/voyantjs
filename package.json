@@ -55,8 +55,7 @@
     "watchify": "^4.0.0"
   },
   "dependencies": {
-    "highcharts": "^9.3.0",
-    "lda-topic-model": "git+https://git@github.com/voyanttools/lda-topic-model.git"
+    "highcharts": "^9.3.0"
   },
   "directories": {
     "test": "test"

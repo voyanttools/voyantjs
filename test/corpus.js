@@ -173,13 +173,11 @@ test('correlations', () => {
 	})
 })
 
-test('ldaTopics', async () => {
-	fetch
-		.once(JSON.stringify(Mocks.Stopwords))
-		.once(JSON.stringify(Mocks.CorpusTextsLimit500));
+test('topics', async () => {
+	fetch.once(JSON.stringify(Mocks.TopicModeling));
 	const corpus = await Corpus.load(corpusId);
-	const data = await corpus.ldaTopics({numberTopics: 5});
-	expect(data.length).toBe(5);
+	const data = await corpus.topics({topics: 10});
+	expect(data.topicWords.length).toBe(10);
 })
 
 test('tool', () => {

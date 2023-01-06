@@ -1,6 +1,5 @@
 import Load from './load';
 import Util from './util.js';
-import LDA from 'lda-topic-model';
 
 
 // this is essentially a private method to determine if we're in corpus or documents mode.
@@ -1204,110 +1203,31 @@ class Corpus {
 	}
 
 	/**
-	 * Performs topic modelling using the latent Dirichlet allocation. Returns an LDA object that has two primary methods of use:
+	 * Performs topic modelling using the latent Dirichlet allocation. Returns an object that has two primary properties:
 	 * 
-	 * * **getTopicWords**: return a list of topics (words organized into bunches of a specified size
-	 * * **getDocuments**: return a list of documents and the signicant words
+	 * * **topicWords**: a list of topics (words organized into bunches of a specified size)
+	 * * **topicDocuments**: a list of documents and their topic weights
 	 *
 	 * The config object as parameter can contain the following:
 	 * 
-	 * * **numberTopics**: the number of topics to get (default is 10)
-	 * * **sweeps**: the number of sweeps to do, more sweeps = more accurate (default is 100)
-	 * * **language**: stopwords language to use, default is corpus language
+	 * * **topics**: the number of topics to get (default is 10)
+	 * * **termsPerTopic**: the number of terms for each topic (default is 10)
+	 * * **iterations**: the number of iterations to do, more iterations = more accurate (default is 100)
 	 * 
 	 * @param {Object} config (see above)
-	 * @param {number} config.numberTopics the number of topics to get (default is 10)
-	 * @param {number} config.sweeps the number of sweeps to do, more sweeps = more accurate (default is 100)
-	 * @param {string} config.language stopwords language to use, default is corpus language
-	 * @returns {Promise<Object>} a promise for an LDA object
+	 * @param {number} config.topics the number of topics to get (default is 10)
+	 * @param {number} config.termsPerTopic the number of terms for each topic (default is 10)
+	 * @param {number} config.iterations the number of iterations to do, more iterations = more accurate (default is 100)
+	 * @param {number} config.perDocLimit this parameter allows you to specify a limit value per document
+	 * @param {number} config.seed specify a particular seed to use for random number generation
+	 * @param {string} config.stopList a list of stopwords to include (see {@link https://voyant-tools.org/docs/#!/guide/stopwords})
+	 * @returns {Promise<Object>}
 	 */
-	async lda(config = {numberTopics: 10, sweeps: 100}) {
-		const options = {
-			displayingStopwords: false,
-			numberTopics: config.numberTopics || 10,
-			sweeps: config.sweeps || 100,
-			bins: parseInt(config.bins) || 10
-		};
-
-		const data = await Load.trombone({
-			tool: 'resource.KeywordsManager',
-			stopList: config.language || 'auto',
+	async topics(config = {topics: 10, termsPerTopic: 10, iterations: 100, seed: 0, stopList: 'auto'}) {
+		return Load.trombone(config, {
+			tool: 'analysis.TopicModeling',
 			corpus: this.corpusid
-		});
-		const stopwords = data.keywords.keywords;
-
-		let texts = await this.texts({
-			noMarkup: true,
-			compactSpace: true,
-			format: 'text'
-		});
-		
-		// our corpus contains a single document, so split it into segments
-		if (texts.length===1) {
-			let words = texts[0].split(' ');
-			let wordsPerBin = Math.ceil(words.length/options.bins);
-			let ts = [];
-			for (let i=0; i<options.bins; i++) {
-				ts[i] = words.slice(i*wordsPerBin, (i*wordsPerBin)+wordsPerBin).join(' ');
-			}
-			texts = ts;
-		}
-		
-		
-		let documents = [];
-		texts.forEach((text, index) => {
-			documents.push({
-				id: index,
-				text: text
-			});
-		});
-
-		return new Promise((resolve, reject) => {
-			const lda = new LDA(options, documents, stopwords);
-			resolve(lda);
-		});
-		
-	}
-	
-	/**
-	 * Performs topic modelling using the latent Dirichlet allocation. Returns an array of LDA topics from the corpus.
-	 * 
-	 * The config object as parameter can contain the following:
-	 * 
-	 *  * **numberTopics**: the number of topics to get (default is 10)
-	 *  * **sweeps**: the number of sweeps to do, more sweeps = more accurate (default is 100)
-	 *  * **language**: stopwords language to use, default is corpus language
-	 * 
-	 * @param {Object} config (see above)
-	 * @param {number} config.numberTopics the number of topics to get (default is 10)
-	 * @param {number} config.wordsPerTopic the number of words per topic (default is 10)
-	 * @param {number} config.sweeps the number of sweeps to do, more sweeps = more accurate (default is 100)
-	 * @param {string} config.language stopwords language to use, default is corpus language
-	 * @returns {Promise<Array>} a promise for an array of topics
-	 */
-	async ldaTopics(config = {numberTopics: 10, wordsPerTopic: 10, sweeps: 100}) {
-		const lda = await this.lda(config);
-		return lda.getTopicWords(config.wordsPerTopic);
-	}
-	
-	/**
-	 * Performs topic modelling using the latent Dirichlet allocation. Returns an array of documents and associated words
-	 * 
-	 * The config object as parameter can contain the following:
-	 * 
-	 *  * **numberTopics**: the number of topics to get (default is 10)
-	 *  * **sweeps**: the number of sweeps to do, more sweeps = more accurate (default is 100)
-	 *  * **language**: stopwords language to use, default is corpus language
-	 * 
-	 * @param {Object} config (see above)
-	 * @param {number} config.numberTopics the number of topics to get (default is 10)
-	 * @param {number} config.sweeps the number of sweeps to do, more sweeps = more accurate (default is 100)
-	 * @param {string} config.language stopwords language to use, default is corpus language
-	 * @returns {Promise<Array>} a promise for an array of documents
-	 */
-	async ldaDocuments(config = {numberTopics: 10, sweeps: 100}) {
-		const lda = await this.lda(config);
-		return lda.getDocuments();
+		}).then(data => data.topicModeling);
 	}
 	
 	/**
@@ -1668,7 +1588,7 @@ class Corpus {
 			
 		});
 
-		['collocates','contexts','correlations','documents','entities','id','lda','ldaDocuments','ldaTopics','lemmas','metadata','phrases','summary','terms','text','texts','titles','toString','tokens','tool','words'].forEach(name => {
+		['collocates','contexts','correlations','documents','entities','id','topics','lemmas','metadata','phrases','summary','terms','text','texts','titles','toString','tokens','tool','words'].forEach(name => {
 			promise[name] = function() {
 				var args = arguments;
 				return promise.then(corpus => {return corpus[name].apply(corpus, args);});
