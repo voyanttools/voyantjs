@@ -1,3 +1,16 @@
+# [3.0.0](https://github.com/voyanttools/voyantjs/compare/v2.4.0...v3.0.0) (2023-01-06)
+
+
+### Features
+
+* **corpus:** perform topic modeling on the server instead of the client ([7f8e218](https://github.com/voyanttools/voyantjs/commit/7f8e218170ab90fb295ed380f399017a4cd16501))
+
+
+### BREAKING CHANGES
+
+* **corpus:** The corpus topic modeling method signature has changed. The 'lda', 'ldaTopics', and
+'ldaDocuments' methods have been replaced with 'topics'.
+
 # [2.4.0](https://github.com/voyanttools/voyantjs/compare/v2.3.1...v2.4.0) (2022-11-01)
 
 
