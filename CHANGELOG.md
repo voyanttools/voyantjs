@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/voyanttools/voyantjs/compare/v3.0.0...v3.0.1) (2023-01-17)
+
+
+### Bug Fixes
+
+* **util:** recognize more mime types ([1827c12](https://github.com/voyanttools/voyantjs/commit/1827c1275d0adcc2d38aa9010404799bb0372020))
+
 # [3.0.0](https://github.com/voyanttools/voyantjs/compare/v2.4.0...v3.0.0) (2023-01-06)
 
 
