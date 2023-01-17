@@ -295,8 +295,12 @@ class Util {
 			return 'xhtml';
 		case 'text/html':
 			return 'html';
+		case 'text/plain':
+			return 'txt';
 		case 'application/pdf':
 			return 'pdf';
+		case 'application/json':
+			return 'json';
 		case 'application/vnd.apple.pages':
 			return 'pages';
 		case 'application/rtf':
@@ -313,8 +317,18 @@ class Util {
 			return 'xls';
 		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
 			return 'xlsx';
+		case 'application/zip':
+			return 'zip';
+		case 'application/gzip':
+			return 'gzip';
+		case 'application/x-bzip2':
+			return 'bzip2';
 		default:
-			return undefined;
+			if (mimeType.indexOf('text') === 0) {
+				return 'txt'; // fallback
+			} else {
+				return undefined;
+			}
 		}
 	}
 }

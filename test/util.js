@@ -101,5 +101,7 @@ test('isPromise', () => {
 
 test('getFileExtensionFromMimeType', () => {
 	expect(Util.getFileExtensionFromMimeType('application/vnd.oasis.opendocument.text')).toBe('odt');
+	expect(Util.getFileExtensionFromMimeType('application/json')).toBe('json');
 	expect(Util.getFileExtensionFromMimeType('application/x-apple-diskimage')).toBe(undefined);
+	expect(Util.getFileExtensionFromMimeType('text/csv')).toBe('txt');
 })
