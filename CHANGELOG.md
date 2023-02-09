@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/voyanttools/voyantjs/compare/v3.0.1...v3.0.2) (2023-02-09)
+
+
+### Bug Fixes
+
+* **util:** add isBlob method ([3f8edc7](https://github.com/voyanttools/voyantjs/commit/3f8edc7b388d52b714a352356f7495e21914b875))
+
 ## [3.0.1](https://github.com/voyanttools/voyantjs/compare/v3.0.0...v3.0.1) (2023-01-17)
 
 
