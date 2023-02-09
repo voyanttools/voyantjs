@@ -99,6 +99,10 @@ test('isPromise', () => {
 	expect(Util.isPromise(new Promise(() => {}))).toBe(true);
 })
 
+test('isBlob', () => {
+	expect(Util.isBlob(new Blob())).toBe(true);
+})
+
 test('getFileExtensionFromMimeType', () => {
 	expect(Util.getFileExtensionFromMimeType('application/vnd.oasis.opendocument.text')).toBe('odt');
 	expect(Util.getFileExtensionFromMimeType('application/json')).toBe('json');

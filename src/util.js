@@ -277,6 +277,15 @@ class Util {
 	}
 
 	/**
+	 * Returns true if the value is a Blob.
+	 * @param {*} val 
+	 * @returns {Boolean}
+	 */
+	static isBlob(val) {
+		return val instanceof Blob;
+	}
+
+	/**
 	 * Takes a MIME type and returns the related file extension.
 	 * Only handles file types supported by Voyant.
 	 * @param {String} mimeType 
