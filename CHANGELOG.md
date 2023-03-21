@@ -1,3 +1,10 @@
+## [3.0.3](https://github.com/voyanttools/voyantjs/compare/v3.0.2...v3.0.3) (2023-03-21)
+
+
+### Bug Fixes
+
+* **util:** add support for text/xml mime type ([ae3d625](https://github.com/voyanttools/voyantjs/commit/ae3d6252f83ab0fadc8cbff127d452a014c0b07b))
+
 ## [3.0.2](https://github.com/voyanttools/voyantjs/compare/v3.0.1...v3.0.2) (2023-02-09)
 
 
