@@ -300,6 +300,8 @@ class Util {
 			return 'xml';
 		case 'application/xml':
 			return 'xml';
+		case 'text/xml':
+			return 'xml';
 		case 'application/xhtml+xml':
 			return 'xhtml';
 		case 'text/html':
