@@ -1563,19 +1563,19 @@ class Corpus {
 						const nodeString = new XMLSerializer().serializeToString(config);
 						config = new Blob([nodeString], {type: 'text/xml'});
 					}
-					formData.append('input', config);
-					formData.append('inputFormat', Util.getFileExtensionFromMimeType(config.type));
+					formData.set('input', config);
+					formData.set('inputFormat', Util.getFileExtensionFromMimeType(config.type));
 				}
 				
 				// append any other form options that may have been included
 				if (api && typeof api === 'object') {
 					for (let key in api) {
-						formData.append(key, api[key]);
+						formData.set(key, api[key]);
 					}
 				}
 
-				formData.append('tool', 'corpus.CorpusMetadata');
-				
+				formData.set('tool', 'corpus.CorpusMetadata');
+
 				config = {
 					body: formData,
 					method: 'POST'
