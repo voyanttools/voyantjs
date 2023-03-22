@@ -1,3 +1,10 @@
+## [3.0.4](https://github.com/voyanttools/voyantjs/compare/v3.0.3...v3.0.4) (2023-03-22)
+
+
+### Bug Fixes
+
+* **corpus:** use set instead of append in some cases when loading corpus ([d62ddfd](https://github.com/voyanttools/voyantjs/commit/d62ddfd351d3e7f9a78b2343ece2fcad9e9c0641))
+
 ## [3.0.3](https://github.com/voyanttools/voyantjs/compare/v3.0.2...v3.0.3) (2023-03-21)
 
 
