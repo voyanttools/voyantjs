@@ -1,3 +1,10 @@
+## [3.0.5](https://github.com/voyanttools/voyantjs/compare/v3.0.4...v3.0.5) (2023-06-16)
+
+
+### Bug Fixes
+
+* don't restrict blobToString by mime type ([dd2138d](https://github.com/voyanttools/voyantjs/commit/dd2138dda937a1dfd218795358d53481b49d9b4e))
+
 ## [3.0.4](https://github.com/voyanttools/voyantjs/compare/v3.0.3...v3.0.4) (2023-03-22)
 
 
