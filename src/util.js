@@ -93,22 +93,17 @@ class Util {
 	 */
 	static blobToString(blob) {
 		return new Promise((resolve, reject) => {
-			if (blob.type.search(/application\/(?!json|javascript)/) === 0) {
-				// probably a non-browser file type
-				reject();
-			} else {
-				const reader = new FileReader();
-				reader.addEventListener('loadend', function(ev) {
-					try {
-						const td = new TextDecoder();
-						const data = td.decode(ev.target.result);
-						resolve(data);
-					} catch (err) {
-						reject(err);
-					}
-				});
-				reader.readAsArrayBuffer(blob);
-			}
+			const reader = new FileReader();
+			reader.addEventListener('loadend', function(ev) {
+				try {
+					const td = new TextDecoder();
+					const data = td.decode(ev.target.result);
+					resolve(data);
+				} catch (err) {
+					reject(err);
+				}
+			});
+			reader.readAsArrayBuffer(blob);
 		});
 	}
 
