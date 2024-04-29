@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/voyanttools/voyantjs/compare/v3.0.5...v3.1.0) (2024-04-29)
+
+
+### Features
+
+* **corpus:** add analysis method ([aa82e35](https://github.com/voyanttools/voyantjs/commit/aa82e351623b9c563d283215ef50514a11c79a1f))
+
 ## [3.0.5](https://github.com/voyanttools/voyantjs/compare/v3.0.4...v3.0.5) (2023-06-16)
 
 
