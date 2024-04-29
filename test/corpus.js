@@ -180,6 +180,13 @@ test('topics', async () => {
 	expect(data.topicWords.length).toBe(10);
 })
 
+test('analysis', async () => {
+	fetch.once(JSON.stringify(Mocks.TsneAnalysisResponse));
+	const corpus = await Corpus.load(corpusId);
+	const data = await corpus.analysis({type: 'tsne', limit: 10});
+	expect(data.totalTerms).toBe(10);
+})
+
 test('tool', () => {
 	return Corpus.load(corpusId).then((c) => {
 		return c.tool('scatterplot').then((url) => {

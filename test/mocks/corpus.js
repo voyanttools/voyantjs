@@ -1663,4 +1663,135 @@ export const TopicModeling = {
 	  ]
 	}
 }
-  
+
+export const TsneAnalysisResponse = {
+	"version": "5.7",
+	"voyantVersion": "2.6.5",
+	"voyantBuild": "",
+	"duration": 94,
+	"tsneAnalysis": {
+	  "totalTerms": 10,
+	  "tokens": [
+		{
+		  "term": "mr",
+		  "rawFreq": 3117,
+		  "relativeFreq": 0.003987142,
+		  "cluster": 1,
+		  "clusterCenter": false,
+		  "vector": [
+			-103.7467,
+			28.169899,
+			7.702347
+		  ]
+		},
+		{
+		  "term": "mrs",
+		  "rawFreq": 2531,
+		  "relativeFreq": 0.003237554,
+		  "cluster": 1,
+		  "clusterCenter": false,
+		  "vector": [
+			-74.587654,
+			23.095747,
+			6.271585
+		  ]
+		},
+		{
+		  "term": "said",
+		  "rawFreq": 2165,
+		  "relativeFreq": 0.0027693815,
+		  "cluster": 1,
+		  "clusterCenter": false,
+		  "vector": [
+			-45.615444,
+			16.943518,
+			4.572727
+		  ]
+		},
+		{
+		  "term": "miss",
+		  "rawFreq": 1942,
+		  "relativeFreq": 0.0024841288,
+		  "cluster": 1,
+		  "clusterCenter": false,
+		  "vector": [
+			-22.255201,
+			0.91893846,
+			0.37695453
+		  ]
+		},
+		{
+		  "term": "think",
+		  "rawFreq": 1514,
+		  "relativeFreq": 0.0019366483,
+		  "cluster": 2,
+		  "clusterCenter": false,
+		  "vector": [
+			13.109824,
+			-7.1417384,
+			-1.8730118
+		  ]
+		},
+		{
+		  "term": "know",
+		  "rawFreq": 1450,
+		  "relativeFreq": 0.0018547821,
+		  "cluster": 2,
+		  "clusterCenter": false,
+		  "vector": [
+			52.169395,
+			35.557575,
+			8.489791
+		  ]
+		},
+		{
+		  "term": "good",
+		  "rawFreq": 1444,
+		  "relativeFreq": 0.0018471071,
+		  "cluster": 2,
+		  "clusterCenter": false,
+		  "vector": [
+			25.662,
+			-31.01025,
+			-7.8994007
+		  ]
+		},
+		{
+		  "term": "time",
+		  "rawFreq": 1432,
+		  "relativeFreq": 0.0018317571,
+		  "cluster": 2,
+		  "clusterCenter": false,
+		  "vector": [
+			33.301075,
+			13.585071,
+			3.1431928
+		  ]
+		},
+		{
+		  "term": "little",
+		  "rawFreq": 1363,
+		  "relativeFreq": 0.0017434951,
+		  "cluster": 0,
+		  "clusterCenter": false,
+		  "vector": [
+			46.274334,
+			-37.25481,
+			-9.601916
+		  ]
+		},
+		{
+		  "term": "soon",
+		  "rawFreq": 1124,
+		  "relativeFreq": 0.0014377759,
+		  "cluster": 0,
+		  "clusterCenter": false,
+		  "vector": [
+			75.68837,
+			-42.86395,
+			-11.182268
+		  ]
+		}
+	  ]
+	}
+  }

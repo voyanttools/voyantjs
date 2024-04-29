@@ -1309,6 +1309,55 @@ class Corpus {
 	}
 
 	/**
+	 * Performs one of several dimension reduction statistical analysis techniques.
+	 * 
+	 * For more details see {@link https://voyant-tools.org/docs/#!/guide/scatterplot}.
+	 * 
+	 * @param {Object} config 
+	 * @param {string} config.type The type of analysis technique to use: 'ca', 'pca', 'tsne', 'docsim'
+	 * @param {number} config.start The zero-based start of the list
+	 * @param {number} config.limit A limit to the number of items to return at a time
+	 * @param {number} config.dimensions The number of dimensions to render, either 2 or 3.
+	 * @param {number} config.bins The number of bins to separate a document into.
+	 * @param {number} config.clusters The number of clusters within which to group words.
+	 * @param {number} config.perplexity The TSNE perplexity value.
+	 * @param {number} config.iterations The TSNE iterations value.
+	 * @param {string} config.comparisonType The value to use for comparing terms. Options are: 'raw', 'relative', and 'tfidf'.
+	 * @param {string} config.target The term to set as the target. This will filter results to terms that are near the target.
+	 * @param {string} config.term Used in combination with "target" as a white list of terms to keep.
+	 * @param {string} config.query A term query (see {@link https://voyant-tools.org/docs/#!/guide/search})
+	 * @param {string} config.stopList A list of stopwords to include (see {@link https://voyant-tools.org/docs/#!/guide/stopwords})
+	 * @returns {Promise<Object>}
+	 */
+	analysis(config = {}) {
+		config = Object.assign({
+			type: 'ca', start: 0, limit: 50, dimensions: 3, bins: 10, clusters: 3, perplexity: 15, iterations: 1500, comparisonType: 'relative', target: undefined, term: undefined, query: undefined, stopList: 'auto'
+		}, config);
+		const analysis = config.type.toLowerCase();
+		delete config.type;
+		let tool = '';
+		let root = '';
+		if (analysis === 'tsne') {
+			tool = 'corpus.TSNE';
+			root = 'tsneAnalysis';
+		} else if (analysis === 'pca') {
+			tool = 'corpus.PCA';
+			root = 'pcaAnalysis';
+		} else if (analysis === 'docsim') {
+			tool = 'corpus.DocumentSimilarity';
+			root = 'documentSimilarity';
+		} else {
+			tool = 'corpus.CA';
+			root = 'correspondenceAnalysis';
+		}
+		return Load.trombone(config, {
+			tool,
+			withDistributions: true,
+			corpus: this.corpusid
+		}).then(data => data[root]);
+	}
+
+	/**
 	 * Returns an HTML snippet that will produce the specified Voyant tools to appear.
 	 * 
 	 * In its simplest form we can simply call the named tool:
@@ -1612,7 +1661,7 @@ class Corpus {
 			
 		});
 
-		['collocates','contexts','correlations','documents','entities','id','topics','lemmas','metadata','phrases','summary','terms','text','texts','titles','toString','tokens','tool','words'].forEach(name => {
+		['analysis','collocates','contexts','correlations','documents','entities','id','topics','lemmas','metadata','phrases','summary','terms','text','texts','titles','toString','tokens','tool','words'].forEach(name => {
 			promise[name] = function() {
 				var args = arguments;
 				return promise.then(corpus => {return corpus[name].apply(corpus, args);});
