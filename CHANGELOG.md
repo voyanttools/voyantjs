@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/voyanttools/voyantjs/compare/v3.1.0...v3.1.1) (2024-08-16)
+
+
+### Bug Fixes
+
+* **corpus:** properly specify inputFormat ([624860b](https://github.com/voyanttools/voyantjs/commit/624860ba87f97eb5b1a5f0bced073f19f7bde098))
+
 # [3.1.0](https://github.com/voyanttools/voyantjs/compare/v3.0.5...v3.1.0) (2024-04-29)
 
 
