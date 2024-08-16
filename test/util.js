@@ -109,3 +109,14 @@ test('getFileExtensionFromMimeType', () => {
 	expect(Util.getFileExtensionFromMimeType('application/x-apple-diskimage')).toBe(undefined);
 	expect(Util.getFileExtensionFromMimeType('text/csv')).toBe('txt');
 })
+
+test('getVoyantDocumentFormatFromFileExtension', () => {
+	expect(Util.getVoyantDocumentFormatFromFileExtension('txt')).toBe('text');
+	expect(Util.getVoyantDocumentFormatFromFileExtension('xhtml')).toBe('html');
+	expect(Util.getVoyantDocumentFormatFromFileExtension('doc')).toBe('msword');
+	expect(Util.getVoyantDocumentFormatFromFileExtension('docx')).toBe('mswordx');
+	expect(Util.getVoyantDocumentFormatFromFileExtension('xls')).toBe('xlsx');
+	expect(Util.getVoyantDocumentFormatFromFileExtension('zip')).toBe('archive');
+	expect(Util.getVoyantDocumentFormatFromFileExtension('gzip')).toBe('compressed');
+	expect(Util.getVoyantDocumentFormatFromFileExtension('pdf')).toBe('pdf');
+})

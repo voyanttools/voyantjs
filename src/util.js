@@ -337,6 +337,34 @@ class Util {
 			}
 		}
 	}
+
+	/**
+	 * Takes a file extension and returns the corresponding Voyant Document Format name.
+	 * @param {String} fileExtension 
+	 * @returns {String}
+	 */
+	static getVoyantDocumentFormatFromFileExtension(fileExtension) {
+		fileExtension = fileExtension.trim().toLowerCase();
+		switch(fileExtension) {
+		case 'txt':
+			return 'text';
+		case 'xhtml':
+			return 'html';
+		case 'doc':
+			return 'msword';
+		case 'docx':
+			return 'mswordx';
+		case 'xls':
+			return 'xlsx';
+		case 'zip':
+			return 'archive';
+		case 'gzip':
+		case 'bzip2':
+			return 'compressed';
+		default:
+			return fileExtension;
+		}
+	}
 }
 
 export default Util;

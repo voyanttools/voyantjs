@@ -1629,7 +1629,8 @@ class Corpus {
 							file = new Blob([nodeString], {type: 'text/xml'});
 						}
 						formData.append('input', file);
-						formData.append('inputFormat', Util.getFileExtensionFromMimeType(file.type));
+						const fileExt = Util.getFileExtensionFromMimeType(file.type);
+						formData.append('inputFormat', Util.getVoyantDocumentFormatFromFileExtension(fileExt));
 					});
 				} else {
 					if (Util.isNode(config)) {
@@ -1637,7 +1638,8 @@ class Corpus {
 						config = new Blob([nodeString], {type: 'text/xml'});
 					}
 					formData.set('input', config);
-					formData.set('inputFormat', Util.getFileExtensionFromMimeType(config.type));
+					const fileExt = Util.getFileExtensionFromMimeType(config.type);
+					formData.set('inputFormat', Util.getVoyantDocumentFormatFromFileExtension(fileExt));
 				}
 				
 				// append any other form options that may have been included
