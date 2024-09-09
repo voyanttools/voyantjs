@@ -93,6 +93,7 @@ test('isNode', () => {
 
 test('isFunction', () => {
 	expect(Util.isFunction(()=>{})).toBe(true);
+	expect(Util.isFunction(async ()=>{})).toBe(true);
 })
 
 test('isPromise', () => {

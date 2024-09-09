@@ -255,7 +255,8 @@ class Util {
 	 * @returns {Boolean}
 	 */
 	static isFunction(val) {
-		return Object.prototype.toString.call(val) === '[object Function]';
+		const typeString = Object.prototype.toString.call(val);
+		return typeString === '[object Function]' || typeString === '[object AsyncFunction]';
 	}
 
 	/**
