@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/voyanttools/voyantjs/compare/v3.1.1...v3.1.2) (2024-09-09)
+
+
+### Bug Fixes
+
+* **util:** support AsyncFunction ([a2913e9](https://github.com/voyanttools/voyantjs/commit/a2913e91f674c88830f43704e86ddae76f0dbb62))
+
 ## [3.1.1](https://github.com/voyanttools/voyantjs/compare/v3.1.0...v3.1.1) (2024-08-16)
 
 
