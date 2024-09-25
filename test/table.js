@@ -25,6 +25,13 @@ test('empty table', () => {
 	}).toThrow();
 });
 
+test('promise value', () => {
+	const error = () => {
+		Table.create(Promise.resolve());
+	}
+	expect(error).toThrow(Error);
+})
+
 test('single value', () => {
 	const table = Table.create(1);
 	expect(table.rows()).toBe(1);
