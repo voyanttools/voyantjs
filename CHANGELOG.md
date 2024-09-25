@@ -1,3 +1,10 @@
+## [3.1.3](https://github.com/voyanttools/voyantjs/compare/v3.1.2...v3.1.3) (2024-09-25)
+
+
+### Bug Fixes
+
+* **table:** throw error when promise used as data ([dac0926](https://github.com/voyanttools/voyantjs/commit/dac0926bffbc71a0abce5fad96bcd88611291212))
+
 ## [3.1.2](https://github.com/voyanttools/voyantjs/compare/v3.1.1...v3.1.2) (2024-09-09)
 
 
