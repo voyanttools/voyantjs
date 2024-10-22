@@ -1627,7 +1627,7 @@ class Corpus {
 				resolve(config);
 			}
 
-			if (typeof config === 'string') {
+			if (Util.isString(config)) {
 				if (config.length>0 && /\W/.test(config)===false) {
 					config = {corpus: config};
 				} else {
@@ -1635,7 +1635,7 @@ class Corpus {
 				}
 			} else if (Util.isArray(config) && config.length > 0 && typeof config[0] === 'string') {
 				config = {input: config};
-			} else if (config instanceof Blob || Util.isNode(config) || (Util.isArray(config) && (config[0] instanceof Blob || Util.isNode(config[0])))) {
+			} else if (Util.isBlob(config) || Util.isNode(config) || (Util.isArray(config) && (Util.isBlob(config[0]) || Util.isNode(config[0])))) {
 				const formData = new FormData();
 				if (Util.isArray(config)) {
 					config.forEach(file => {
@@ -1658,7 +1658,7 @@ class Corpus {
 				}
 				
 				// append any other form options that may have been included
-				if (api && typeof api === 'object') {
+				if (api && Util.isObject(api)) {
 					for (let key in api) {
 						formData.set(key, api[key]);
 					}
@@ -1670,6 +1670,10 @@ class Corpus {
 					body: formData,
 					method: 'POST'
 				};
+			} else if (Util.isObject(config)) {
+				if (config.inputFormat === 'json' && Util.isString(config.input) === false) {
+					config.input = JSON.stringify(config.input);
+				}
 			}
 			
 			Load.trombone({...config,...api}, {tool: 'corpus.CorpusMetadata'})
