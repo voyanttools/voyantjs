@@ -1,3 +1,10 @@
+## [3.1.4](https://github.com/voyanttools/voyantjs/compare/v3.1.3...v3.1.4) (2024-10-22)
+
+
+### Bug Fixes
+
+* **load:** auto stringify json when creating corpus from json ([6a28759](https://github.com/voyanttools/voyantjs/commit/6a2875932a975d33cdf8f820d9f86c63b52ca077))
+
 ## [3.1.3](https://github.com/voyanttools/voyantjs/compare/v3.1.2...v3.1.3) (2024-09-25)
 
 
