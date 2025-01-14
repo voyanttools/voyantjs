@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/voyanttools/voyantjs/compare/v3.1.4...v3.2.0) (2025-01-14)
+
+
+### Features
+
+* **corpus:** add filterByCategory method ([47a2ba3](https://github.com/voyanttools/voyantjs/commit/47a2ba35a609aa022a0f039ea5ef68b560febda5))
+
 ## [3.1.4](https://github.com/voyanttools/voyantjs/compare/v3.1.3...v3.1.4) (2024-10-22)
 
 
