@@ -5,6 +5,8 @@
 import Corpus from '../src/corpus';
 
 import * as Mocks from './mocks/corpus';
+import * as MocksCategories from './mocks/categories';
+import Categories from '../src/categories';
 
 const corpusId = 'austen';
 
@@ -185,6 +187,15 @@ test('analysis', async () => {
 	const corpus = await Corpus.load(corpusId);
 	const data = await corpus.analysis({type: 'tsne', limit: 10});
 	expect(data.totalTerms).toBe(10);
+})
+
+test('filterByCategory', async () => {
+	const corpus = await Corpus.load(corpusId);
+	fetch.once(JSON.stringify(MocksCategories.Categories));
+	const categories = await Categories.load('categories.en.txt');
+	fetch.once(JSON.stringify(Mocks.TermsWhiteList));
+	const data = await corpus.filterByCategory(categories, 'positive');
+	expect(data.length).toBe(22);
 })
 
 test('tool', () => {

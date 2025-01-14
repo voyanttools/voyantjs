@@ -1,5 +1,6 @@
 import Load from './load';
 import Util from './util.js';
+import Categories from './categories.js';
 
 
 // this is essentially a private method to determine if we're in corpus or documents mode.
@@ -1324,6 +1325,23 @@ class Corpus {
 			
 			doLoad(config);
 		});
+	}
+
+	/**
+	 * Returns a list of corpus terms, filtered by the provided category.
+	 * @param {String|Spyral.Categories} categories A categories ID or a Spyral.Categories instance.
+	 * @param {String} categoryName The name of the category within the instance.
+	 * @returns {Promise<Array>}
+	 */
+	async filterByCategory(categories, categoryName) {
+		if (categories === undefined) return;
+		if (categoryName === undefined) return;
+		
+		if (categories instanceof Categories === false) {
+			categories = await Categories.load(categories);
+		}
+		const catTerms = categories.getCategoryTerms(categoryName);
+		return this.terms({whiteList: catTerms});
 	}
 
 	/**
