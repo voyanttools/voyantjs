@@ -1619,6 +1619,7 @@ class Corpus {
 	 * @param {Object} config the Corpus config
 	 * @param {Object} api any additional API values
 	 * @returns {Promise<Corpus>}
+	 * @static
 	 */
 	static load(config={}, api = {}) {
 		const promise = new Promise(function(resolve, reject) {

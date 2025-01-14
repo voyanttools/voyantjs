@@ -91,6 +91,7 @@ class Chart {
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
+	 * @static
 	 */
 	static create(target, config) {
 		[target, config] = Chart._handleTargetAndConfig(target, config);
@@ -184,6 +185,7 @@ class Chart {
 	 * Add the provided data to the config as a series
 	 * @param {Object} config 
 	 * @param {Array} data 
+	 * @static
 	 */
 	static setSeriesData(config, data) {
 		if (Array.isArray(data)) {
@@ -209,6 +211,7 @@ class Chart {
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
 	 * @returns {Highcharts.Chart}
+	 * @static
 	 */
 	static bar(target, config) {
 		[target, config] = Chart._handleTargetAndConfig(target, config);
@@ -230,6 +233,7 @@ class Chart {
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
 	 * @returns {Highcharts.Chart}
+	 * @static
 	 */
 	static column(target, config) {
 		[target, config] = Chart._handleTargetAndConfig(target, config);
@@ -251,6 +255,7 @@ class Chart {
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
 	 * @returns {Highcharts.Chart}
+	 * @static
 	 */
 	static line(target, config) {
 		[target, config] = Chart._handleTargetAndConfig(target, config);
@@ -272,6 +277,7 @@ class Chart {
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
 	 * @returns {Highcharts.Chart}
+	 * @static
 	 */
 	static scatter(target, config) {
 		[target, config] = Chart._handleTargetAndConfig(target, config);
@@ -292,6 +298,7 @@ class Chart {
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Object} config 
 	 * @returns {Spyral.NetworkGraph}
+	 * @static
 	 */
 	static networkgraph(target, config) {
 		[target, config] = Chart._handleTargetAndConfig(target, config);

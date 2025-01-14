@@ -8,6 +8,7 @@ class Util {
 	 * Generates a random ID of the specified length.
 	 * @param {Number} len The length of the ID to generate?
 	 * @returns {String}
+	 * @static
 	 */
 	static id(len = 8) {
 		// based on https://stackoverflow.com/a/13403498
@@ -25,6 +26,7 @@ class Util {
 	 * 
 	 * @param {Array|Object|String} contents 
 	 * @returns {String}
+	 * @static
 	 */
 	static toString(contents) {
 		if (contents.constructor === Array || contents.constructor===Object) {
@@ -41,6 +43,7 @@ class Util {
 	 * @param {String} before 
 	 * @param {String} more 
 	 * @param {String} after 
+	 * @static
 	 */
 	static more(before, more, after) {
 		return before + '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'+more.substring(0,500)+' <a href="">+</a><div style="display: none">'+more.substring(501)+'</div>' + after;
@@ -51,6 +54,7 @@ class Util {
 	 * Take a data URL and convert it to a Blob.
 	 * @param {String} dataUrl 
 	 * @returns {Blob}
+	 * @static
 	 */
 	static dataUrlToBlob(dataUrl) {
 		const parts = dataUrl.split(',');
@@ -70,6 +74,7 @@ class Util {
 	 * Take a Blob and convert it to a data URL.
 	 * @param {Blob} blob 
 	 * @returns {Promise<String>} a Promise for a data URL
+	 * @static
 	 */
 	static blobToDataUrl(blob) {
 		return new Promise((resolve, reject) => {
@@ -90,6 +95,7 @@ class Util {
 	 * Take a Blob and convert it to a String.
 	 * @param {Blob} blob 
 	 * @returns {Promise<String>} a Promise for a String
+	 * @static
 	 */
 	static blobToString(blob) {
 		return new Promise((resolve, reject) => {
@@ -113,6 +119,7 @@ class Util {
 	 * @param {(Document|String)} xslStylesheet The XSL to use for the transformation
 	 * @param {Boolean} [returnDoc=false] True to return a Document, false to return a DocumentFragment
 	 * @returns {Document}
+	 * @static
 	 */
 	static transformXml(xmlDoc, xslStylesheet, returnDoc=false) {
 		if (this.isString(xmlDoc)) {
@@ -158,6 +165,7 @@ class Util {
 	 * @param {Document} doc 
 	 * @param {Boolean} [includePosition=false] True to include the error position information
 	 * @returns {Error|null}
+	 * @static
 	 */
 	static _getParserError(doc, includePosition=false) {
 		// fairly naive check for parsererror, consider something like https://stackoverflow.com/a/55756548
@@ -181,6 +189,7 @@ class Util {
 	 * Returns true if the value is a String.
 	 * @param {*} val 
 	 * @returns {Boolean} 
+	 * @static
 	 */
 	static isString(val) {
 		return typeof val === 'string';
@@ -190,6 +199,7 @@ class Util {
 	 * Returns true if the value is a Number.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isNumber(val) {
 		return typeof val === 'number';
@@ -199,6 +209,7 @@ class Util {
 	 * Returns true if the value is a Boolean.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isBoolean(val) {
 		return typeof val === 'boolean';
@@ -208,6 +219,7 @@ class Util {
 	 * Returns true if the value is Undefined.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isUndefined(val) {
 		return typeof val === 'undefined';
@@ -217,6 +229,7 @@ class Util {
 	 * Returns true if the value is an Array.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isArray(val) {
 		return Object.prototype.toString.call(val) === '[object Array]';
@@ -226,6 +239,7 @@ class Util {
 	 * Returns true if the value is an Object.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isObject(val) {
 		return Object.prototype.toString.call(val) === '[object Object]';
@@ -235,6 +249,7 @@ class Util {
 	 * Returns true if the value is Null.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isNull(val) {
 		return Object.prototype.toString.call(val) === '[object Null]';
@@ -244,6 +259,7 @@ class Util {
 	 * Returns true if the value is a Node.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isNode(val) {
 		return val instanceof Node;
@@ -253,6 +269,7 @@ class Util {
 	 * Returns true if the value is a Function.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isFunction(val) {
 		const typeString = Object.prototype.toString.call(val);
@@ -263,6 +280,7 @@ class Util {
 	 * Returns true if the value is a Promise.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isPromise(val) {
 		// ES6 promise detection
@@ -276,6 +294,7 @@ class Util {
 	 * Returns true if the value is a Blob.
 	 * @param {*} val 
 	 * @returns {Boolean}
+	 * @static
 	 */
 	static isBlob(val) {
 		return val instanceof Blob;
@@ -286,6 +305,7 @@ class Util {
 	 * Only handles file types supported by Voyant.
 	 * @param {String} mimeType 
 	 * @returns {String}
+	 * @static
 	 */
 	static getFileExtensionFromMimeType(mimeType) {
 		mimeType = mimeType.trim().toLowerCase();
@@ -343,6 +363,7 @@ class Util {
 	 * Takes a file extension and returns the corresponding Voyant Document Format name.
 	 * @param {String} fileExtension 
 	 * @returns {String}
+	 * @static
 	 */
 	static getVoyantDocumentFormatFromFileExtension(fileExtension) {
 		fileExtension = fileExtension.trim().toLowerCase();

@@ -9,6 +9,7 @@ class Load {
 	/**
 	 * Set the base URL for use with the Load class
 	 * @param {string} baseUrl 
+	 * @static
 	 */
 	static setBaseUrl(baseUrl) {
 		this.baseUrl = baseUrl;
@@ -19,6 +20,7 @@ class Load {
 	 * @param {Object} config 
 	 * @param {Object} params
 	 * @returns {JSON}
+	 * @static
 	 */
 	static trombone(config = {}, params) {
 		let url = new URL(config.trombone ? config.trombone : this.baseUrl + 'trombone', window.location.origin);
@@ -93,6 +95,7 @@ class Load {
 	 * @param {string} urlToFetch 
 	 * @param {Object} config
 	 * @returns {Response}
+	 * @static
 	 */
 	static load(urlToFetch, config) {
 		let url = new URL(config && config.trombone ? config.trombone : this.baseUrl + 'trombone');
@@ -114,6 +117,7 @@ class Load {
 	 * Fetch HTML content from a URL
 	 * @param {string} url 
 	 * @returns {Document}
+	 * @static
 	 */
 	static html(url) {
 		return this.text(url).then(text => new DOMParser().parseFromString(text, 'text/html'));
@@ -123,6 +127,7 @@ class Load {
 	 * Fetch XML content from a URL
 	 * @param {string} url 
 	 * @returns {XMLDocument}
+	 * @static
 	 */
 	static xml(url) {
 		return this.text(url).then(text => new DOMParser().parseFromString(text, 'text/xml'));
@@ -132,6 +137,7 @@ class Load {
 	 * Fetch JSON content from a URL
 	 * @param {string} url 
 	 * @returns {JSON}
+	 * @static
 	 */
 	static json(url) {
 		return this.load(url).then(response => response.json());
@@ -141,6 +147,7 @@ class Load {
 	 * Fetch text content from a URL
 	 * @param {string} url 
 	 * @returns {string}
+	 * @static
 	 */
 	static text(url) {
 		return this.load(url).then(response => response.text());

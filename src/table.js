@@ -1125,6 +1125,7 @@ class Table {
 	 * @param {(Object|Array|String|Number)} data
 	 * @param {TableConfig} config
 	 * @returns {Spyral.Table}
+	 * @static
 	 */
 	static create(data, config, ...other) {
 		return new Table(data, config, ...other);
@@ -1136,6 +1137,7 @@ class Table {
 	 * @param {Object} api
 	 * @param {Object} config
 	 * @returns {Promise}
+	 * @static
 	 */
 	static fetch(input, api, config) {
 		return new Promise((resolve, reject) => {
@@ -1152,6 +1154,7 @@ class Table {
 	 * Get the count of each unique value in the data
 	 * @param {Array} data
 	 * @returns {Object}
+	 * @static
 	 */
 	static counts(data) {
 		let vals = {};
@@ -1164,6 +1167,7 @@ class Table {
 	 * @param {(number|string)} a
 	 * @param {(number|string)} b
 	 * @returns {number}
+	 * @static
 	 */
 	static cmp(a, b) {
 		return typeof a === 'string' && typeof b === 'string' ? a.localeCompare(b) : a-b;
@@ -1173,6 +1177,7 @@ class Table {
 	 * Get the sum of the provided values
 	 * @param {Array} data
 	 * @returns {number}
+	 * @static
 	 */
 	static sum(data) {
 		return data.reduce((a,b) => a+b, 0);
@@ -1182,6 +1187,7 @@ class Table {
 	 * Get the mean of the provided values
 	 * @param {Array} data
 	 * @returns {number}
+	 * @static
 	 */
 	static mean(data) {
 		return Table.sum(data) / data.length;
@@ -1192,6 +1198,7 @@ class Table {
 	 * @param {Array} data
 	 * @param {number} neighbors
 	 * @returns {Array}
+	 * @static
 	 */
 	static rollingMean(data, neighbors) {
 		// https://stackoverflow.com/questions/41386083/plot-rolling-moving-average-in-d3-js-v4/41388581#41387286
@@ -1207,6 +1214,7 @@ class Table {
 	 * Get the variance for the provided values
 	 * @param {Array} data
 	 * @returns {number}
+	 * @static
 	 */
 	static variance(data) {
 		let m = Table.mean(data);
@@ -1217,6 +1225,7 @@ class Table {
 	 * Get the standard deviation for the provided values
 	 * @param {Array} data
 	 * @returns {number}
+	 * @static
 	 */
 	static standardDeviation(data) {
 		return Math.sqrt(Table.variance(data));
@@ -1226,6 +1235,7 @@ class Table {
 	 * Get the z scores for the provided values
 	 * @param {Array} data
 	 * @returns {Array}
+	 * @static
 	 */
 	static zScores(data) {
 		let m = Table.mean(data);
@@ -1237,6 +1247,7 @@ class Table {
 	 * Perform a zip operation of the provided arrays. Learn more about zip on [Wikipedia](https://en.wikipedia.org/wiki/Convolution_%28computer_science%29).
 	 * @param {Array} data
 	 * @returns {Array}
+	 * @static
 	 */
 	static zip(...data) {
 	

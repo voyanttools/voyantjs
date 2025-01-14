@@ -380,6 +380,7 @@ class Categories {
 	 * @param {(Object|String)} config an object specifying the parameters (see above)
 	 * @param {Object} api an object specifying any parameters for the trombone call
 	 * @returns {Promise<Object>} this first returns a promise and when the promise is resolved it returns this categories object (with the loaded data included)
+	 * @static
 	 */
 	static load(config={}, api={}) {
 		const categories = new Categories();
