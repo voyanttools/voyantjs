@@ -193,9 +193,15 @@ test('filterByCategory', async () => {
 	const corpus = await Corpus.load(corpusId);
 	fetch.once(JSON.stringify(MocksCategories.Categories));
 	const categories = await Categories.load('categories.en.txt');
-	fetch.once(JSON.stringify(Mocks.TermsWhiteList));
+	fetch.once(JSON.stringify(MocksCategories.TermsWhiteListPositive));
 	const data = await corpus.filterByCategory(categories, 'positive');
-	expect(data.length).toBe(22);
+	expect(data.positive.length).toBe(22);
+	fetch
+		.once(JSON.stringify(MocksCategories.Categories))
+		.once(JSON.stringify(MocksCategories.TermsWhiteListPositive))
+		.once(JSON.stringify(MocksCategories.TermsWhiteListNegative));
+	const data2 = await corpus.filterByCategory('categories.en.txt');
+	expect(data2.negative.length).toBe(21);
 })
 
 test('tool', () => {

@@ -1328,20 +1328,41 @@ class Corpus {
 	}
 
 	/**
-	 * Returns a list of corpus terms, filtered by the provided category.
+	 * Given a Categories instance or ID, returns an object mapping category names to corpus terms. The results can be limited to specific category names by providing one or more of them.
 	 * @param {String|Spyral.Categories} categories A categories ID or a Spyral.Categories instance.
-	 * @param {String} categoryName The name of the category within the instance.
-	 * @returns {Promise<Array>}
+	 * @param {String|Array<String>} [categoryName] One or more names of categories within the instance.
+	 * @returns {Promise<Object>}
 	 */
 	async filterByCategory(categories, categoryName) {
 		if (categories === undefined) return;
-		if (categoryName === undefined) return;
 		
 		if (categories instanceof Categories === false) {
 			categories = await Categories.load(categories);
 		}
-		const catTerms = categories.getCategoryTerms(categoryName);
-		return this.terms({whiteList: catTerms});
+
+		let categoryNames = [];
+
+		if (categoryName === undefined) {
+			categoryNames = categories.getCategoryNames();
+		} else if (Util.isString(categoryName)) {
+			categoryNames = [categoryName];
+		} else {
+			categoryNames = categoryName;
+		}
+
+		const termsResults = await Promise.all(
+			categoryNames.map(key => {
+				let catTerms = categories.getCategoryTerms(key);
+				return this.terms({whiteList: catTerms});
+			})
+		);
+
+		let results = {};
+		termsResults.forEach((terms, i) => {
+			results[categoryNames[i]] = terms;
+		});
+
+		return results;
 	}
 
 	/**
