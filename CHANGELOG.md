@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/voyanttools/voyantjs/compare/v3.2.0...v3.2.1) (2025-01-16)
+
+
+### Bug Fixes
+
+* **corpus:** return object instead of array, make second argument optional ([75c3495](https://github.com/voyanttools/voyantjs/commit/75c3495743c340d07b808c2bafd541f40136f0fa))
+
 # [3.2.0](https://github.com/voyanttools/voyantjs/compare/v3.1.4...v3.2.0) (2025-01-14)
 
 
