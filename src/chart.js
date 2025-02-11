@@ -7,7 +7,7 @@ import Util from './util.js';
 /**
  * The Chart class in Spyral.
  * This class provides methods for creating a variety of charts.
- * Charts are created using the [Highcharts Library](https://api.highcharts.com/highcharts/).
+ * Charts are created using the [Highcharts Library]{@link https://api.highcharts.com/highcharts/}.
  * Highcharts have many configuration options and Spyral.Chart helps to streamline the process.
  * A simple example:
  * 
@@ -36,20 +36,20 @@ import Util from './util.js';
 class Chart {
 	/**
 	 * The Highcharts config object
-	 * @typedef {Object} HighchartsConfig
+	 * @typedef {Object} Spyral.Chart~HighchartsConfig
 	 * @property {(string|object)} title
 	 * @property {(string|object)} subtitle
 	 * @property {Object} credits
 	 * @property {Object} xAxis
 	 * @property {Object} yAxis
 	 * @property {Object} chart
-	 * @property {Array<HighchartsSeriesConfig>} series
+	 * @property {Array<Spyral.Chart~HighchartsSeriesConfig>} series
 	 * @property {Object} plotOptions
 	 */
 
 	/**
 	 * The series config object
-	 * @typedef {Object} HighchartsSeriesConfig
+	 * @typedef {Object} Spyral.Chart~HighchartsSeriesConfig
 	 * @property {Array} data
 	 * @property {string} [name]
 	 */
@@ -75,9 +75,9 @@ class Chart {
 
 	/**
 	 * Create a new chart.
-	 * See [Highcharts API](https://api.highcharts.com/highcharts/) for full set of config options.
+	 * See [Highcharts API]{@link https://api.highcharts.com/highcharts/} for full set of config options.
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
-	 * @param {HighchartsConfig} config 
+	 * @param {Spyral.Chart~HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
 	 */
 	create(target, config) {
@@ -87,9 +87,9 @@ class Chart {
 	
 	/**
 	 * Create a new chart.
-	 * See [Highcharts API](https://api.highcharts.com/highcharts/) for full set of config options.
+	 * See [Highcharts API]{@link https://api.highcharts.com/highcharts/} for full set of config options.
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
-	 * @param {HighchartsConfig} config 
+	 * @param {Spyral.Chart~HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
 	 * @static
 	 */
@@ -183,7 +183,7 @@ class Chart {
 
 	/**
 	 * Add the provided data to the config as a series
-	 * @param {Object} config 
+	 * @param {Spyral.Chart~HighchartsConfig} config 
 	 * @param {Array} data 
 	 * @static
 	 */
@@ -199,7 +199,7 @@ class Chart {
 
 	/**
 	 * Create a bar chart
-	 * @param {Object} [config]
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
 	 * @returns {Highcharts.Chart}
 	 */
 	bar(config={}) {
@@ -209,7 +209,7 @@ class Chart {
 	/**
 	 * Create a bar chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
-	 * @param {Object} config 
+	 * @param {Spyral.Chart~HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
 	 * @static
 	 */
@@ -221,7 +221,7 @@ class Chart {
 
 	/**
 	 * Create a column chart
-	 * @param {Object} [config]
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
 	 * @returns {Highcharts.Chart}
 	 */
 	column(config={}) {
@@ -231,7 +231,7 @@ class Chart {
 	/**
 	 * Create a column chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
-	 * @param {Object} config 
+	 * @param {Spyral.Chart~HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
 	 * @static
 	 */
@@ -243,7 +243,7 @@ class Chart {
 
 	/**
 	 * Create a line chart
-	 * @param {Object} [config]
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
 	 * @returns {Highcharts.Chart}
 	 */
 	line(config={}) {
@@ -253,7 +253,7 @@ class Chart {
 	/**
 	 * Create a line chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
-	 * @param {Object} config 
+	 * @param {Spyral.Chart~HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
 	 * @static
 	 */
@@ -265,7 +265,7 @@ class Chart {
 
 	/**
 	 * Create a scatter plot
-	 * @param {Object} [config]
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
 	 * @returns {Highcharts.Chart}
 	 */
 	scatter(config={}) {
@@ -275,7 +275,7 @@ class Chart {
 	/**
 	 * Create a scatter plot
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
-	 * @param {Object} config 
+	 * @param {Spyral.Chart~HighchartsConfig} config 
 	 * @returns {Highcharts.Chart}
 	 * @static
 	 */

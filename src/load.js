@@ -2,6 +2,7 @@
  * Class embodying Load functionality.
  * @memberof Spyral
  * @class
+ * @hideconstructor
  */
 class Load {
 	static baseUrl;

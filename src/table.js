@@ -67,7 +67,7 @@ import Util from './util.js';
 class Table {
 	/**
 	 * The Table config object
-	 * @typedef {Object} TableConfig
+	 * @typedef {Object} Spyral.Table~TableConfig
 	 * @property {string} format The format of the provided data, either "tsv" or "csv"
 	 * @property {(Object|Array)} headers The table headers
 	 * @property {boolean} hasHeaders True if the headers are the first item in the data
@@ -79,7 +79,7 @@ class Table {
 	 * Create a new Table
 	 * @constructor
 	 * @param {(Object|Array|String|Number)} data An array of data or a string with CSV or TSV.
-	 * @param {TableConfig} config an Object for configuring the table initialization
+	 * @param {Spyral.Table~TableConfig} config an Object for configuring the table initialization
 	 * @returns {Spyral.Table}
 	 */
 	constructor(data, config, ...other) {
@@ -1123,7 +1123,7 @@ class Table {
 	/**
 	 * Create a new Table
 	 * @param {(Object|Array|String|Number)} data
-	 * @param {TableConfig} config
+	 * @param {Spyral.Table~TableConfig} config
 	 * @returns {Spyral.Table}
 	 * @static
 	 */
@@ -1244,7 +1244,7 @@ class Table {
 	}
 	
 	/**
-	 * Perform a zip operation of the provided arrays. Learn more about zip on [Wikipedia](https://en.wikipedia.org/wiki/Convolution_%28computer_science%29).
+	 * Perform a zip operation of the provided arrays. Learn more about zip on [Wikipedia]{@link https://en.wikipedia.org/wiki/Convolution_%28computer_science%29}.
 	 * @param {Array} data
 	 * @returns {Array}
 	 * @static

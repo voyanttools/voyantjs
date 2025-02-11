@@ -1,6 +1,7 @@
 /**
  * A helper for working with the Voyant Notebook app.
  * @memberof Spyral
+ * @hideconstructor
  */
 class Util {
 
