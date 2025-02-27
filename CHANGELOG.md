@@ -1,3 +1,10 @@
+## [3.2.2](https://github.com/voyanttools/voyantjs/compare/v3.2.1...v3.2.2) (2025-02-27)
+
+
+### Bug Fixes
+
+* **networkgraph:** use nodeIdField as default for nodeLabelField, better documentation ([fc94c11](https://github.com/voyanttools/voyantjs/commit/fc94c11fb2001e4951f378f544e4c0a9bb9adb8e))
+
 ## [3.2.1](https://github.com/voyanttools/voyantjs/compare/v3.2.0...v3.2.1) (2025-01-16)
 
 
