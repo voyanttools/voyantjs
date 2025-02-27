@@ -599,7 +599,7 @@ class Corpus {
 	
 	/**
 	 * Returns an array of terms (either CorpusTerms or DocumentTerms, depending on the specified mode).
-	 * These terms are actually types, so information about each type is collected (as opposed to the {#link tokens}
+	 * These terms are actually types, so information about each type is collected (as opposed to the [tokens]{@link Spyral.Corpus#tokens}
 	 * method which is for every occurrence in document order).
 	 * 
 	 * The mode is set to "documents" when any of the following is true
@@ -1502,7 +1502,7 @@ class Corpus {
 	//	}
 
 	/**
-	 * An alias for {@link #summary}.
+	 * An alias for [summary]{@link Spyral.Corpus#summary}.
 	 */
 	toString() {
 		return this.summary();

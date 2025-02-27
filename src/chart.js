@@ -287,8 +287,8 @@ class Chart {
 
 	/**
 	 * Create a network graph
-	 * @param {Object} [config]
-	 * @returns {Spyral.NetworkGraph}
+	 * @param {NetworkGraph~Config} [config]
+	 * @returns {NetworkGraph}
 	 */
 	networkgraph(config={}) {
 		return Chart.networkgraph(this.target, config);
@@ -296,8 +296,8 @@ class Chart {
 	/**
 	 * Create a network graph
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
-	 * @param {Object} config 
-	 * @returns {Spyral.NetworkGraph}
+	 * @param {NetworkGraph~Config} config 
+	 * @returns {NetworkGraph}
 	 * @static
 	 */
 	static networkgraph(target, config) {

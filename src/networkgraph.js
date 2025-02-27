@@ -1,9 +1,30 @@
 /* global d3 */
 
 /**
- * A d3 force directed layout with labeled nodes
- * @memberof Spyral
+ * A force directed layout network graph with labeled nodes.
+ * Uses the [d3]{@link https://d3js.org/d3-force} library for rendering.
+ * 
+ * This graph should be created via the [Spyral.Chart.networkgraph]{@link Spyral.Chart.networkgraph} method.
  * @class
+ * 
+ * @example
+ * 
+ * var nodes = [{
+ *   term: 'foo', value: 15
+ * },{
+ *   term: 'bar', value: 3
+ * },{
+ *   term: 'baz', value: 4
+ * }]
+ * var links = [{
+ *   source: 'foo', target: 'bar'
+ * },{
+ *   source: 'foo', target: 'baz'
+ * }]
+ * Spyral.Chart.networkgraph({
+ *   nodes: nodes, nodeIdField: 'term',
+ *   links: links
+ * })
  */
 class NetworkGraph {
 
@@ -15,21 +36,27 @@ class NetworkGraph {
 		springStrength: 0.25, // 0 = not strong, >1 = probably too strong
 		collisionScale: 1.25 // 1 = default, 0 = no collision 
 	}
+	
+	/**
+	 * The NetworkGraph config
+	 * @typedef {Object} NetworkGraph~Config
+	 * @property {Array} config.nodes An array of node objects
+	 * @property {Array} config.links An array of link objects
+	 * @property {String|Function} [config.nodeIdField=id] The name of the ID field in the node object, or a function for accessing that field. Default is "id".
+	 * @property {String|Function} [config.nodeLabelField] The name of the label field in the node object, or a function for accessing that field. If not specified, nodeIdField will be used.
+	 * @property {String|Function} [config.nodeValueField=value] The name of the value field in the node object, or a function for accessing that field. Default is "value".
+	 * @property {String|Function} [config.nodeCategoryField=category] The name of the category field in the node object, or a function for accessing that field. Default is "category". This applies a category attribute to the node in the graph which can then be used for targeting or styling purposes.
+	 * @property {String|Function} [config.linkSourceField=source] The name of the source field in the link object, or a function for accessing that field. Default is "source".
+	 * @property {String|Function} [config.linkTargetField=target] The name of the target field in the link object, or a function for accessing that field. Default is "target".
+	 * @property {String|Function} [config.linkValueField=value] The name of the value field in the link object, or a function for accessing that field. Default is "value".
+	 */
 
 	/**
 	 * Construct a new NetworkGraph class
 	 * @constructor
-	 * @param {HTMLElement} target 
-	 * @param {Object} config 
-	 * @param {Array} config.nodes An array of nodes
-	 * @param {Array} config.links An array of links
-	 * @param {String|Function} [config.nodeIdField]
-	 * @param {String|Function} [config.nodeLabelField]
-	 * @param {String|Function} [config.nodeValueField]
-	 * @param {String|Function} [config.nodeCategoryField]
-	 * @param {String|Function} [config.linkSourceField]
-	 * @param {String|Function} [config.linkTargetField]
-	 * @param {String|Function} [config.linkValueField]
+	 * @param {HTMLElement} target The element to render the graph to
+	 * @param {NetworkGraph~Config} config The NetworkGraph config
+	 * 
 	 * @return {NetworkGraph}
 	 */
 	constructor(target, config) {
@@ -39,7 +66,7 @@ class NetworkGraph {
 		if (config.links === undefined) throw new Error('Missing links!');
 		
 		const nodeIdField = config.nodeIdField === undefined ? 'id' : config.nodeIdField;
-		const nodeLabelField = config.nodeLabelField === undefined ? 'id' : config.nodeLabelField;
+		const nodeLabelField = config.nodeLabelField === undefined ? nodeIdField : config.nodeLabelField;
 		const nodeValueField = config.nodeValueField === undefined ? 'value' : config.nodeValueField;
 		const nodeCategoryField = config.nodeCategoryField === undefined ? 'category' : config.nodeCategoryField;
 
