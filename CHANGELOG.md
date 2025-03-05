@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/voyanttools/voyantjs/compare/v3.2.2...v3.3.0) (2025-03-05)
+
+
+### Features
+
+* **table:** add DataTable output ([3e41248](https://github.com/voyanttools/voyantjs/commit/3e412482d4b1036b720de413c237bfef5f63d21d))
+
 ## [3.2.2](https://github.com/voyanttools/voyantjs/compare/v3.2.1...v3.2.2) (2025-02-27)
 
 
