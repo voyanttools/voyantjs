@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-/* global Spyral */
+/* global Spyral, DataTable */
 
 import Chart from './chart.js';
 
@@ -1017,6 +1017,35 @@ class Table {
 	 */
 	toHtml(config={}) {
 		return this.toString(config);
+	}
+
+	/**
+	 * Displays an interactive table using [DataTables]{@link https://datatables.net/}
+	 * @param {HTMLElement} [target]
+	 * @param {Object} config 
+	 * @returns {DataTable}
+	 */
+	toDataTable(target, config={}) {
+		if (Util.isNode(target) === false && typeof target === 'object') {
+			config = target;
+			target = undefined;
+		}
+		if (target === undefined) {
+			if (typeof Spyral !== 'undefined' && Spyral.Notebook) {
+				target = Spyral.Notebook.getTarget();
+			} else {
+				target = document.createElement('div');
+				document.body.appendChild(target);
+			}
+		} else {
+			if (Util.isNode(target) && target.isConnected === false) {
+				throw new Error('The target node does not exist within the document.');
+			}
+		}
+		target = document.body.appendChild(target);
+		this.html(target, config);
+		let dataTable = new DataTable(target.firstElementChild);
+		return dataTable;
 	}
 	
 	/**
