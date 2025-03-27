@@ -85,7 +85,7 @@ class Table {
 	constructor(data, config, ...other) {
 		this._rows = [];
 		this._headers = {};
-		this._rowKeyColumnIndex = 0;
+		this._rowKeyColumnIndex = 0; // the key, i.e. id
 
 		if (Util.isPromise(data)) {
 			throw new Error('Data cannot be a Promise');
@@ -269,7 +269,7 @@ class Table {
 		else if (typeof data === 'object') {
 			for (let column in data) {
 				if (!this.hasColumn(column)) {
-					//
+					// TODO filter out columns that don't match a header?
 				}
 				this.setCell(rowIndex, column, data[column]);
 			}
@@ -986,6 +986,25 @@ class Table {
 	toTsv(config) {
 		return config && 'noHeaders' in config && config.noHeaders ? '' : this.headers(true).join('\t') + '\n' +
 			this._rows.map(row => row.join('\t')).join('\n');
+	}
+
+	/**
+	 * Get an array of the rows of the Table.
+	 * @param {Boolean} [rowsAsObjects=false] If true, each row will be returned as an object with the headers as keys
+	 * @returns {Array}
+	 */
+	toArray(rowsAsObjects=false) {
+		if (!rowsAsObjects) return this.rows(true);
+		else {
+			const headers = this.headers(true);
+			return this.rows(true).map(row => {
+				let rowObj = {};
+				row.forEach((cell, col) => {
+					rowObj[headers[col]] = cell;
+				});
+				return rowObj;
+			});
+		}
 	}
 	
 	/**

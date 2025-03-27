@@ -234,6 +234,13 @@ test('adding rows with chaining', () => {
 	expect(counts.one).toBe(1);
 });
 
+test('toArray', () => {
+	const table = Table.create({ headers: ['item', 'count'] });
+	table.addRow('one', 1).addRow(['two', 2]);
+	expect(table.toArray().length).toBe(2);
+	expect(table.toArray(true)[0]['count']).toBe(1);
+})
+
 test('html target', () => {
 	document.body.innerHTML = `
 	<div id="table1"></div>
