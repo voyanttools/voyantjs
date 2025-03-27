@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/voyanttools/voyantjs/compare/v3.3.0...v3.4.0) (2025-03-27)
+
+
+### Features
+
+* **table:** add toArray method ([5c73a27](https://github.com/voyanttools/voyantjs/commit/5c73a279febf06cdf8284e9b0d4c91a3de529559))
+
 # [3.3.0](https://github.com/voyanttools/voyantjs/compare/v3.2.2...v3.3.0) (2025-03-05)
 
 
