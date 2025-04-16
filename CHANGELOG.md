@@ -1,3 +1,10 @@
+## [3.4.1](https://github.com/voyanttools/voyantjs/compare/v3.4.0...v3.4.1) (2025-04-16)
+
+
+### Bug Fixes
+
+* **corpus:** increase default tool panel size to 100% x 450px ([a98cb9f](https://github.com/voyanttools/voyantjs/commit/a98cb9f0ef654abbf623467aa3026d0f8d4cd619))
+
 # [3.4.0](https://github.com/voyanttools/voyantjs/compare/v3.3.0...v3.4.0) (2025-03-27)
 
 
