@@ -882,6 +882,7 @@ class Corpus {
 	
 	/**
 	 * Returns an array of collocates (either document or corpus collocates, depending on the specified mode).
+	 * Collocates are terms which appear more frequently in proximity to keywords across the corpus or document.
 	 * 
 	 * The mode is set to "documents" when any of the following is true
 	 * 
@@ -920,7 +921,7 @@ class Corpus {
 	 *  * **stopList**: a list of stopwords to include (see [stopwords tutorial]{@tutorial stopwords})
 	 *  * **collocatesWhitelist**: collocates will be limited to this list
 	 *  * **context**: the size of the context (the number of words on each side of the keyword)
-	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
 	 * 
 	 * The following are specific to corpus mode:
 	 * 
