@@ -1409,8 +1409,8 @@ class Corpus {
 						if (typeof t === 'string') {t = {forTool: t};} // make sure we have object
 						
 						// process width and height info
-						var width = config['width'] !== undefined ? config['width']+'' : '350';
-						var height = config['height'] !== undefined ? config['height']+'' : '350';
+						var width = config['width'] !== undefined ? config['width']+'' : '100%';
+						var height = config['height'] !== undefined ? config['height']+'' : '450';
 						if (width.search(/^\d+$/) === 0) width += 'px';
 						if (height.search(/^\d+$/) === 0) height += 'px';
 						if (config['style'] !== undefined) {
