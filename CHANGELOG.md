@@ -1,3 +1,10 @@
+## [3.5.1](https://github.com/voyanttools/voyantjs/compare/v3.5.0...v3.5.1) (2025-07-03)
+
+
+### Bug Fixes
+
+* **chart:** add return type so docs will build ([a1bff19](https://github.com/voyanttools/voyantjs/commit/a1bff19f9867a13b563c03f591c57727321c796d))
+
 # [3.5.0](https://github.com/voyanttools/voyantjs/compare/v3.4.1...v3.5.0) (2025-07-03)
 
 
