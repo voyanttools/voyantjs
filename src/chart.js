@@ -587,8 +587,8 @@ class Chart {
 
 	/**
 	 * Create a treegraph chart
-	 * @param {*} config 
-	 * @returns 
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
 	 */
 	treegraph(config={}) {
 		Chart.setSeriesData(config, this.data);
