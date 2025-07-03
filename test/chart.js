@@ -80,6 +80,13 @@ test('scatter', () => {
 	expect(scatter.series[0].type).toBe('scatter');
 })
 
+test('pie', () => {
+	const chart = new Chart(document.getElementById('target'), seriesData);
+	const pie = chart.pie();
+
+	expect(pie.series[0].type).toBe('pie');
+})
+
 // test('networkgraph', () => {
 // 	const chart = new Chart(document.getElementById('target'));
 // 	const networkgraph = chart.networkgraph({nodes: networkNodes, links: networkLinks});

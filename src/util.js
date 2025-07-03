@@ -187,6 +187,25 @@ class Util {
 	}
 
 	/**
+	 * Loads an external script for use with your notebook.
+	 * @param {String} scriptUrl The URL of the script to load.
+	 * @returns {Promise}
+	 */
+	static loadScript(scriptUrl) {
+		return new Promise((resolve, reject) => {
+			var scriptsEl = document.createElement('script');
+			scriptsEl.onload = function() {
+				resolve();
+			};
+			scriptsEl.onerror = function(oError) {
+				reject(`The script ${oError.target.src} didn't load correctly.`);
+			};
+			scriptsEl.setAttribute('src', scriptUrl);
+			document.body.appendChild(scriptsEl);
+		});
+	}
+
+	/**
 	 * Returns true if the value is a String.
 	 * @param {*} val 
 	 * @returns {Boolean} 

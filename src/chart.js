@@ -261,6 +261,50 @@ class Chart {
 		[target, config] = Chart._handleTargetAndConfig(target, config);
 		Chart._setDefaultChartType(config, 'line');
 		return Highcharts.chart(target, config);
+	}	
+
+	/**
+	 * Create a pie chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	pie(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.pie(this.target, config);
+	}
+	/**
+	 * Create a pie chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static pie(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'pie');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a polar chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	polar(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.polar(this.target, config);
+	}
+	/**
+	 * Create a polar chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static polar(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'polar');
+		return Highcharts.chart(target, config);
 	}
 
 	/**
@@ -291,6 +335,7 @@ class Chart {
 	 * @returns {NetworkGraph}
 	 */
 	networkgraph(config={}) {
+		Chart.setSeriesData(config, this.data);
 		return Chart.networkgraph(this.target, config);
 	}
 	/**
@@ -303,6 +348,288 @@ class Chart {
 	static networkgraph(target, config) {
 		[target, config] = Chart._handleTargetAndConfig(target, config);
 		return new NetworkGraph(target, config);
+	}
+
+	static _loadHighchartsModule(moduleName) {
+		return Util.loadScript(`../resources/highcharts/11/modules/${moduleName}.js`);
+	}
+
+	/**
+	 * Create an arc-diagram chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	arcdiagram(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.arcdiagram(this.target, config);
+	}
+	/**
+	 * Create an arc-diagram chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async arcdiagram(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'arcdiagram');
+		await Chart._loadHighchartsModule('arc-diagram');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a dependency wheel chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	dependencywheel(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.dependencywheel(this.target, config);
+	}
+	/**
+	 * Create a dependency wheel chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async dependencywheel(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'dependencywheel');
+		await Chart._loadHighchartsModule('sankey');
+		await Chart._loadHighchartsModule('dependency-wheel');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a dumbbell chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	dumbbell(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.dumbbell(this.target, config);
+	}
+	/**
+	 * Create a dumbbell chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async dumbbell(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'dumbbell');
+		await Chart._loadHighchartsModule('dumbbell');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a heatmap chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	heatmap(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.heatmap(this.target, config);
+	}
+	/**
+	 * Create a heatmap chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async heatmap(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'heatmap');
+		await Chart._loadHighchartsModule('heatmap');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a histogram chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	histogram(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.histogram(this.target, config);
+	}
+	/**
+	 * Create a histogram chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async histogram(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'histogram');
+		await Chart._loadHighchartsModule('histogram-bellcurve');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create an item chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	item(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.item(this.target, config);
+	}
+	/**
+	 * Create an item chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async item(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'item');
+		await Chart._loadHighchartsModule('item-series');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a map chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	map(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.map(this.target, config);
+	}
+	/**
+	 * Create a map chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async map(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'map');
+		await Chart._loadHighchartsModule('map');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a sankey chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	sankey(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.sankey(this.target, config);
+	}
+	/**
+	 * Create a sankey chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async sankey(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'sankey');
+		await Chart._loadHighchartsModule('sankey');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a streamgraph chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	streamgraph(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.streamgraph(this.target, config);
+	}
+	/**
+	 * Create a streamgraph chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async streamgraph(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'streamgraph');
+		await Chart._loadHighchartsModule('streamgraph');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a sunburst chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	sunburst(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.sunburst(this.target, config);
+	}
+	/**
+	 * Create a sunburst chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async sunburst(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'sunburst');
+		await Chart._loadHighchartsModule('sunburst');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a treegraph chart
+	 * @param {*} config 
+	 * @returns 
+	 */
+	treegraph(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.treegraph(this.target, config);
+	}
+	/**
+	 * Create a treegraph chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async treegraph(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'treegraph');
+		await Chart._loadHighchartsModule('treemap');
+		await Chart._loadHighchartsModule('treegraph');
+		return Highcharts.chart(target, config);
+	}
+
+	/**
+	 * Create a treemap chart
+	 * @param {Spyral.Chart~HighchartsConfig} [config]
+	 * @returns {Highcharts.Chart}
+	 */
+	treemap(config={}) {
+		Chart.setSeriesData(config, this.data);
+		return Chart.treemap(this.target, config);
+	}
+	/**
+	 * Create a treemap chart
+	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
+	 * @param {Spyral.Chart~HighchartsConfig} config 
+	 * @returns {Highcharts.Chart}
+	 * @static
+	 */
+	static async treemap(target, config) {
+		[target, config] = Chart._handleTargetAndConfig(target, config);
+		Chart._setDefaultChartType(config, 'treemap');
+		await Chart._loadHighchartsModule('treemap');
+		return Highcharts.chart(target, config);
 	}
 }
 
