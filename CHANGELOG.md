@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/voyanttools/voyantjs/compare/v3.4.1...v3.5.0) (2025-07-03)
+
+
+### Features
+
+* **chart:** add more chart types, add loadScript method ([aa8866e](https://github.com/voyanttools/voyantjs/commit/aa8866ebda6d829573c6519aa84d3cf5d5e3807b))
+
 ## [3.4.1](https://github.com/voyanttools/voyantjs/compare/v3.4.0...v3.4.1) (2025-04-16)
 
 
