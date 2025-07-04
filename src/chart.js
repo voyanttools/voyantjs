@@ -357,7 +357,7 @@ class Chart {
 	/**
 	 * Create an arc-diagram chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	arcdiagram(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -367,7 +367,7 @@ class Chart {
 	 * Create an arc-diagram chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async arcdiagram(target, config) {
@@ -380,7 +380,7 @@ class Chart {
 	/**
 	 * Create a dependency wheel chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	dependencywheel(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -390,7 +390,7 @@ class Chart {
 	 * Create a dependency wheel chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async dependencywheel(target, config) {
@@ -404,7 +404,7 @@ class Chart {
 	/**
 	 * Create a dumbbell chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	dumbbell(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -414,7 +414,7 @@ class Chart {
 	 * Create a dumbbell chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async dumbbell(target, config) {
@@ -427,7 +427,7 @@ class Chart {
 	/**
 	 * Create a heatmap chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	heatmap(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -437,7 +437,7 @@ class Chart {
 	 * Create a heatmap chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async heatmap(target, config) {
@@ -450,7 +450,7 @@ class Chart {
 	/**
 	 * Create a histogram chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	histogram(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -460,7 +460,7 @@ class Chart {
 	 * Create a histogram chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async histogram(target, config) {
@@ -473,7 +473,7 @@ class Chart {
 	/**
 	 * Create an item chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	item(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -483,7 +483,7 @@ class Chart {
 	 * Create an item chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async item(target, config) {
@@ -496,7 +496,7 @@ class Chart {
 	/**
 	 * Create a map chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	map(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -506,7 +506,7 @@ class Chart {
 	 * Create a map chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async map(target, config) {
@@ -519,7 +519,7 @@ class Chart {
 	/**
 	 * Create a sankey chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	sankey(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -529,7 +529,7 @@ class Chart {
 	 * Create a sankey chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async sankey(target, config) {
@@ -542,7 +542,7 @@ class Chart {
 	/**
 	 * Create a streamgraph chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	streamgraph(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -552,7 +552,7 @@ class Chart {
 	 * Create a streamgraph chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async streamgraph(target, config) {
@@ -565,7 +565,7 @@ class Chart {
 	/**
 	 * Create a sunburst chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	sunburst(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -575,7 +575,7 @@ class Chart {
 	 * Create a sunburst chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async sunburst(target, config) {
@@ -588,7 +588,7 @@ class Chart {
 	/**
 	 * Create a treegraph chart
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	treegraph(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -598,7 +598,7 @@ class Chart {
 	 * Create a treegraph chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async treegraph(target, config) {
@@ -612,7 +612,7 @@ class Chart {
 	/**
 	 * Create a treemap chart
 	 * @param {Spyral.Chart~HighchartsConfig} [config]
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 */
 	treemap(config={}) {
 		Chart.setSeriesData(config, this.data);
@@ -622,7 +622,7 @@ class Chart {
 	 * Create a treemap chart
 	 * @param {(String|Element)} [target] An element or ID to use as the chart's target. If not specified, one will be created.
 	 * @param {Spyral.Chart~HighchartsConfig} config 
-	 * @returns {Highcharts.Chart}
+	 * @returns {Promise}
 	 * @static
 	 */
 	static async treemap(target, config) {
