@@ -1,3 +1,10 @@
+## [3.5.3](https://github.com/voyanttools/voyantjs/compare/v3.5.2...v3.5.3) (2025-07-04)
+
+
+### Bug Fixes
+
+* **chart:** fix return type of charts that require module loading ([a5f1fce](https://github.com/voyanttools/voyantjs/commit/a5f1fce851daab044f50e1e6b01f6e8e4c4ed039))
+
 ## [3.5.2](https://github.com/voyanttools/voyantjs/compare/v3.5.1...v3.5.2) (2025-07-04)
 
 
