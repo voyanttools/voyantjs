@@ -1,3 +1,10 @@
+## [3.5.2](https://github.com/voyanttools/voyantjs/compare/v3.5.1...v3.5.2) (2025-07-04)
+
+
+### Bug Fixes
+
+* **chart:** fix map method ([e8a723d](https://github.com/voyanttools/voyantjs/commit/e8a723d20d2e1167767205a494b8f4ad29dfd374))
+
 ## [3.5.1](https://github.com/voyanttools/voyantjs/compare/v3.5.0...v3.5.1) (2025-07-03)
 
 
