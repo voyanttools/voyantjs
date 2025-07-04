@@ -513,7 +513,7 @@ class Chart {
 		[target, config] = Chart._handleTargetAndConfig(target, config);
 		Chart._setDefaultChartType(config, 'map');
 		await Chart._loadHighchartsModule('map');
-		return Highcharts.chart(target, config);
+		return Highcharts.mapChart(target, config);
 	}
 
 	/**
