@@ -1,3 +1,10 @@
+## [3.5.4](https://github.com/voyanttools/voyantjs/compare/v3.5.3...v3.5.4) (2025-07-12)
+
+
+### Bug Fixes
+
+* **docs:** fix syntax error in docs example ([0ede5d4](https://github.com/voyanttools/voyantjs/commit/0ede5d40c29ec066522d32a86c4e0e0ab5a121fd))
+
 ## [3.5.3](https://github.com/voyanttools/voyantjs/compare/v3.5.2...v3.5.3) (2025-07-04)
 
 
