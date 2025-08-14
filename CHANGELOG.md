@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/voyanttools/voyantjs/compare/v3.5.4...v3.6.0) (2025-08-14)
+
+
+### Features
+
+* **analysis:** add new analysis class ([018ca9e](https://github.com/voyanttools/voyantjs/commit/018ca9e9c67e46751f50b3b8b195e79fe4278bb6))
+
 ## [3.5.4](https://github.com/voyanttools/voyantjs/compare/v3.5.3...v3.5.4) (2025-07-12)
 
 
