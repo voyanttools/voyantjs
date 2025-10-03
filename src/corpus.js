@@ -402,7 +402,7 @@ class Corpus {
 	 *  * **docId**: a set of document IDs; multiple documents can be separated by a comma
 	 *  * **query**: one or more term queries for the title, author or full-text
 	 *  * **sort**: one of the following sort orders: `INDEX`, `TITLE`, `AUTHOR`, `TOKENSCOUNTLEXICAL`, `TYPESCOUNTLEXICAL`, `TYPETOKENRATIOLEXICAL`, `PUBDATE`
-	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
 	 * 
 	 *  An example:
 	 *  
@@ -418,6 +418,100 @@ class Corpus {
 			corpus: this.corpusid
 		})
 		.then(data => isDocumentsMode(config) ? data.documentsMetadata.documents : data.corpus.metadata);
+	}
+
+	/**
+	 * Returns the metadata object for the corpus.
+	 * 
+	 * The following is an example of the object return for the metadata of the Jane Austen corpus:
+	 * 
+	 * 	{
+	 * 		"id": "b50407fd1cbbecec4315a8fc411bad3c",
+	 * 		"alias": "austen",
+ 	 * 		"title": "",
+	 * 		"subTitle": "",
+	 * 		"documentsCount": 8,
+	 * 		"createdTime": 1582429585984,
+	 * 		"createdDate": "2020-02-22T22:46:25.984-0500",
+	 * 		"lexicalTokensCount": 781763,
+	 * 		"lexicalTypesCount": 15368,
+	 * 		"noPasswordAccess": "NORMAL",
+	 * 		"languageCodes": [
+	 * 			"en"
+	 * 		]
+	 * 	}
+	 * 
+	 *  An example:
+	 *  
+	 *  	// this would show the number 8 (the size of the corpus)
+	 *  	loadCorpus("austen").corpusMetadata().then(metadata => metadata.documentsCount)
+	 *  
+	 * @returns {Promise<object>} a Promise for an Object containing metadata
+	 */
+	corpusMetadata() {
+		return Load.trombone({
+			tool: 'corpus.CorpusMetadata',
+			corpus: this.corpusid
+		})
+		.then(data => data.corpus.metadata);
+	}
+
+	/**
+	 * Returns the metadata object for the document(s).
+	 * 
+	 * The following is an example of what is returned as metadata for the first document:
+	 *
+	 * 	[
+     * 		{
+     *   		"id": "ddac6b12c3f4261013c63d04e8d21b45",
+     *   		"extra.X-Parsed-By": "org.apache.tika.parser.DefaultParser",
+     *   		"tokensCount-lexical": "33559",
+     *   		"lastTokenStartOffset-lexical": "259750",
+     *   		"parent_modified": "1548457455000",
+     *   		"typesCount-lexical": "4235",
+     *   		"typesCountMean-lexical": "7.924203",
+     *   		"lastTokenPositionIndex-lexical": "33558",
+     *   		"index": "0",
+     *   		"language": "en",
+     *   		"sentencesCount": "1302",
+     *   		"source": "stream",
+     *   		"typesCountStdDev-lexical": "46.626404",
+     *   		"title": "1790 Love And Freindship",
+     *   		"parent_queryParameters": "VOYANT_BUILD=M16&textarea-1015-inputEl=Type+in+one+or+more+URLs+on+separate+lines+or+paste+in+a+full+text.&VOYANT_REMOTE_ID=199.229.249.196&accessIP=199.229.249.196&VOYANT_VERSION=2.4&palette=default&suppressTools=false",
+     *   		"extra.Content-Type": "text/plain; charset=windows-1252",
+     *   		"parentType": "expansion",
+     *   		"extra.Content-Encoding": "windows-1252",
+     *   		"parent_source": "file",
+     *   		"parent_id": "ae47e3a72cd3cad51e196e8a41e21aec",
+     *   		"modified": "1432861756000",
+     *   		"location": "1790 Love And Freindship.txt",
+     *   		"parent_title": "Austen",
+     *   		"parent_location": "Austen.zip"
+     * 		}
+     * 	]
+	 * 
+	 * You can request specific documents in the config object:
+	 * 
+	 *  * **start**: the zero-based start of the list
+	 *  * **limit**: a limit to the number of items to return at a time
+	 *  * **docIndex**: a zero-based list of documents (first document is zero, etc.); multiple documents can be separated by a comma
+	 *  * **docId**: a set of document IDs; multiple documents can be separated by a comma
+	 *  * **query**: one or more term queries for the title, author or full-text
+	 *  * **sort**: one of the following sort orders: `INDEX`, `TITLE`, `AUTHOR`, `TOKENSCOUNTLEXICAL`, `TYPESCOUNTLEXICAL`, `TYPETOKENRATIOLEXICAL`, `PUBDATE`
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
+	 *  
+	 * @param {Object} config an Object specifying parameters (see list above)
+	 * @returns {Promise<object>} a Promise for an Object containing metadata
+	 */
+	documentMetadata(config) {
+		if (!isDocumentsMode(config)) {
+			throw new Error('Must specify a docIndex or docId.');
+		}
+		return Load.trombone(config, {
+			tool: 'corpus.DocumentsMetadata',
+			corpus: this.corpusid
+		})
+		.then(data => data.documentsMetadata.documents);
 	}
 
 	/*
@@ -464,7 +558,7 @@ class Corpus {
 	 *  * **docId**: a set of document IDs; multiple documents can be separated by a comma
 	 *  * **query**: one or more term queries for the title, author or full-text
 	 *  * **sort**: one of the following sort orders: `INDEX`, `TITLE`, `AUTHOR`, `TOKENSCOUNTLEXICAL`, `TYPESCOUNTLEXICAL`, `TYPETOKENRATIOLEXICAL`, `PUBDATE`
-	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
 	 * 
 	 * An example:
 	 *
@@ -477,7 +571,7 @@ class Corpus {
 	 * @param {string} config.docId a set of document IDs; multiple documents can be separated by a comma
 	 * @param {string} config.query one or more term queries for the title, author or full-text
 	 * @param {string} config.sort one of the following sort orders: `INDEX`, `TITLE`, `AUTHOR`, `TOKENSCOUNTLEXICAL`, `TYPESCOUNTLEXICAL`, `TYPETOKENRATIOLEXICAL`, `PUBDATE`
-	 * @param {string} config.dir sort direction, **`ASC`**ending or **`DESC`**ending
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
 	 * @returns {Promise<Array>} a Promise for an Array of document titles
 	 */
 	titles(config={}) {
@@ -496,7 +590,7 @@ class Corpus {
 	 *  * **docId**: a set of document IDs; multiple documents can be separated by a comma
 	 *  * **query**: one or more term queries for the title, author or full-text
 	 *  * **sort**: one of the following sort orders: `INDEX`, `TITLE`, `AUTHOR`, `TOKENSCOUNTLEXICAL`, `TYPESCOUNTLEXICAL`, `TYPETOKENRATIOLEXICAL`, `PUBDATE`
-	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
 	 * 
 	 * @param {Object} config an Object specifying parameters (see list above) 
 	 * @param {number} config.start the zero-based start of the list
@@ -505,7 +599,7 @@ class Corpus {
 	 * @param {string} config.docId a set of document IDs; multiple documents can be separated by a comma
 	 * @param {string} config.query one or more term queries for the title, author or full-text
 	 * @param {string} config.sort one of the following sort orders: `INDEX`, `TITLE`, `AUTHOR`, `TOKENSCOUNTLEXICAL`, `TYPESCOUNTLEXICAL`, `TYPETOKENRATIOLEXICAL`, `PUBDATE`
-	 * @param {string} config.dir sort direction, **`ASC`**ending or **`DESC`**ending
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
 	 * @returns {Promise<Array>} a Promise for an Array of documents metadata
 	 */
 	documents(config={}) {
@@ -618,7 +712,7 @@ class Corpus {
 	 * 		"comparisonRelativeFreqDifference": 0
 	 * 	}
 	 * 
-	 * The following is an example of Document Term (documents mode):
+	 * The following is an example of a Document Term (documents mode):
 	 * 
 	 * 	{
 	 * 		"term": "the",
@@ -642,19 +736,19 @@ class Corpus {
 	 *  * **withDistributions**: a true value shows distribution across the corpus (corpus mode) or across the document (documents mode)
 	 *  * **whiteList**: a keyword list – terms will be limited to this list
 	 *  * **tokenType**: the token type to use, by default `lexical` (other possible values might be `title` and `author`)
-	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
 	 * 
 	 * The following are specific to corpus mode:
 	 * 
 	 *  * **bins**: by default there are the same number of bins as there are documents (for distribution values), this can be modified
 	 *  * **corpusComparison**: you can provide the ID of a corpus for comparison of frequency values
 	 *  * **inDocumentsCountOnly**: if you don't need term frequencies but only frequency per document set this to true
-	 *  * **sort**: the order of the terms, one of the following: `INDOCUMENTSCOUNT, RAWFREQ, TERM, RELATIVEPEAKEDNESS, RELATIVESKEWNESS, COMPARISONRELATIVEFREQDIFFERENCE`
+	 *  * **sort**: the order of the terms, one of the following: `INDOCUMENTSCOUNT`, `RAWFREQ`, `TERM`, `RELATIVEPEAKEDNESS`, `RELATIVESKEWNESS`, `COMPARISONRELATIVEFREQDIFFERENCE`
 	 *  
 	 *  The following are specific to documents mode:
 	 * 
 	 *  * **bins**: by default the document is divided into 10 equal bins(for distribution values), this can be modified
-	 *  * **sort**: the order of the terms, one of the following: `RAWFREQ, RELATIVEFREQ, TERM, TFIDF, ZSCORE`
+	 *  * **sort**: the order of the terms, one of the following: `RAWFREQ`, `RELATIVEFREQ`, `TERM`, `TFIDF`, `ZSCORE`
 	 *  * **perDocLimit**: the `limit` parameter is for the total number of terms returned, this parameter allows you to specify a limit value per document
 	 *  * **docIndex**: the zero-based index of the documents to include (use commas to separate multiple values)
 	 *  * **docId**: the document IDs to include (use commas to separate multiple values)
@@ -676,7 +770,7 @@ class Corpus {
 	 * @param {boolean} config.withDistributions a true value shows distribution across the corpus (corpus mode) or across the document (documents mode)
 	 * @param {string} config.whiteList a keyword list – terms will be limited to this list
 	 * @param {string} config.tokenType the token type to use, by default `lexical` (other possible values might be `title` and `author`)
-	 * @param {string} config.dir sort direction, **`ASC`**ending or **`DESC`**ending
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
 	 * @returns {Promise<Array>} a Promise for a Array of Terms
 	 */
 	terms(config) {
@@ -684,6 +778,133 @@ class Corpus {
 			tool: isDocumentsMode(config) ? 'corpus.DocumentTerms' : 'corpus.CorpusTerms',
 			corpus: this.corpusid
 		}).then(data => isDocumentsMode(config) ? data.documentTerms.terms : data.corpusTerms.terms);
+	}
+
+	/**
+	 * Returns an array of corpus terms.
+	 * These terms are actually types, so information about each type is collected (as opposed to the [tokens]{@link Spyral.Corpus#tokens}
+	 * method which is for every occurrence in document order).
+	 * 
+	 * The following is an example a corpus term:
+	 * 
+	 * 	{
+	 * 		"term": "the",
+	 * 		"inDocumentsCount": 8,
+	 * 		"rawFreq": 28292,
+	 * 		"relativeFreq": 0.036189996,
+	 * 		"comparisonRelativeFreqDifference": 0
+	 * 	}
+	 * 
+	 * The following config parameters are valid:
+	 * 
+	 *  * **start**: the zero-based start index of the list (for paging)
+	 *  * **limit**: the maximum number of terms to provide per request
+	 *  * **minRawFreq**: the minimum raw frequency of terms
+	 *  * **query**: a term query (see [search tutorial]{@tutorial search})
+	 *  * **stopList**: a list of stopwords to include (see [stopwords tutorial]{@tutorial stopwords})
+	 *  * **withDistributions**: a true value shows distribution across the corpus
+	 *  * **whiteList**: a keyword list – terms will be limited to this list
+	 *  * **tokenType**: the token type to use, by default `lexical` (other possible values might be `title` and `author`)
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
+	 *  * **bins**: by default there are the same number of bins as there are documents (for distribution values), this can be modified
+	 *  * **corpusComparison**: you can provide the ID of a corpus for comparison of frequency values
+	 *  * **inDocumentsCountOnly**: if you don't need term frequencies but only frequency per document set this to true
+	 *  * **sort**: the order of the terms, one of the following: `INDOCUMENTSCOUNT`, `RAWFREQ`, `TERM`, `RELATIVEPEAKEDNESS`, `RELATIVESKEWNESS`, `COMPARISONRELATIVEFREQDIFFERENCE`
+	 *  
+	 * An example:
+	 * 
+	 * 	// show top 5 terms
+   	 * 	loadCorpus("austen").corpusTerms({stopList: 'auto', limit: 5}).then(terms => terms.map(term => term.term))
+   	 * 
+	 * @param {Object} config an Object specifying parameters (see list above)
+	 * @param {number} config.start the zero-based start index of the list (for paging)
+	 * @param {number} config.limit the maximum number of terms to provide per request
+	 * @param {number} config.minRawFreq the minimum raw frequency of terms
+	 * @param {string} config.query a term query (see [search tutorial]{@tutorial search})
+	 * @param {string} config.stopList a list of stopwords to include (see [stopwords tutorial]{@tutorial stopwords})
+	 * @param {boolean} config.withDistributions a true value shows distribution across the corpus
+	 * @param {string} config.whiteList a keyword list – terms will be limited to this list
+	 * @param {string} config.tokenType the token type to use, by default `lexical` (other possible values might be `title` and `author`)
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
+	 * @param {number} config.bins by default there are the same number of bins as there are documents (for distribution values), this can be modified
+	 * @param {string} config.corpusComparison you can provide the ID of a corpus for comparison of frequency values
+	 * @param {boolean} config.inDocumentsCountOnly if you don't need term frequencies but only frequency per document set this to true
+	 * @param {string} config.sort the order of the terms, one of the following: `INDOCUMENTSCOUNT`, `RAWFREQ`, `TERM`, `RELATIVEPEAKEDNESS`, `RELATIVESKEWNESS`, `COMPARISONRELATIVEFREQDIFFERENCE`
+	 * @returns {Promise<Array>} a Promise for a Array of Terms
+	 */
+	corpusTerms(config) {
+		return Load.trombone(config, {
+			tool: 'corpus.CorpusTerms',
+			corpus: this.corpusid
+		}).then(data => data.corpusTerms.terms);
+	}
+
+	/**
+	 * Returns an array of document terms.
+	 * These terms are actually types, so information about each type is collected (as opposed to the [tokens]{@link Spyral.Corpus#tokens}
+	 * method which is for every occurrence in document order).
+	 * 
+	 * The following is an example of a document term:
+	 * 
+	 * 	{
+	 * 		"term": "the",
+	 * 		"rawFreq": 1333,
+	 * 		"relativeFreq": 39721.086,
+	 * 		"zscore": 28.419,
+	 * 		"zscoreRatio": -373.4891,
+	 * 		"tfidf": 0.0,
+	 * 		"totalTermsCount": 33559,
+ 	 * 		"docIndex": 0,
+	 * 		"docId": "8a61d5d851a69c03c6ba9cc446713574"
+	 * 	}
+	 * 
+	 * The following config parameters are valid:
+	 * 
+	 *  * **start**: the zero-based start index of the list (for paging)
+	 *  * **limit**: the maximum number of terms to provide per request
+	 *  * **minRawFreq**: the minimum raw frequency of terms
+	 *  * **query**: a term query (see [search tutorial]{@tutorial search})
+	 *  * **stopList**: a list of stopwords to include (see [stopwords tutorial]{@tutorial stopwords})
+	 *  * **withDistributions**: a true value shows distribution across the document
+	 *  * **whiteList**: a keyword list – terms will be limited to this list
+	 *  * **tokenType**: the token type to use, by default `lexical` (other possible values might be `title` and `author`)
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
+	 *  * **bins**: by default the document is divided into 10 equal bins(for distribution values), this can be modified
+	 *  * **sort**: the order of the terms, one of the following: `RAWFREQ`, `RELATIVEFREQ`, `TERM`, `TFIDF`, `ZSCORE`
+	 *  * **perDocLimit**: the `limit` parameter is for the total number of terms returned, this parameter allows you to specify a limit value per document
+	 *  * **docIndex**: the zero-based index of the documents to include (use commas to separate multiple values)
+	 *  * **docId**: the document IDs to include (use commas to separate multiple values)
+	 *  
+	 * An example:
+   	 *
+   	 * 	// show top term for each document
+   	 * 	loadCorpus("austen").documentTerms({stopList: 'auto', perDocLimit: 1, mode: 'documents'}).then(terms => terms.map(term => term.term))
+   	 * 
+	 * @param {Object} config an Object specifying parameters (see list above)
+	 * @param {number} config.start the zero-based start index of the list (for paging)
+	 * @param {number} config.limit the maximum number of terms to provide per request
+	 * @param {number} config.minRawFreq the minimum raw frequency of terms
+	 * @param {string} config.query a term query (see [search tutorial]{@tutorial search})
+	 * @param {string} config.stopList a list of stopwords to include (see [stopwords tutorial]{@tutorial stopwords})
+	 * @param {boolean} config.withDistributions a true value shows distribution across the corpus (corpus mode) or across the document (documents mode)
+	 * @param {string} config.whiteList a keyword list – terms will be limited to this list
+	 * @param {string} config.tokenType the token type to use, by default `lexical` (other possible values might be `title` and `author`)
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
+	 * @param {number} config.bins by default the document is divided into 10 equal bins(for distribution values), this can be modified
+	 * @param {string} config.sort the order of the terms, one of the following: `RAWFREQ`, `RELATIVEFREQ`, `TERM`, `TFIDF`, `ZSCORE`
+	 * @param {number} config.perDocLimit the `limit` parameter is for the total number of terms returned, this parameter allows you to specify a limit value per document
+	 * @param {(number|string)} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
+	 * @param {string} config.docId the document IDs to include (use commas to separate multiple values)
+	 * @returns {Promise<Array>} a Promise for a Array of Terms
+	 */
+	documentTerms(config) {
+		if (!isDocumentsMode(config)) {
+			throw new Error('Must specify a docIndex or docId.');
+		}
+		return Load.trombone(config, {
+			tool: 'corpus.DocumentTerms',
+			corpus: this.corpusid
+		}).then(data => data.documentTerms.terms);
 	}
 
 	/*
@@ -738,7 +959,7 @@ class Corpus {
 	 * @param {boolean} config.noOthers only include lexical forms, no other tokens
 	 * @param {string} config.stripTags one of the following: `ALL`, `BLOCKSONLY`, `NONE` (`BLOCKSONLY` tries to maintain blocks for line formatting)
 	 * @param {boolean} config.withPosLemmas include part-of-speech and lemma information when available (reliability of this may vary by instance)
-	 * @param {number} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
+	 * @param {(number|string)} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
 	 * @param {string} config.docId the document IDs to include (use commas to separate multiple values)
 	 * @returns {Promise<Array>} a Promise for an Array of document tokens
 	 */
@@ -784,7 +1005,7 @@ class Corpus {
 	 * @param {string} config.stopList a list of stopwords to include (see [stopwords tutorial]{@tutorial stopwords})
 	 * @param {string} config.whiteList a keyword list – terms will be limited to this list
 	 * @param {number} config.perDocLimit the `limit` parameter is for the total number of terms returned, this parameter allows you to specify a limit value per document
-	 * @param {number} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
+	 * @param {(number|string)} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
 	 * @param {string} config.docId the document IDs to include (use commas to separate multiple values)
 	 * @returns {Promise<Array>} a Promise for an Array of words
 	 */
@@ -827,8 +1048,8 @@ class Corpus {
      *  * **start**: the zero-based start index of the list (for paging)
      *  * **limit**: the maximum number of terms to provide per request
      *  * **query**: a term query (see [search tutorial]{@tutorial search})
-     *  * **sort**: the order of the contexts: `TERM, DOCINDEX, POSITION, LEFT, RIGHT`
-	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+     *  * **sort**: the order of the contexts: `TERM`, `DOCINDEX`, `POSITION`, `LEFT`, `RIGHT`
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
      *  * **perDocLimit**: the `limit` parameter is for the total number of terms returned, this parameter allows you to specify a limit value per document
      *  * **stripTags**: for the `left`, `middle` and `right` values, one of the following: `ALL`, `BLOCKSONLY` (tries to maintain blocks for line formatting), `NONE` (default)
      *  * **context**: the size of the context (the number of words on each side of the keyword)
@@ -853,12 +1074,12 @@ class Corpus {
      * @param {number} config.start the zero-based start index of the list (for paging)
      * @param {number} config.limit the maximum number of terms to provide per request
      * @param {string} config.query a term query (see [search tutorial]{@tutorial search})
-     * @param {string} config.sort the order of the contexts: `TERM, DOCINDEX, POSITION, LEFT, RIGHT`
-	 * @param {string} config.dir sort direction, **`ASC`**ending or **`DESC`**ending
+     * @param {string} config.sort the order of the contexts: `TERM`, `DOCINDEX`, `POSITION`, `LEFT`, `RIGHT`
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
      * @param {number} config.perDocLimit the `limit` parameter is for the total number of terms returned, this parameter allows you to specify a limit value per document
      * @param {string} config.stripTags for the `left`, `middle` and `right` values, one of the following: `ALL`, `BLOCKSONLY` (tries to maintain blocks for line formatting), `NONE` (default)
      * @param {number} config.context the size of the context (the number of words on each side of the keyword)
-     * @param {number} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
+     * @param {(number|string)} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
      * @param {string} config.docId the document IDs to include (use commas to separate multiple values)
      * @param {string} config.overlapStrategy determines how to handle cases where there's overlap between KWICs, such as "to be or not to be" when the keyword is "be"
      * @returns {Promise<Array>} a Promise for an Array of KWIC Objects
@@ -925,11 +1146,11 @@ class Corpus {
 	 * 
 	 * The following are specific to corpus mode:
 	 * 
-	 *  * **sort**: the order of the terms, one of the following: `RAWFREQ, TERM, CONTEXTTERM, CONTEXTTERMRAWFREQ`
+	 *  * **sort**: the order of the terms, one of the following: `RAWFREQ`, `TERM`, `CONTEXTTERM`, `CONTEXTTERMRAWFREQ`
 	 *  
 	 *  The following are specific to documents mode:
 	 * 
-	 *  * **sort**: the order of the terms, one of the following: `TERM, REL, REL, RAW, DOCREL, DOCRAW, CONTEXTDOCRELDIFF`
+	 *  * **sort**: the order of the terms, one of the following: `TERM`, `REL`, `RAW`, `DOCREL`, `DOCRAW`, `CONTEXTDOCRELDIFF`
 	 *  * **docIndex**: the zero-based index of the documents to include (use commas to separate multiple values)
 	 *  * **docId**: the document IDs to include (use commas to separate multiple values)
 	 *  
@@ -945,7 +1166,7 @@ class Corpus {
 	 * @param {string} config.stopList a list of stopwords to include (see [stopwords tutorial]{@tutorial stopwords})
 	 * @param {string} config.collocatesWhitelist collocates will be limited to this list
 	 * @param {number} config.context the size of the context (the number of words on each side of the keyword)
-	 * @param {string} config.dir sort direction, **`ASC`**ending or **`DESC`**ending
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
 	 * @returns {Promise<Array>} a Promise for a Array of Terms
 	 */
 	collocates(config) {
@@ -974,7 +1195,7 @@ class Corpus {
 	 * * a `docIndex` parameter being set
 	 * * a `docId` parameter being set
 	 * 
-	 * The following is an example a Corpus phrase (corpus mode), without distributions requested:
+	 * The following is an example of a Corpus phrase (corpus mode), without distributions requested:
 	 * 
 	 * 	{
      *  		"term": "love with",
@@ -982,7 +1203,7 @@ class Corpus {
      *  		"length": 2
      * 	}
 	 * 
-	 * The following is an example of Document phrase (documents mode), without positions requested:
+	 * The following is an example of a Document phrase (documents mode), without positions requested:
 	 * 
 	 * 	{
      *   		"term": "love with",
@@ -998,8 +1219,8 @@ class Corpus {
 	 *  * **minLength**: the minimum length of the phrase
 	 *  * **maxLength**: the maximum length of the phrase
 	 *  * **minRawFreq**: the minimum raw frequency of the phrase
-	 * 	* **sort**: the order of the terms, one of the following: `RAWFREQ, TERM, LENGTH`
-	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+	 *  * **sort**: the order of the terms, one of the following: `RAWFREQ`, `TERM`, `LENGTH`
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
 	 *  * **overlapFilter**: it happens that phrases contain other phrases and we need a strategy for handling overlap:
      *      * **NONE**: nevermind the overlap, keep all phrases
      *      * **LENGTHFIRST**: priority goes to the longest phrases
@@ -1022,8 +1243,8 @@ class Corpus {
 	 * @param {number} config.minLength the minimum length of the phrase
 	 * @param {number} config.maxLength the maximum length of the phrase
 	 * @param {number} config.minRawFreq the minimum raw frequency of the phrase
-	 * @param {string} config.sort the order of the terms, one of the following: `RAWFREQ, TERM, LENGTH`
-	 * @param {string} config.dir sort direction, **`ASC`**ending or **`DESC`**ending
+	 * @param {string} config.sort the order of the terms, one of the following: `RAWFREQ`, `TERM`, `LENGTH`
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
 	 * @param {string} config.overlapFilter it happens that phrases contain other phrases and we need a strategy for handling overlap
      * @returns {Promise<Array>} a Promise for an Array of phrase Objects
      */
@@ -1032,6 +1253,112 @@ class Corpus {
 			tool: isDocumentsMode(config) ? 'corpus.DocumentNgrams' : 'corpus.CorpusNgrams',
 			corpus: this.corpusid
 		}).then(data => isDocumentsMode(config) ? data.documentNgrams.ngrams : data.corpusNgrams.ngrams);
+	}
+
+	/**
+	 * Returns an array of corpus phrases or n-grams.
+	 * 
+	 * The following is an example of a Corpus phrase, without distributions requested:
+	 * 
+	 * 	{
+     *  		"term": "love with",
+     *  		"rawFreq": 103,
+     *  		"length": 2
+     * 	}
+	 * 
+	 * The following config parameters are valid:
+	 * 
+	 *  * **start**: the zero-based start index of the list (for paging)
+	 *  * **limit**: the maximum number of terms to provide per request
+	 *  * **minLength**: the minimum length of the phrase
+	 *  * **maxLength**: the maximum length of the phrase
+	 *  * **minRawFreq**: the minimum raw frequency of the phrase
+	 *  * **sort**: the order of the terms, one of the following: `RAWFREQ`, `TERM`, `LENGTH`
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
+	 *  * **overlapFilter**: it happens that phrases contain other phrases and we need a strategy for handling overlap:
+     *      * **NONE**: nevermind the overlap, keep all phrases
+     *      * **LENGTHFIRST**: priority goes to the longest phrases
+     *      * **RAWFREQFIRST**: priority goes to the highest frequency phrases
+     *      * **POSITIONFIRST**: priority goes to the first phrases
+     * 
+     * An example:
+     * 
+     * 	// load the first 20 phrases in the corpus
+     * 	loadCorpus("austen").corpusPhrases({query: "love", limit: 10})
+     * 
+     * @param {Object} config an Object specifying parameters (see above)
+	 * @param {number} config.start the zero-based start index of the list (for paging)
+	 * @param {number} config.limit the maximum number of terms to provide per request
+	 * @param {number} config.minLength the minimum length of the phrase
+	 * @param {number} config.maxLength the maximum length of the phrase
+	 * @param {number} config.minRawFreq the minimum raw frequency of the phrase
+	 * @param {string} config.sort the order of the terms, one of the following: `RAWFREQ`, `TERM`, `LENGTH`
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
+	 * @param {string} config.overlapFilter it happens that phrases contain other phrases and we need a strategy for handling overlap
+     * @returns {Promise<Array>} a Promise for an Array of phrase Objects
+     */
+	corpusPhrases(config) {
+		return Load.trombone(config, {
+			tool: 'corpus.CorpusNgrams',
+			corpus: this.corpusid
+		}).then(data => data.corpusNgrams.ngrams);
+	}
+
+	/**
+	 * Returns an array of document phrases or n-grams.
+	 * 
+	 * The following is an example of a Document phrase, without positions requested:
+	 * 
+	 * 	{
+     *   		"term": "love with",
+     *   		"rawFreq": 31,
+     *   		"length": 2,
+     *   		"docIndex": 5
+     * 	}
+	 * 
+	 * The following config parameters are valid:
+	 * 
+	 *  * **start**: the zero-based start index of the list (for paging)
+	 *  * **limit**: the maximum number of terms to provide per request
+	 *  * **minLength**: the minimum length of the phrase
+	 *  * **maxLength**: the maximum length of the phrase
+	 *  * **minRawFreq**: the minimum raw frequency of the phrase
+	 *  * **sort**: the order of the terms, one of the following: `RAWFREQ`, `TERM`, `LENGTH`
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
+	 *  * **overlapFilter**: it happens that phrases contain other phrases and we need a strategy for handling overlap:
+     *      * **NONE**: nevermind the overlap, keep all phrases
+     *      * **LENGTHFIRST**: priority goes to the longest phrases
+     *      * **RAWFREQFIRST**: priority goes to the highest frequency phrases
+     *      * **POSITIONFIRST**: priority goes to the first phrases
+	 *  * **docIndex**: the zero-based index of the documents to include (use commas to separate multiple values)
+	 *  * **docId**: the document IDs to include (use commas to separate multiple values)
+     *  
+     * An example:
+     * 
+     * 	// load the first 20 phrases for the first document in the corpus
+     * 	loadCorpus("austen").documentPhrases({query: "love", docIndex: 0, limit: 10})
+     * 
+     * @param {Object} config an Object specifying parameters (see above)
+	 * @param {number} config.start the zero-based start index of the list (for paging)
+	 * @param {number} config.limit the maximum number of terms to provide per request
+	 * @param {number} config.minLength the minimum length of the phrase
+	 * @param {number} config.maxLength the maximum length of the phrase
+	 * @param {number} config.minRawFreq the minimum raw frequency of the phrase
+	 * @param {string} config.sort the order of the terms, one of the following: `RAWFREQ`, `TERM`, `LENGTH`
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
+	 * @param {string} config.overlapFilter it happens that phrases contain other phrases and we need a strategy for handling overlap
+	 * @param {(number|string)} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
+	 * @param {string} config.docId the document IDs to include (use commas to separate multiple values)
+     * @returns {Promise<Array>} a Promise for an Array of phrase Objects
+     */
+	documentPhrases(config) {
+		if (!isDocumentsMode(config)) {
+			throw new Error('Must specify a docIndex or docId.');
+		}
+		return Load.trombone(config, {
+			tool: 'corpus.DocumentNgrams',
+			corpus: this.corpusid
+		}).then(data => data.documentNgrams.ngrams);
 	}
 	
 	/*
@@ -1073,7 +1400,7 @@ class Corpus {
      * 		"significance": 0.08580014
      * 	}
 	 * 
-	 * The following is an example of Document correlation (documents mode), without positions requested:
+	 * The following is an example of a Document correlation (documents mode), without positions requested:
 	 * 
 	 * 	{
      * 		"source": {
@@ -1108,7 +1435,7 @@ class Corpus {
 	 *  * **limit**: the maximum number of terms to provide per request
 	 *  * **termsOnly**: a very compact data view of the correlations
 	 *  * **sort**: the order of the terms, one of the following: `CORRELATION`, `CORRELATIONABS`
-	 *  * **dir**: sort direction, **`ASC`**ending or **`DESC`**ending
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
      * 
 	 * The following is specific to corpus mode:
 	 * 
@@ -1130,7 +1457,7 @@ class Corpus {
 	 * @param {number} config.minInDocumentsCountRatio the minimum coverage (as a percentage between 0 and 100) of the term, amongst all the documents
 	 * @param {boolean} config.termsOnly a very compact data view of the correlations
 	 * @param {string} config.sort the order of the terms, one of the following: `CORRELATION`, `CORRELATIONABS`
-	 * @param {string} config.dir sort direction, **`ASC`**ending or **`DESC`**ending
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
      * @returns {Promise<Array>} a Promise for an Array of phrase Objects
      */
 	correlations(config) {
@@ -1142,6 +1469,131 @@ class Corpus {
 		}
 		return Load.trombone(config, {
 			tool: isDocumentsMode(config) ? 'corpus.DocumentTermCorrelations' : 'corpus.CorpusTermCorrelations',
+			corpus: this.corpusid
+		}).then(data => data.termCorrelations.correlations);
+	}
+
+	/**
+	 * Returns an array of corpus correlations.
+	 * 
+	 * The following is an example a Corpus correlation:
+	 * 
+	 * 	{
+     * 		"source": {
+     * 			"term": "mrs",
+     * 			"inDocumentsCount": 8,
+     * 			"rawFreq": 2531,
+     * 			"relativePeakedness": 0.46444246,
+     * 			"relativeSkewness": -0.44197384
+     * 		},
+     * 		"target": {
+     * 			"term": "love",
+     * 			"inDocumentsCount": 8,
+     * 			"rawFreq": 568,
+     * 			"relativePeakedness": 5.763066,
+     * 			"relativeSkewness": 2.2536576
+     * 		},
+     * 		"correlation": -0.44287738,
+     * 		"significance": 0.08580014
+     * 	}
+	 * 
+	 * The following config parameters are valid:
+	 * 
+	 *  * **start**: the zero-based start index of the list (for paging)
+	 *  * **limit**: the maximum number of terms to provide per request
+	 *  * **termsOnly**: a very compact data view of the correlations
+	 *  * **sort**: the order of the terms, one of the following: `CORRELATION`, `CORRELATIONABS`
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
+	 *  * **minInDocumentsCountRatio**: the minimum coverage (as a percentage between 0 and 100) of the term, amongst all the documents
+	 * 
+     * An example:
+     * 
+     * 	// load the first 10 phrases in the corpus
+     * 	loadCorpus("austen").corpusCorrelations({query: "love", limit: 10})
+     * 
+     * @param {Object} config an Object specifying parameters (see above)
+	 * @param {number} config.start the zero-based start index of the list (for paging)
+	 * @param {number} config.limit the maximum number of terms to provide per request
+	 * @param {number} config.minInDocumentsCountRatio the minimum coverage (as a percentage between 0 and 100) of the term, amongst all the documents
+	 * @param {boolean} config.termsOnly a very compact data view of the correlations
+	 * @param {string} config.sort the order of the terms, one of the following: `CORRELATION`, `CORRELATIONABS`
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
+     * @returns {Promise<Array>} a Promise for an Array of phrase Objects
+     */
+	corpusCorrelations(config) {
+		if ((!config || !config.query) && console) {
+			console.warn('No query provided for correlations request.');
+			throw new Error('Unable to run correlations for a corpus without a query.');
+		}
+		return Load.trombone(config, {
+			tool: 'corpus.CorpusTermCorrelations',
+			corpus: this.corpusid
+		}).then(data => data.termCorrelations.correlations);
+	}
+
+	/**
+	 * Returns an array of document correlations.
+	 * 
+	 * The following is an example of a Document correlation, without positions requested:
+	 * 
+	 * 	{
+     * 		"source": {
+     * 			"term": "confide",
+     * 			"rawFreq": 3,
+     * 			"relativeFreq": 89.3948,
+     * 			"zscore": -0.10560975,
+     * 			"zscoreRatio": -0.7541012,
+     * 			"tfidf": 1.1168874E-5,
+     * 			"totalTermsCount": 33559,
+     * 			"docIndex": 0,
+     * 			"docId": "8a61d5d851a69c03c6ba9cc446713574"
+     * 		},
+     * 		"target": {
+     * 			"term": "love",
+     * 			"rawFreq": 54,
+     * 			"relativeFreq": 1609.1063,
+     * 			"zscore": 53.830048,
+     * 			"zscoreRatio": -707.44696,
+     * 			"tfidf": 0.0,
+     * 			"totalTermsCount": 33559,
+     * 			"docIndex": 0,
+     * 			"docId": "8a61d5d851a69c03c6ba9cc446713574"
+     * 		},
+     * 		"correlation": 0.93527687,
+     * 		"significance": 7.0970666E-5
+     * 	}
+	 * 
+	 * The following config parameters are valid:
+	 * 
+	 *  * **start**: the zero-based start index of the list (for paging)
+	 *  * **limit**: the maximum number of terms to provide per request
+	 *  * **termsOnly**: a very compact data view of the correlations
+	 *  * **sort**: the order of the terms, one of the following: `CORRELATION`, `CORRELATIONABS`
+	 *  * **dir**: sort direction, `ASC`ending or `DESC`ending
+	 *  * **docIndex**: the zero-based index of the documents to include (use commas to separate multiple values)
+	 *  * **docId**: the document IDs to include (use commas to separate multiple values)
+     *  
+     * An example:
+     * 
+     * 	// load the first 10 phrases for the first document in the corpus
+     * 	loadCorpus("austen").documentCorrelations({query: "love", docIndex: 0, limit: 10})
+     * 
+     * @param {Object} config an Object specifying parameters (see above)
+	 * @param {number} config.start the zero-based start index of the list (for paging)
+	 * @param {number} config.limit the maximum number of terms to provide per request
+	 * @param {boolean} config.termsOnly a very compact data view of the correlations
+	 * @param {string} config.sort the order of the terms, one of the following: `CORRELATION`, `CORRELATIONABS`
+	 * @param {string} config.dir sort direction, `ASC`ending or `DESC`ending
+	 * @param {(number|string)} config.docIndex the zero-based index of the documents to include (use commas to separate multiple values)
+	 * @param {string} config.docId the document IDs to include (use commas to separate multiple values)
+     * @returns {Promise<Array>} a Promise for an Array of phrase Objects
+     */
+	documentCorrelations(config) {
+		if (!isDocumentsMode(config)) {
+			throw new Error('Must specify a docIndex or docId.');
+		}
+		return Load.trombone(config, {
+			tool: 'corpus.DocumentTermCorrelations',
 			corpus: this.corpusid
 		}).then(data => data.termCorrelations.correlations);
 	}
@@ -1589,7 +2041,7 @@ class Corpus {
 			
 		});
 
-		['analysis','collocates','contexts','correlations','documents','entities','id','topics','lemmas','metadata','phrases','summary','terms','text','texts','titles','toString','tokens','tool','words'].forEach(name => {
+		['analysis','collocates','contexts','corpusCorrelations','corpusMetadata','corpusPhrases','corpusTerms','correlations','documentCorrelations','documentMetadata','documentPhrases','documents','documentTerms','entities','id','topics','lemmas','metadata','phrases','summary','terms','text','texts','titles','toString','tokens','tool','words'].forEach(name => {
 			promise[name] = function() {
 				var args = arguments;
 				return promise.then(corpus => {return corpus[name].apply(corpus, args);});
