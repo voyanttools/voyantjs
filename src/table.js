@@ -18,11 +18,11 @@ import Util from './util.js';
  *
  * Provide a nested array of data with multiple rows:
  * 
- *		let table = createTable([[1,2],[3,4]]);
+ *  	let table = createTable([[1,2],[3,4]]);
  * 
  * Same nested array, but with a second argument specifying headers
  * 
- *		let table = createTable([[1,2],[3,4]], {headers: ["one","two"]});
+ *  	let table = createTable([[1,2],[3,4]], {headers: ["one","two"]});
  * 
  * Create table with comma-separated values:
  * 
@@ -30,7 +30,7 @@ import Util from './util.js';
  * 
  * Create table with tab-separated values
  * 
- *		let table = createTable("one\\ttwo\\n1\\t2\\n3\\t4");
+ *  	let table = createTable("one\\ttwo\\n1\\t2\\n3\\t4");
  * 
  * Create table with array of objects
  * 
@@ -38,19 +38,19 @@ import Util from './util.js';
  * 
  * It's also possible simple to create a sorted frequency table from an array of values:
  * 
- *		let table = createTable(["one","two","one"], {count: "vertical", headers: ["Term","Count"]})
+ *  	let table = createTable(["one","two","one"], {count: "vertical", headers: ["Term","Count"]})
  * 
  * Working with a Corpus is easy. For instance, we can create a table from the top terms:
  * 
- *		loadCorpus("austen").terms({limit:500, stopList: 'auto'}).then(terms => {
- *			return createTable(terms);
- *		})
+ *  	loadCorpus("austen").terms({limit:500, stopList: 'auto'}).then(terms => {
+ *  		return createTable(terms);
+ *  	})
  * 
  * Similarly, we could create a frequency table from the first 1,000 words of the corpus:
  * 
- *		loadCorpus("austen").words({limit:1000, docIndex: 0, stopList: 'auto'}).then(words => {
- *			return createTable(words, {count: "vertical"});
- *		});
+ *  	loadCorpus("austen").words({limit:1000, docIndex: 0, stopList: 'auto'}).then(words => {
+ *  		return createTable(words, {count: "vertical"});
+ *  	});
  *
  * Some of the configuration options are as follows:
  * 

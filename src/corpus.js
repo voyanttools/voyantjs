@@ -366,30 +366,30 @@ class Corpus {
 	 *
 	 * 	[
      * 		{
-     *   		"id": "ddac6b12c3f4261013c63d04e8d21b45",
-     *   		"extra.X-Parsed-By": "org.apache.tika.parser.DefaultParser",
-     *   		"tokensCount-lexical": "33559",
-     *   		"lastTokenStartOffset-lexical": "259750",
-     *   		"parent_modified": "1548457455000",
-     *   		"typesCount-lexical": "4235",
-     *   		"typesCountMean-lexical": "7.924203",
-     *   		"lastTokenPositionIndex-lexical": "33558",
-     *   		"index": "0",
-     *   		"language": "en",
-     *   		"sentencesCount": "1302",
-     *   		"source": "stream",
-     *   		"typesCountStdDev-lexical": "46.626404",
-     *   		"title": "1790 Love And Freindship",
-     *   		"parent_queryParameters": "VOYANT_BUILD=M16&textarea-1015-inputEl=Type+in+one+or+more+URLs+on+separate+lines+or+paste+in+a+full+text.&VOYANT_REMOTE_ID=199.229.249.196&accessIP=199.229.249.196&VOYANT_VERSION=2.4&palette=default&suppressTools=false",
-     *   		"extra.Content-Type": "text/plain; charset=windows-1252",
-     *   		"parentType": "expansion",
-     *   		"extra.Content-Encoding": "windows-1252",
-     *   		"parent_source": "file",
-     *   		"parent_id": "ae47e3a72cd3cad51e196e8a41e21aec",
-     *   		"modified": "1432861756000",
-     *   		"location": "1790 Love And Freindship.txt",
-     *   		"parent_title": "Austen",
-     *   		"parent_location": "Austen.zip"
+     * 			"id": "ddac6b12c3f4261013c63d04e8d21b45",
+     * 			"extra.X-Parsed-By": "org.apache.tika.parser.DefaultParser",
+     * 			"tokensCount-lexical": "33559",
+     * 			"lastTokenStartOffset-lexical": "259750",
+     * 			"parent_modified": "1548457455000",
+     * 			"typesCount-lexical": "4235",
+     * 			"typesCountMean-lexical": "7.924203",
+     * 			"lastTokenPositionIndex-lexical": "33558",
+     * 			"index": "0",
+     * 			"language": "en",
+     * 			"sentencesCount": "1302",
+     * 			"source": "stream",
+     * 			"typesCountStdDev-lexical": "46.626404",
+     * 			"title": "1790 Love And Freindship",
+     * 			"parent_queryParameters": "VOYANT_BUILD=M16&textarea-1015-inputEl=Type+in+one+or+more+URLs+on+separate+lines+or+paste+in+a+full+text.&VOYANT_REMOTE_ID=199.229.249.196&accessIP=199.229.249.196&VOYANT_VERSION=2.4&palette=default&suppressTools=false",
+     * 			"extra.Content-Type": "text/plain; charset=windows-1252",
+     * 			"parentType": "expansion",
+     * 			"extra.Content-Encoding": "windows-1252",
+     * 			"parent_source": "file",
+     * 			"parent_id": "ae47e3a72cd3cad51e196e8a41e21aec",
+     * 			"modified": "1432861756000",
+     * 			"location": "1790 Love And Freindship.txt",
+     * 			"parent_title": "Austen",
+     * 			"parent_location": "Austen.zip"
      * 		}
      * 	]
 	 * 
@@ -463,30 +463,30 @@ class Corpus {
 	 *
 	 * 	[
      * 		{
-     *   		"id": "ddac6b12c3f4261013c63d04e8d21b45",
-     *   		"extra.X-Parsed-By": "org.apache.tika.parser.DefaultParser",
-     *   		"tokensCount-lexical": "33559",
-     *   		"lastTokenStartOffset-lexical": "259750",
-     *   		"parent_modified": "1548457455000",
-     *   		"typesCount-lexical": "4235",
-     *   		"typesCountMean-lexical": "7.924203",
-     *   		"lastTokenPositionIndex-lexical": "33558",
-     *   		"index": "0",
-     *   		"language": "en",
-     *   		"sentencesCount": "1302",
-     *   		"source": "stream",
-     *   		"typesCountStdDev-lexical": "46.626404",
-     *   		"title": "1790 Love And Freindship",
-     *   		"parent_queryParameters": "VOYANT_BUILD=M16&textarea-1015-inputEl=Type+in+one+or+more+URLs+on+separate+lines+or+paste+in+a+full+text.&VOYANT_REMOTE_ID=199.229.249.196&accessIP=199.229.249.196&VOYANT_VERSION=2.4&palette=default&suppressTools=false",
-     *   		"extra.Content-Type": "text/plain; charset=windows-1252",
-     *   		"parentType": "expansion",
-     *   		"extra.Content-Encoding": "windows-1252",
-     *   		"parent_source": "file",
-     *   		"parent_id": "ae47e3a72cd3cad51e196e8a41e21aec",
-     *   		"modified": "1432861756000",
-     *   		"location": "1790 Love And Freindship.txt",
-     *   		"parent_title": "Austen",
-     *   		"parent_location": "Austen.zip"
+     * 			"id": "ddac6b12c3f4261013c63d04e8d21b45",
+     * 			"extra.X-Parsed-By": "org.apache.tika.parser.DefaultParser",
+     * 			"tokensCount-lexical": "33559",
+     * 			"lastTokenStartOffset-lexical": "259750",
+     * 			"parent_modified": "1548457455000",
+     * 			"typesCount-lexical": "4235",
+     * 			"typesCountMean-lexical": "7.924203",
+     * 			"lastTokenPositionIndex-lexical": "33558",
+     * 			"index": "0",
+     * 			"language": "en",
+     * 			"sentencesCount": "1302",
+     * 			"source": "stream",
+     * 			"typesCountStdDev-lexical": "46.626404",
+     * 			"title": "1790 Love And Freindship",
+     * 			"parent_queryParameters": "VOYANT_BUILD=M16&textarea-1015-inputEl=Type+in+one+or+more+URLs+on+separate+lines+or+paste+in+a+full+text.&VOYANT_REMOTE_ID=199.229.249.196&accessIP=199.229.249.196&VOYANT_VERSION=2.4&palette=default&suppressTools=false",
+     * 			"extra.Content-Type": "text/plain; charset=windows-1252",
+     * 			"parentType": "expansion",
+     * 			"extra.Content-Encoding": "windows-1252",
+     * 			"parent_source": "file",
+     * 			"parent_id": "ae47e3a72cd3cad51e196e8a41e21aec",
+     * 			"modified": "1432861756000",
+     * 			"location": "1790 Love And Freindship.txt",
+     * 			"parent_title": "Austen",
+     * 			"parent_location": "Austen.zip"
      * 		}
      * 	]
 	 * 
@@ -921,16 +921,16 @@ class Corpus {
 	 * 
 	 * The promise returns an array of document token objects. A document token object can look something like this:
 	 * 
-	 *		{
-	 *			"docId": "8a61d5d851a69c03c6ba9cc446713574",
-	 *			"docIndex": 0,
-	 *			"term": "LOVE",
-	 *			"tokenType": "lexical",
-	 *			"rawFreq": 54,
-	 *			"position": 0,
-	 *			"startOffset": 3,
-	 *			"endOffset": 7
-	 *		}
+	 *	{
+	 * 		"docId": "8a61d5d851a69c03c6ba9cc446713574",
+	 * 		"docIndex": 0,
+	 * 		"term": "LOVE",
+	 * 		"tokenType": "lexical",
+	 * 		"rawFreq": 54,
+	 * 		"position": 0,
+	 * 		"startOffset": 3,
+	 * 		"endOffset": 7
+	 *	}
 	 *
 	 * The following are valid in the config parameter:
 	 * 
@@ -1034,13 +1034,13 @@ class Corpus {
 	 * An individual KWIC Object looks something like this:
 	 * 
      * 	{
-     *			"docIndex": 0,
-     *			"query": "love",
-     *			"term": "love",
-     *			"position": 0,
-     *			"left": "FREINDSHIP AND OTHER EARLY WORKS",
-     *			"middle": "Love",
-     *			"right": " And Friendship And Other Early"
+     * 		"docIndex": 0,
+     * 		"query": "love",
+     * 		"term": "love",
+     * 		"position": 0,
+     * 		"left": "FREINDSHIP AND OTHER EARLY WORKS",
+     * 		"middle": "Love",
+     * 		"right": " And Friendship And Other Early"
      * 	}
      *  
      * The following are valid in the config parameter:
@@ -1114,24 +1114,24 @@ class Corpus {
 	 * The following is an example a Corpus Collocate (corpus mode):
 	 * 
 	 * 	{
-     *   		"term": "love",
-     *   		"rawFreq": 568,
-     *   		"contextTerm": "mr",
-     *   		"contextTermRawFreq": 24
+     *  		"term": "love",
+     *  		"rawFreq": 568,
+     *  		"contextTerm": "mr",
+     *  		"contextTermRawFreq": 24
      * 	}
 	 * 
 	 * The following is an example of Document Collocate (documents mode):
 	 * 
 	 * 	{
-     * 			"docIndex": 4,
-     * 			"keyword": "love",
-     * 			"keywordContextRawFrequency": 124,
-     * 			"term": "fanny",
-     * 			"termContextRawFrequency": 8,
-     * 			"termContextRelativeFrequency": 0.021680217,
-     * 			"termDocumentRawFrequency": 816,
-     * 			"termDocumentRelativeFrequency": 0.0050853477,
-     * 			"termContextDocumentRelativeFrequencyDifference": 0.01659487
+     * 		"docIndex": 4,
+     * 		"keyword": "love",
+     * 		"keywordContextRawFrequency": 124,
+     * 		"term": "fanny",
+     * 		"termContextRawFrequency": 8,
+     * 		"termContextRelativeFrequency": 0.021680217,
+     * 		"termDocumentRawFrequency": 816,
+     * 		"termDocumentRelativeFrequency": 0.0050853477,
+     * 		"termContextDocumentRelativeFrequencyDifference": 0.01659487
      * 	}
 	 * 
 	 * The following config parameters are valid in both modes:
