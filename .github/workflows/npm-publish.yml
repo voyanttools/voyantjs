@@ -24,12 +24,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: NPM token/OIDC workaround # see: https://github.com/actions/setup-node/issues/1440 and https://github.com/actions/setup-node/issues/1445
-        run: unset NODE_AUTH_TOKEN
-      - name: Replace ssh with https # see: https://github.com/actions/setup-node/issues/214#issuecomment-810829250
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
+      #- name: NPM token/OIDC workaround # see: https://github.com/actions/setup-node/issues/1440 and https://github.com/actions/setup-node/issues/1445
+      #  run: unset NODE_AUTH_TOKEN
+      #- name: Replace ssh with https # see: https://github.com/actions/setup-node/issues/214#issuecomment-810829250
+      #  run: >
+      #    git config --global url."https://github.com/".insteadOf
+      #    ssh://git@github.com/
       - name: Install, test, and build
         run: |
           npm ci
