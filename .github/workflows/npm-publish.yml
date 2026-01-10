@@ -8,15 +8,12 @@ on:
 
 permissions:
   id-token: write # required for OIDC
-  contents: read # required for semantic release checkout
+  contents: write # required for semantic release checkout
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # to be able to publish a GitHub release
-      id-token: write # to enable use of OIDC for trusted publishing and npm provenance
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,6 +24,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: NPM token/OIDC workaround # see: https://github.com/actions/setup-node/issues/1440 and https://github.com/actions/setup-node/issues/1445
+        run: unset NODE_AUTH_TOKEN
       - name: Replace ssh with https # see: https://github.com/actions/setup-node/issues/214#issuecomment-810829250
         run: >
           git config --global url."https://github.com/".insteadOf
