@@ -8,11 +8,15 @@ on:
 
 permissions:
   id-token: write # required for OIDC
-  contents: write # required for semantic release
+  contents: read # required for semantic release checkout
 
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      id-token: write # to enable use of OIDC for trusted publishing and npm provenance
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -51,5 +55,4 @@ jobs:
       - name: Semantic release
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
         run: npm run-script semantic-release
