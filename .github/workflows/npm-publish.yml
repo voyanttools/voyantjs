@@ -19,13 +19,13 @@ jobs:
       id-token: write # to enable use of OIDC for trusted publishing and npm provenance
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 24
       - name: Replace ssh with https # see: https://github.com/actions/setup-node/issues/214#issuecomment-810829250
         run: >
           git config --global url."https://github.com/".insteadOf
