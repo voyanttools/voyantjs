@@ -7,13 +7,15 @@ on:
       - master
 
 permissions:
-  id-token: write # required for OIDC
-  contents: write # required for semantic release checkout
+  contents: read # for checkout
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required for OIDC
+      contents: write # required to publish a GitHub release
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,35 +26,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-      #- name: NPM token/OIDC workaround # see: https://github.com/actions/setup-node/issues/1440 and https://github.com/actions/setup-node/issues/1445
-      #  run: unset NODE_AUTH_TOKEN
-      #- name: Replace ssh with https # see: https://github.com/actions/setup-node/issues/214#issuecomment-810829250
-      #  run: >
-      #    git config --global url."https://github.com/".insteadOf
-      #    ssh://git@github.com/
-      - name: Install, test, and build
-        run: |
-          npm ci
-          npm test
-          npm run-script build
-      # - name: Archive code coverage results
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: code-coverage-report
-      #     path: coverage
-      # - name: Archive distribution file
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: distribution
-      #     path: dist/voyantjs.js
-      - name: Upload coverage report
-        uses: codecov/codecov-action@v2
-        with:
-          directory: coverage
-          name: codecov-umbrella
-          #fail_ci_if_error: true # optional (default = false)
-          verbose: true # optional (default = false)
-      - name: Semantic release
+      - name: Install
+        run: npm ci
+      - name: Release
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: npm run-script semantic-release
