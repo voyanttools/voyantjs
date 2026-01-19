@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install, test, build
+        run: |
+          npm ci
+          npm test
+          npm run-script build
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: distribution
+          path: dist/voyantjs.js
+          if-no-files-found: error
+          overwrite: true
