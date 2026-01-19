@@ -1,3 +1,15 @@
+# [3.7.0](https://github.com/voyanttools/voyantjs/compare/v3.6.0...v3.7.0) (2026-01-19)
+
+
+### Bug Fixes
+
+* **docs:** fix spacing in examples ([0039050](https://github.com/voyanttools/voyantjs/commit/0039050c09baaffbffd4aecd2df3b59fa6a88065))
+
+
+### Features
+
+* **corpus:** add corpus & document specific aliases for methods that have a "mode" toggle ([62bd11a](https://github.com/voyanttools/voyantjs/commit/62bd11ab4e18256e246cac3cd61540bbea88d6bf))
+
 # [3.6.0](https://github.com/voyanttools/voyantjs/compare/v3.5.4...v3.6.0) (2025-08-14)
 
 
