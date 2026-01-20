@@ -92,6 +92,9 @@
       ]
     ]
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "release": {
     "plugins": [
       "@semantic-release/commit-analyzer",
