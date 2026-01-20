@@ -7,15 +7,13 @@ on:
       - master
 
 permissions:  
-  contents: read # for checkout
+  id-token: write # required for OIDC
+  contents: write # required to publish release
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    permissions:  
-      id-token: write # required for OIDC
-      contents: write # required to publish release
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,6 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          registry-url: 'https://registry.npmjs.org'
       - name: Install, test, and build
         run: |
           npm ci
